@@ -1,6 +1,46 @@
 class Guest:
-    def __init__(self, guest_id:int, last_name:str, first_name:str, e_mail:str):
-        self.guest_id = guest_id
-        self.last_name = last_name
-        self.first_name = first_name
-        self.e_mail = e_mail
+    def __init__(self, guest_id:int, last_name:str, first_name:str, email:str):
+        self.__guest_id = guest_id
+        self.__last_name = last_name
+        self.__first_name = first_name
+        self.__email = email
+
+    @property
+    def guest_id(self):
+        return self.__guest_id
+
+    @property
+    def last_name(self):
+        return self.__last_name
+
+    @last_name.setter
+    def last_name(self, last_name):
+        if not last_name:
+            raise ValueError("last name name is required")
+        if not isinstance(last_name, str):
+            raise TypeError("last name must be a string")
+        self.__last_name = last_name
+
+    @property
+    def first_name(self):
+        return self.__first_name
+
+    @first_name.setter
+    def first_name(self, first_name):
+        if not first_name:
+            raise ValueError("first name is required")
+        if not isinstance(first_name, str):
+            raise TypeError("first name must be a string")
+        self.__first_name = first_name
+
+    @property
+    def email(self):
+        return self.__email
+
+    @email.setter
+    def email(self, email):
+        if not email:
+            raise ValueError("email is required")
+        if not isinstance(email, str):
+            raise TypeError("email must be a string")
+        self.__email = email
