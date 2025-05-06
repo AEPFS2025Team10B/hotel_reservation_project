@@ -4,6 +4,9 @@ class Hotel:
         self.__name = name
         self.__stars = stars
 
+def __repr__(self):
+    return f"Hotel(id={self.__hotel_id!r}, name={self.__name!r})"
+
     @property
     def hotel_id(self):
         return self.__hotel_id

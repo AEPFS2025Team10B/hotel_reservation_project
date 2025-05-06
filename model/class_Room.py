@@ -4,6 +4,9 @@ class Room:
         self.__number = number
         self.__price_per_night = price_per_night
 
+    def __repr__(self):
+        return f"Room(id={self.__room_id!r}, number={self.__number!r}, price_per_night={self.__price_per_night!r})"
+
     @property
     def room_id(self):
         return self.__room_id

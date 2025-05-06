@@ -5,6 +5,9 @@ class Invoice:
         self.__issue_date = issue_date
         self.__total_amount = total_amount
 
+    def __repr__(self):
+        return f"Invoice(id={self.__invoice_id!r}, issue_date={self.__issue_date!r}, total={self.__total_amount!r})"
+
     @property
     def invoice_id(self):
         return self.__invoice_id

@@ -6,6 +6,9 @@ class Address:
         self.__state = state
         self.__zip_code = zip_code
 
+    def __repr__(self):
+        return f"Address(id={self.__address_id!r}, street={self.__street!r}, city={self.__city!r}, state={self.__state!r}, zip={self.__zip_code!r})"
+
     @property
     def address_id(self):
         return self.__address_id

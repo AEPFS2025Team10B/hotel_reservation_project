@@ -5,6 +5,9 @@ class Guest:
         self.__first_name = first_name
         self.__email = email
 
+    def __repr__(self):
+        return f"Guest(id={self.__guest_id!r}, last_name={self.__last_name!r}, first_name={self.__first_name!r}, email={self.__email!r})"
+
     @property
     def guest_id(self):
         return self.__guest_id

@@ -8,6 +8,10 @@ class Booking:
         self.__is_cancelled = False
         self.__total_price = 0
 
+    def __repr__(self):
+        return f"Booking(id={self.__booking_id!r}, check_in_date={self.__check_in_date!r}, check_out_date={self.__check_out_date!r}, number_of_guests={self.__number_of_guests!r}, is_cancelled{self.__is_cancelled!r}, total_price={self.total_price!r})"
+
+
     @property
     def booking_id(self):
         return self.__booking_id
