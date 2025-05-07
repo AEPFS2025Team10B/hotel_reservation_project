@@ -7,7 +7,7 @@ def get_hotels_by_city(city_name: str) -> list:
     cursor = connection.cursor()
 
     query = """
-    SELECT Hotel.name, Hotel.stars, Address.city, Address.street
+    SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
     FROM Hotel
     JOIN Address ON Hotel.address_id = Address.address_id
     WHERE LOWER(Address.city) = LOWER(?);

@@ -16,8 +16,15 @@ def run_story(filename):
         print("No main() function found in", filename)
 
 def main():
+    # User Story 1.1: Stadtbasierte Hotelsuche
+    # User Story 1.2: Hotels nach Mindestanzahl Sterne filtern
+    # User Story 1.3: Hotels nach Gästezahl filtern
+    # User Story 1.4: Hotels mit Verfügbarkeit im Zeitraum filtern
+    # User Story 1.5: Kombination von Wünschen (Sterne, Gästezahl, Zeitraum)
+    # User Story 1.6: Anzeige von Hoteldetails (Name, Adresse, Sterne)
+
     stories = [
-        (1, "01.1_search_hotels_by_city_ui.py", "As a user, I want to search for hotels in a specific city so that I can find suitable accommodations."),
+        (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
     ]
 
     print("\nAvailable User Stories:")
