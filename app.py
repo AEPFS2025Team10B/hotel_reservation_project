@@ -25,7 +25,7 @@ def main():
 
     stories = [
         (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
-    ]
+        (2,"01.2_search_hotel_stars.py","As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count.")]
 
     print("\nAvailable User Stories:")
     for idx, fname, doc in stories:
