@@ -1,12 +1,12 @@
 """
 User Story 1.1
-As a guest, I want to browse all hotels in a city so that I can choose one based on location (city).
+Stadtbasierte Hotelsuche
 """
-
+#Import function
 from business_logic.hotel_service import find_hotels_by_city
 
 def main():
-    print("🏨 Hotel Search by City")
+    print(" Hotel Search by City")
     city = input("Enter a city: ").strip()
     hotels = find_hotels_by_city(city)
 

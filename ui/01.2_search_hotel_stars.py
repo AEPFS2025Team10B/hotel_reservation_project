@@ -1,6 +1,5 @@
 """
 User Story 1.2: Hotels nach Mindestanzahl Sterne filtern
-As a guest, I want to filter hotels in a city by minimum star rating.
 """
 
 import sys
@@ -12,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_service import find_hotels_by_city_and_min_stars
 
 def main():
-    print("🏨 Hotel Search by City with Minimum Stars")
+    print(" Hotel Search by City with Minimum Stars")
     city = input("Enter city: ").strip()
     min_stars = int(input("Enter minimum stars: "))
 
