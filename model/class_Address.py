@@ -22,7 +22,7 @@ class Address:
         if not street:
             raise ValueError("street name and number is required")
         if not isinstance(street, str):
-            raise TypeError("street must be an string")
+            raise TypeError("street must be a string")
         self.__street = street
 
     @property
@@ -34,7 +34,7 @@ class Address:
         if not city:
             raise ValueError("city name is required")
         if not isinstance(city, str):
-            raise TypeError("city must be an string")
+            raise TypeError("city must be a string")
         self.__city = city
 
     @property
@@ -46,7 +46,7 @@ class Address:
         if not state:
             raise ValueError("state name is required")
         if not isinstance(state, str):
-            raise TypeError("state must be an string")
+            raise TypeError("state must be a string")
         self.__state = state
 
     @property
@@ -58,6 +58,6 @@ class Address:
         if not zip_code:
             raise ValueError("zip code is required")
         if not isinstance(zip_code, str):
-            raise TypeError("zip code must be an string")
+            raise TypeError("zip code must be a string")
         self.__zip_code = zip_code
 

@@ -15,5 +15,5 @@ class Facility:
         if not name:
             raise ValueError("facility name is required")
         if not isinstance(name, str):
-            raise TypeError("facility name must be an string")
+            raise TypeError("facility name must be a string")
         self.__name = name

@@ -20,7 +20,7 @@ class Room:
         if not number:
             raise ValueError("room number is required")
         if not isinstance(number, str):
-            raise TypeError("room number must be an string")
+            raise TypeError("room number must be a string")
         self.__number = number
 
     @property
