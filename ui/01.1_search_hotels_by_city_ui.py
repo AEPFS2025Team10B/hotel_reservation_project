@@ -3,7 +3,7 @@ User Story 1.1
 Stadtbasierte Hotelsuche
 """
 #Import function
-from business_logic.hotel_service import find_hotels_by_city
+from business_logic.hotel_manager import find_hotels_by_city
 
 def main():
     print(" Hotel Search by City")

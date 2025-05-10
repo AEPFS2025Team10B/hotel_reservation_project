@@ -2,6 +2,10 @@
 
 import importlib.util
 import os
+import sys
+
+# Sicherstellen, dass das Hauptverzeichnis im Pfad ist, damit Imports funktionieren
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 UI_PATH = "ui"
 
@@ -18,17 +22,20 @@ def run_story(filename):
 def main():
     # User Story 1.1: Stadtbasierte Hotelsuche.
     # User Story 1.2: Hotels nach Mindestanzahl Sterne filtern.
-    # User Story 1.3: Ich möchte alle Hotels in einer Stadt durchsuchen, die Zimmer haben, die meiner Gästezahl entsprechen (nur 1 Zimmer pro Buchung).
+    # User Story 1.3: Hotels mit Zimmern für bestimmte Gästezahl.
     # User Story 1.4: Hotels mit Verfügbarkeit im Zeitraum filtern.
     # User Story 1.5: Kombination von Wünschen (Sterne, Gästezahl, Zeitraum).
     # User Story 1.6: Anzeige von Hoteldetails (Name, Adresse, Sterne).
 
     stories = [
         (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
-        (2,"01.2_search_hotel_stars.py","As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),
-        (3,"01.3_search_room_by_guest_count.py","As a guest I want to search all Hotels in a city that have room for all my guests"),
-        (4,"01.4_search_hotels_by_availability.py", "As a guest I want to search all Hotels which have available room for my desired stay time"),
-        (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria"),]
+        (2, "01.2_search_hotel_stars.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),
+        (3, "01.3_search_room_by_guest_count.py", "As a guest I want to search all hotels in a city that have room for all my guests."),
+        (4, "01.4_search_hotels_by_availability.py", "As a guest I want to search all hotels which have available room for my desired stay time."),
+        (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
+        # (6, "01.6_display_hotel_details_ui.py", "As a guest I want to see hotel details (name, address, stars).")
+    ]
+
     print("\nAvailable User Stories:")
     for idx, fname, doc in stories:
         print(f"{idx}. {fname}\n   → {doc}\n")

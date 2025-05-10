@@ -6,7 +6,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from business_logic.hotel_service import find_hotels_by_availability
+from business_logic.hotel_manager import find_hotels_by_availability
 
 def main():
     print("🏨 Hotel Search by Availability")

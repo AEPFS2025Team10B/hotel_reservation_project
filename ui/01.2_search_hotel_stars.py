@@ -8,7 +8,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import the correct function
-from business_logic.hotel_service import find_hotels_by_city_and_min_stars
+from business_logic.hotel_manager import find_hotels_by_city_and_min_stars
 
 def main():
     print(" Hotel Search by City with Minimum Stars")

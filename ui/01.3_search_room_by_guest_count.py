@@ -6,7 +6,7 @@ As a guest, I want to search all hotels in a city that have a room for all my gu
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from business_logic.hotel_service import find_hotels_by_guest_count
+from business_logic.hotel_manager import find_hotels_by_guest_count
 
 DB_PATH = "database/hotel_reservation_sample.db"
 def main():

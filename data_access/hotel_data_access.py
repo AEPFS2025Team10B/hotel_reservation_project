@@ -1,12 +1,12 @@
+import model
 from data_access.base_data_access import BaseDataAccess
-from model.Hotel import Hotel
 
 class HotelDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
     #(Userstory 1.1) Search a Hotel by City 
-    def get_hotels_by_city(self, city_name: str) -> list[Hotel]:
+    def get_hotels_by_city(self, city_name: str) -> list[model.Hotel]:
         query = """
         SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
         FROM Hotel
@@ -14,10 +14,10 @@ class HotelDataAccess(BaseDataAccess):
         WHERE LOWER(Address.city) = LOWER(?);
         """
         result = self.fetchall(query, (city_name,))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
     #(User Story 1.2) Search a Hotel by City and min star 
-    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[Hotel]:
+    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[model.Hotel]:
         query = """
         SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
         FROM Hotel
@@ -25,10 +25,10 @@ class HotelDataAccess(BaseDataAccess):
         WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
         """
         result = self.fetchall(query, (city, min_stars))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
     #(User Story 1.5) Combined Filter (city, stars, guests, availability)
-    def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str) -> list[Hotel]:
+    def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str) -> list[model.Hotel]:
         query = """
         SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
         FROM Hotel
@@ -52,4 +52,4 @@ class HotelDataAccess(BaseDataAccess):
             min_stars,
             guest_count
         ))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]

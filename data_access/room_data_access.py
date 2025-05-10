@@ -1,12 +1,12 @@
+import model
 from data_access.base_data_access import BaseDataAccess
-from model.Hotel import Hotel  # da du Hotel-Objekte zurückgibst
 
 class RoomDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
-    # User Story 1.3: Hotels mit Zimmern für X Gäste
-    def get_hotels_by_guest_count(self, city: str, guest_count: int) -> list[Hotel]:
+    # (User Story 1.3) Filter hotels in a city by room capacity (guest count)
+    def get_hotels_by_guest_count(self, city: str, guest_count: int) -> list[model.Hotel]:
         sql = """
         SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
         FROM Hotel
@@ -16,10 +16,10 @@ class RoomDataAccess(BaseDataAccess):
         WHERE LOWER(Address.city) = LOWER(?) AND Room_Type.max_guests >= ?
         """
         result = self.fetchall(sql, (city, guest_count))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
-    # User Story 1.4: Verfügbarkeit nach Zeitraum
-    def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[Hotel]:
+    # (User Story 1.4) Filter hotels by room availability in a date range
+    def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[model.Hotel]:
         sql = """
         SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
         FROM Hotel
@@ -33,4 +33,4 @@ class RoomDataAccess(BaseDataAccess):
         WHERE Booking.booking_id IS NULL
         """
         result = self.fetchall(sql, (check_in_date, check_out_date))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
