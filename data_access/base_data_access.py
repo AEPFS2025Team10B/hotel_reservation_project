@@ -15,28 +15,18 @@ class BaseDataAccess:
 
     def fetchone(self, sql: str, params: tuple | None = ()): 
         with self._connect() as conn:
-            try:
-                cur = conn.cursor()
-                cur.execute(sql, params)
-                result = cur.fetchone()
-            except sqlite3.Error as e:
-                conn.rollback()
-                raise e
-            finally:
-                cur.close()
+            cur = conn.cursor()
+            cur.execute(sql, params)
+            result = cur.fetchone()
+            cur.close()
         return result
 
     def fetchall(self, sql: str, params: tuple | None = ()) -> list:
         with self._connect() as conn:
-            try:
-                cur = conn.cursor()
-                cur.execute(sql, params)
-                result = cur.fetchall()
-            except sqlite3.Error as e:
-                conn.rollback()
-                raise e
-            finally:
-                cur.close()
+            cur = conn.cursor()
+            cur.execute(sql, params)
+            result = cur.fetchall()
+            cur.close()
         return result
 
     def execute(self, sql: str, params: tuple | None = ()) -> (int, int):

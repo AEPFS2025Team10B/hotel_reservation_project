@@ -1,6 +1,5 @@
-import model.Guest
+import model
 from data_access.base_data_access import BaseDataAccess
-
 
 class GuestDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
@@ -11,12 +10,12 @@ class GuestDataAccess(BaseDataAccess):
             first_name: str,
             last_name: str,
             email: str
-    ) -> model.Guest.Guest:
-        if first_name is None:
+    ) -> model.Guest:
+        if not first_name:
             raise ValueError("First name is required")
-        if last_name is None:
+        if not last_name:
             raise ValueError("Last name is required")
-        if email is None:
+        if not email:
             raise ValueError("Email is required")
 
         sql = """
@@ -27,15 +26,15 @@ class GuestDataAccess(BaseDataAccess):
 
         last_row_id, row_count = self.execute(sql, params)
 
-        return model.Guest.Guest(
+        return model.Guest(
             guest_id=last_row_id,
             first_name=first_name,
             last_name=last_name,
             email=email
         )
 
-    def read_guest_by_id(self, guest_id: int) -> model.Guest.Guest | None:
-        if guest_id is None:
+    def read_guest_by_id(self, guest_id: int) -> model.Guest | None:
+        if not guest_id:
             raise ValueError("Guest ID is required")
 
         sql = """
@@ -48,7 +47,7 @@ class GuestDataAccess(BaseDataAccess):
 
         if result:
             guest_id, first_name, last_name, email = result
-            return model.Guest.Guest(
+            return model.Guest(
                 guest_id=guest_id,
                 first_name=first_name,
                 last_name=last_name,
@@ -57,8 +56,8 @@ class GuestDataAccess(BaseDataAccess):
         else:
             return None
 
-    def read_guests_by_last_name(self, last_name: str) -> list[model.Guest.Guest]:
-        if last_name is None:
+    def read_guests_by_last_name(self, last_name: str) -> list[model.Guest]:
+        if not last_name:
             raise ValueError("Last name is required")
 
         sql = """
@@ -70,7 +69,7 @@ class GuestDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, params)
 
         return [
-            model.Guest.Guest(
+            model.Guest(
                 guest_id=row[0],
                 first_name=row[1],
                 last_name=row[2],
