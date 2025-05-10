@@ -1,12 +1,12 @@
-
 """
 User Story 1.5: Ich möchte Wünsche kombinieren können (z.B. Gästezahl, Sterne, Verfügbarkeit).).
 """
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_hotels_by_multiple_criteria
-
-DB_PATH = "database/hotel_reservation_sample.db"
 
 def main():
     print("Hotel Search by your availability")

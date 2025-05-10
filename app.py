@@ -33,7 +33,7 @@ def main():
         (3, "01.3_search_room_by_guest_count.py", "As a guest I want to search all hotels in a city that have room for all my guests."),
         (4, "01.4_search_hotels_by_availability.py", "As a guest I want to search all hotels which have available room for my desired stay time."),
         (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
-        # (6, "01.6_display_hotel_details_ui.py", "As a guest I want to see hotel details (name, address, stars).")
+        (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars).")
     ]
 
     print("\nAvailable User Stories:")

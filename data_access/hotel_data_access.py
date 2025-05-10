@@ -53,3 +53,13 @@ class HotelDataAccess(BaseDataAccess):
             guest_count
         ))
         return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+
+    #(User Story 1.6) Get all hotel details
+    def get_all_hotel_details(self) -> list[model.Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        """
+        result = self.fetchall(query)
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
