@@ -1,4 +1,4 @@
-import model.class_Guest
+import model.Guest
 from data_access.base_data_access import BaseDataAccess
 
 
@@ -11,7 +11,7 @@ class GuestDataAccess(BaseDataAccess):
             first_name: str,
             last_name: str,
             email: str
-    ) -> model.class_Guest.Guest:
+    ) -> model.Guest.Guest:
         if first_name is None:
             raise ValueError("First name is required")
         if last_name is None:
@@ -27,14 +27,14 @@ class GuestDataAccess(BaseDataAccess):
 
         last_row_id, row_count = self.execute(sql, params)
 
-        return model.class_Guest.Guest(
+        return model.Guest.Guest(
             guest_id=last_row_id,
             first_name=first_name,
             last_name=last_name,
             email=email
         )
 
-    def read_guest_by_id(self, guest_id: int) -> model.class_Guest.Guest | None:
+    def read_guest_by_id(self, guest_id: int) -> model.Guest.Guest | None:
         if guest_id is None:
             raise ValueError("Guest ID is required")
 
@@ -48,7 +48,7 @@ class GuestDataAccess(BaseDataAccess):
 
         if result:
             guest_id, first_name, last_name, email = result
-            return model.class_Guest.Guest(
+            return model.Guest.Guest(
                 guest_id=guest_id,
                 first_name=first_name,
                 last_name=last_name,
@@ -57,7 +57,7 @@ class GuestDataAccess(BaseDataAccess):
         else:
             return None
 
-    def read_guests_by_last_name(self, last_name: str) -> list[model.class_Guest.Guest]:
+    def read_guests_by_last_name(self, last_name: str) -> list[model.Guest.Guest]:
         if last_name is None:
             raise ValueError("Last name is required")
 
@@ -70,7 +70,7 @@ class GuestDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, params)
 
         return [
-            model.class_Guest.Guest(
+            model.Guest.Guest(
                 guest_id=row[0],
                 first_name=row[1],
                 last_name=row[2],
