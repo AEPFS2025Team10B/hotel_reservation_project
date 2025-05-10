@@ -1,4 +1,8 @@
+from data_access.room_data_access import get_hotels_by_availability
+
 from data_access.hotel_data_access import get_hotels_by_city
+
+from data_access.hotel_data_access import get_hotels_by_city_and_min_stars
 
 from data_access.room_data_access import get_hotels_by_guest_count
 
