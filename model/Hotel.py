@@ -1,8 +1,10 @@
 class Hotel:
-    def __init__(self, hotel_id:int, name:str, stars:int):
-        self.__hotel_id = hotel_id
-        self.__name = name
-        self.__stars = stars
+    def __init__(self, hotel_id: int, name: str, stars: int, city: str, street: str):
+        self.hotel_id = hotel_id
+        self.name = name
+        self.stars = stars
+        self.city = city
+        self.street = street
 
 def __repr__(self):
     return f"Hotel(id={self.__hotel_id!r}, name={self.__name!r})"

@@ -12,14 +12,14 @@ def main():
 
     if hotels:
         print(f"\nFound hotels in {city}:")
-        for index, (hotel_id, name, stars, city, street) in enumerate(hotels, start=1):
-            print(f"{index}. {name} ({stars}★), {street}, {city}")
+        for index, hotel in enumerate(hotels, start=1):
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
 
         try:
             selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
             if 1 <= selection <= len(hotels):
                 selected = hotels[selection - 1]
-                print(f"\nYou selected:\n→ {selected[1]} ({selected[2]}★), {selected[4]}, {selected[3]}")
+                print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.street}, {selected.city}")
             else:
                 print("Invalid selection.")
         except ValueError:
