@@ -27,14 +27,19 @@ def get_hotels_by_availability(check_in_date: str, check_out_date: str) -> list:
     cursor = connection.cursor()
 
     query = """
-SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
-FROM Hotel
-JOIN Address ON Hotel.address_id = Address.address_id
-JOIN Room ON Hotel.hotel_id = Room.hotel_id
-LEFT JOIN Booking ON Room.room_id = Booking.room_id
-    AND Booking.is_cancelled = 0
-    AND NOT (
-        Booking.check_out_date <= ? OR Booking.check_in_date >= ?
-    )
-WHERE Booking.booking_id IS NULL
-"""
+    SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+    FROM Hotel
+    JOIN Address ON Hotel.address_id = Address.address_id
+    JOIN Room ON Hotel.hotel_id = Room.hotel_id
+    LEFT JOIN Booking ON Room.room_id = Booking.room_id
+        AND Booking.is_cancelled = 0
+        AND NOT (
+            Booking.check_out_date <= ? OR Booking.check_in_date >= ?
+        )
+    WHERE Booking.booking_id IS NULL
+    """
+    cursor.execute(query, (check_in_date, check_out_date))
+    result = cursor.fetchall()
+
+    connection.close()
+    return result
