@@ -1,9 +1,10 @@
 import sqlite3
+import model.class_Hotel import Hotel
 
 DB_PATH = "database/hotel_reservation_sample.db"
 
 #(Userstory 1.1) Search a Hotel by City 
-def get_hotels_by_city(city_name: str) -> list:
+def get_hotels_by_city(city_name: str) -> list[Hotel]:
     connection = sqlite3.connect(DB_PATH)
     cursor = connection.cursor()
 
