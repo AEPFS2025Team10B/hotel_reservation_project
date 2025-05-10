@@ -10,3 +10,7 @@ def find_hotels_by_city_and_min_stars(city: str, min_stars: int) -> list:
 
 def find_hotels_by_guest_count(city: str, guest_count: int) -> list:
     return get_hotels_by_guest_count(city, guest_count)
+
+def find_hotels_by_availability(check_in_date: str, check_out_date: str) -> list:
+    return get_hotels_by_availability(check_in_date, check_out_date)
+

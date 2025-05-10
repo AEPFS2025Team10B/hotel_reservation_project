@@ -35,4 +35,3 @@ def get_hotels_by_city_and_min_stars(city: str, min_stars: int) -> list:
 
     connection.close()
     return result
-

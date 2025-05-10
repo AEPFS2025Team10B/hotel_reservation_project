@@ -26,7 +26,8 @@ def main():
     stories = [
         (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
         (2,"01.2_search_hotel_stars.py","As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),
-        (3,"01.3_search_room_by_guest_count.py","As a guest I want to search all Hotels in a city that have room for all my guests")]
+        (3,"01.3_search_room_by_guest_count.py","As a guest I want to search all Hotels in a city that have room for all my guests"),
+        (4,"01.4_search_hotels_by_availability.py", "As a guest I want to search all Hotels which have available room for my desired stay time")]
     print("\nAvailable User Stories:")
     for idx, fname, doc in stories:
         print(f"{idx}. {fname}\n   → {doc}\n")
