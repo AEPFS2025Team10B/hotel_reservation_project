@@ -17,7 +17,7 @@ def main():
 
     if hotels:
         print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
-        for index, (hotel_id, name, stars, city, street) in enumerate(hotels, start=1):
-            print(f"{index}. {name} ({stars}★), {street}, {city}")
+        for index, hotel in enumerate(hotels, start=1):
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
     else:
         print(f"\nNo hotels available in that period.")
