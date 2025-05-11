@@ -1,6 +1,8 @@
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
 
+#from model.hotel import Hotel
+
 # Optional: Übergib den Pfad als Parameter, falls du später dynamisch arbeitest
 hotel_dao = HotelDataAccess()
 room_dao = RoomDataAccess()

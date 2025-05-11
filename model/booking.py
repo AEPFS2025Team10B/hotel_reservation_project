@@ -1,4 +1,6 @@
 from datetime import date
+from guest import Guest
+from invoice import Invoice
 class Booking:
     def __init__(self, booking_id:int, check_in_date:date, check_out_date:date, number_of_guests:int):
         self.__booking_id = booking_id
@@ -7,6 +9,8 @@ class Booking:
         self.__number_of_guests = number_of_guests
         self.__is_cancelled = False
         self.__total_price = 0
+        self.__guest = Guest
+        self.__invoice = Invoice
 
     def __repr__(self):
         return f"Booking(id={self.__booking_id!r}, check_in_date={self.__check_in_date!r}, check_out_date={self.__check_out_date!r}, number_of_guests={self.__number_of_guests!r}, is_cancelled{self.__is_cancelled!r}, total_price={self.total_price!r})"
@@ -54,3 +58,20 @@ class Booking:
     @total_price.setter
     def total_price(self, total_price):
         pass
+
+    @property
+    def guest(self):
+        return self.__guest
+
+    @guest.setter
+    def guest(self, guest):
+        pass
+
+    @property
+    def invoice(self):
+        return self.__invoice
+
+    @invoice.setter
+    def invoice(self, invoice):
+        pass
+
