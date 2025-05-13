@@ -1,16 +1,11 @@
-from address import Address
-from booking import Booking
-from model import booking
-
-
 class Guest:
     def __init__(self, guest_id:int, last_name:str, first_name:str, email:str):
         self.__guest_id = guest_id
         self.__last_name = last_name
         self.__first_name = first_name
         self.__email = email
-        self.__address = Address
-        self.__booking = Booking
+        self.__address = None
+        self.__booking = None
 
     def __repr__(self):
         return f"Guest(id={self.__guest_id!r}, last_name={self.__last_name!r}, first_name={self.__first_name!r}, email={self.__email!r})"
@@ -62,15 +57,16 @@ class Guest:
     @address.setter
     def address(self, address):
         if not isinstance(address, Address):
-            raise TypeError("address is required")
+            raise TypeError("Address is required")
         self.__address = address
 
     @property
     def booking(self):
         return self.__booking
+
     @booking.setter
     def booking(self, booking):
+        from .booking import Booking
         if not isinstance(booking, Booking):
-            raise TypeError("booking must be a Booking")
+            raise TypeError("Booking must be a Booking")
         self.__booking = booking
-

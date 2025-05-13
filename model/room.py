@@ -1,15 +1,11 @@
-from hotel import Hotel
-from booking import Booking
-from roomtype import RoomType
-
 class Room:
-    def __init__(self, room_id:int, number:str, price_per_night:float):
+    def __init__(self, room_id: int, number: str, price_per_night: float):
         self.__room_id = room_id
         self.__number = number
         self.__price_per_night = price_per_night
-        self.__roomtype = RoomType
-        self.__hotel = Hotel
-        self.__booking = Booking
+        self.__roomtype = None
+        self.__hotel = None
+        self.__booking = None
 
     def __repr__(self):
         return f"Room(id={self.__room_id!r}, number={self.__number!r}, price_per_night={self.__price_per_night!r})"
@@ -50,6 +46,7 @@ class Room:
 
     @roomtype.setter
     def roomtype(self, roomtype):
+        from .roomtype import RoomType
         if not isinstance(roomtype, RoomType):
             raise TypeError("room type must be a RoomType")
         self.__roomtype = roomtype
@@ -60,8 +57,10 @@ class Room:
 
     @hotel.setter
     def hotel(self, hotel):
+        from .hotel import Hotel
         if not isinstance(hotel, Hotel):
             raise TypeError("hotel must be a Hotel")
+        self.__hotel = hotel
 
     @property
     def booking(self):
@@ -69,10 +68,7 @@ class Room:
 
     @booking.setter
     def booking(self, booking):
+        from .booking import Booking
         if not isinstance(booking, Booking):
             raise TypeError("booking must be a Booking")
         self.__booking = booking
-
-
-
-
