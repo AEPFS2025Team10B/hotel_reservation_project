@@ -1,4 +1,5 @@
 from model.hotel import Hotel
+from model.room import Room
 from data_access.base_data_access import BaseDataAccess
 
 class RoomDataAccess(BaseDataAccess):
@@ -34,3 +35,28 @@ class RoomDataAccess(BaseDataAccess):
         """
         result = self.fetchall(sql, (check_in_date, check_out_date))
         return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+    
+     # (User Story 1.6.1) Get Details from hotel, here we get the next date where there is a non occupied room
+    def get_available_rooms_for_hotel(self, hotel_id: int, today: str):
+        sql = """
+        SELECT Room.room_id, Room.room_number, Room.price_per_night
+        FROM Room
+        JOIN Room_Type ON Room.type_id = Room_Type.type_id
+        LEFT JOIN Booking ON Room.room_id = Booking.room_id
+            AND Booking.is_cancelled = 0
+            AND Booking.check_out_date > ?
+        WHERE Room.hotel_id = ?
+        AND Booking.booking_id IS NULL;
+        """
+        result = self.fetchall(sql, (today, hotel_id))
+        return [Room(room_id, room_number, price) for room_id, room_number, price in result]
+
+    def get_next_available_date_for_hotel(self, hotel_id: int):
+        sql = """
+        SELECT MIN(Booking.check_out_date)
+        FROM Booking
+        JOIN Room ON Booking.room_id = Room.room_id
+        WHERE Room.hotel_id = ? AND Booking.is_cancelled = 0
+        """
+        result = self.fetchone(sql, (hotel_id,))
+        return result[0] if result else None
