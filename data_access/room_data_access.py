@@ -1,5 +1,6 @@
 from model.hotel import Hotel
 from model.room import Room
+from model.roomtype import RoomType
 from data_access.base_data_access import BaseDataAccess
 
 class RoomDataAccess(BaseDataAccess):
@@ -64,3 +65,34 @@ class RoomDataAccess(BaseDataAccess):
         """
         result = self.fetchone(sql, (hotel_id,))
         return result[0] if result else None
+
+     # (User Story 2.1) Show all Room Types of Hotel
+
+    def get_room_types_by_hotel(self, hotel_id: int) -> list[RoomType]:
+        sql = """
+        SELECT 
+            RT.type_id,
+            RT.description,
+            RT.max_guests,
+            R.price_per_night,
+            GROUP_CONCAT(F.facility_name, ', ') AS facilities
+        FROM Room R
+        JOIN Room_Type RT ON R.type_id = RT.type_id
+        LEFT JOIN Room_Facilities RF ON R.room_id = RF.room_id
+        LEFT JOIN Facilities F ON RF.facility_id = F.facility_id
+        WHERE R.hotel_id = ?
+        GROUP BY RT.type_id, R.price_per_night
+        ORDER BY RT.description
+        """
+        result = self.fetchall(sql, (hotel_id,))
+        return [
+            RoomType(
+                room_type_id=type_id,
+                name=description,
+                max_guest=max_guests,
+                description=description,
+                price_per_night=price,
+                facilities=facilities.split(', ') if facilities else []
+            )
+            for type_id, description, max_guests, price, facilities in result
+        ]

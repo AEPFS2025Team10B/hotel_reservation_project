@@ -2,6 +2,7 @@
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
 
+
 #from model.hotel import Hotel
 
 # Optional: Übergib den Pfad als Parameter, falls du später dynamisch arbeitest
@@ -14,3 +15,7 @@ def get_available_rooms_by_hotel(hotel_id: int, today: str):
 
 def get_next_available_date_for_hotel(hotel_id: int):
     return room_dao.get_next_available_date_for_hotel(hotel_id)
+
+# (User Story 2.1) Show all Room Types of Hotel
+def get_room_types_by_hotel(hotel_id: int):
+    return room_dao.get_room_types_by_hotel(hotel_id)

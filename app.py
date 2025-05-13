@@ -33,8 +33,9 @@ def main():
         (3, "01.3_search_room_by_guest_count.py", "As a guest I want to search all hotels in a city that have room for all my guests."),
         (4, "01.4_search_hotels_by_availability.py", "As a guest I want to search all hotels which have available room for my desired stay time."),
         (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
-        (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars).")
-    ]
+        (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars)."),
+        (7, "2.1_search_room_type_by_hotel.py", "As A guest, I want to see all Room Types of a Hotel")
+        ]
 
     print("\nAvailable User Stories:")
     for idx, fname, doc in stories:
