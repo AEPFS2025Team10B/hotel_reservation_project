@@ -8,6 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from datetime import date
 today = date.today().isoformat()
+
 from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.room_manager import get_available_rooms_by_hotel, get_next_available_date_for_hotel
 
@@ -39,12 +40,11 @@ def main():
                     print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
             else:
                 print(" No available rooms today.")
-
-            next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
-            if next_date:
-                print(f"\nNext available date for any room: {next_date}")
-            else:
-                print("No future availability found.")
+                next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
+                if next_date:
+                    print(f"\nNext available date for any room: {next_date}")
+                else:
+                    print("No future availability found.")
         else:
             print("Invalid selection.")
     except ValueError:
