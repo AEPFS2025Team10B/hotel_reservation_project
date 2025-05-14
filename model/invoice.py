@@ -3,8 +3,8 @@ from datetime import date
 class Invoice:
     def __init__(self, invoice_id: int, issue_date: date, total_amount: float):
         self.__invoice_id = invoice_id
-        self.issue_date = issue_date
-        self.total_amount = total_amount
+        self.__issue_date = issue_date
+        self.__total_amount = total_amount
         self.__booking = None
 
     def __repr__(self):

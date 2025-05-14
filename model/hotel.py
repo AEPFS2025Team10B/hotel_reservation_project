@@ -1,11 +1,11 @@
 class Hotel:
     def __init__(self, hotel_id: int, name: str, stars: int, city: str, street: str):
         self.__hotel_id = hotel_id
-        self.name = name                    
-        self.stars = stars                 
+        self.__name = name
+        self.__stars = stars
         self.__city = city
         self.__street = street
-        self.__address = None              
+        self.__address = []
         self.__rooms = []                  
         self.__facilities = []      
 
