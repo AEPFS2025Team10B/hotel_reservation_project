@@ -8,13 +8,18 @@ class HotelDataAccess(BaseDataAccess):
     #(Userstory 1.1) Search a Hotel by City 
     def get_hotels_by_city(self, city_name: str) -> list[model.Hotel]:
         query = """
-        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
         FROM Hotel
         JOIN Address ON Hotel.address_id = Address.address_id
         WHERE LOWER(Address.city) = LOWER(?);
         """
         result = self.fetchall(query, (city_name,))
-        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        for row in result:
+            hotel_id, name, stars, address_id, city, street, zip_code = row
+            hotel = model.Hotel(hotel_id, name, stars)
+            address = model.Address(address_id, city, street, zip_code)
+            hotel.append(hotel)
+            hotel.append(address)
 
     #(User Story 1.2) Search a Hotel by City and min star 
     def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[model.Hotel]:

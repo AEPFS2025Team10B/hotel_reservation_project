@@ -13,7 +13,7 @@ def main():
     if hotels:
         print(f"\nFound hotels in {city}:")
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
 
         try:
             selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))

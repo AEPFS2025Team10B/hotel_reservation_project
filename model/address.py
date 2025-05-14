@@ -1,9 +1,8 @@
 class Address:
-    def __init__(self, address_id:int, street:str, city:str, state:str, zip_code:str):
+    def __init__(self, address_id:int, street:str, city:str, zip_code:str):
         self.__address_id = address_id
         self.__street = street
         self.__city = city
-        self.__state = state
         self.__zip_code = zip_code
 
     def __repr__(self):
