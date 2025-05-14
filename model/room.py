@@ -3,9 +3,9 @@ class Room:
         self.__room_id = room_id
         self.__number = number
         self.__price_per_night = price_per_night
-        self.__roomtype = None
-        self.__hotel = None
-        self.__booking = None
+        self.__roomtype = []
+        self.__hotel = []
+        self.__booking = []
 
     def __repr__(self):
         return f"Room(id={self.__room_id!r}, number={self.__number!r}, price_per_night={self.__price_per_night!r})"
