@@ -1,4 +1,6 @@
-import model.class_Guest
+from __future__ import annotations
+
+from model import Guest
 from data_access.base_data_access import BaseDataAccess
 
 
@@ -6,12 +8,7 @@ class GuestDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
-    def create_new_guest(
-            self,
-            first_name: str,
-            last_name: str,
-            email: str
-    ) -> model.class_Guest.Guest:
+    def create_new_guest(self, first_name: str, last_name: str, email: str) -> Guest:
         if first_name is None:
             raise ValueError("First name is required")
         if last_name is None:
@@ -24,17 +21,16 @@ class GuestDataAccess(BaseDataAccess):
         VALUES (?, ?, ?)
         """
         params = (first_name, last_name, email)
+        last_row_id, _ = self.execute(sql, params)
 
-        last_row_id, row_count = self.execute(sql, params)
-
-        return model.class_Guest.Guest(
+        return Guest(
             guest_id=last_row_id,
             first_name=first_name,
             last_name=last_name,
             email=email
         )
 
-    def read_guest_by_id(self, guest_id: int) -> model.class_Guest.Guest | None:
+    def read_guest_by_id(self, guest_id: int) -> Guest | None:
         if guest_id is None:
             raise ValueError("Guest ID is required")
 
@@ -43,21 +39,13 @@ class GuestDataAccess(BaseDataAccess):
         FROM Guest
         WHERE GuestId = ?
         """
-        params = (guest_id,)
-        result = self.fetchone(sql, params)
-
+        result = self.fetchone(sql, (guest_id,))
         if result:
             guest_id, first_name, last_name, email = result
-            return model.class_Guest.Guest(
-                guest_id=guest_id,
-                first_name=first_name,
-                last_name=last_name,
-                email=email
-            )
-        else:
-            return None
+            return Guest(guest_id, first_name, last_name, email)
+        return None
 
-    def read_guests_by_last_name(self, last_name: str) -> list[model.class_Guest.Guest]:
+    def read_guests_by_last_name(self, last_name: str) -> list[Guest]:
         if last_name is None:
             raise ValueError("Last name is required")
 
@@ -66,15 +54,8 @@ class GuestDataAccess(BaseDataAccess):
         FROM Guest
         WHERE LastName = ?
         """
-        params = (last_name,)
-        rows = self.fetchall(sql, params)
-
+        rows = self.fetchall(sql, (last_name,))
         return [
-            model.class_Guest.Guest(
-                guest_id=row[0],
-                first_name=row[1],
-                last_name=row[2],
-                email=row[3]
-            )
-            for row in rows
+            Guest(guest_id, first_name, last_name, email)
+            for guest_id, first_name, last_name, email in rows
         ]

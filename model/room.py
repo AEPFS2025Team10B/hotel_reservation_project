@@ -1,8 +1,15 @@
+from hotel import Hotel
+from booking import Booking
+from roomtype import RoomType
+
 class Room:
     def __init__(self, room_id:int, number:str, price_per_night:float):
         self.__room_id = room_id
         self.__number = number
         self.__price_per_night = price_per_night
+        self.__roomtype = RoomType
+        self.__hotel = Hotel
+        self.__booking = Booking
 
     def __repr__(self):
         return f"Room(id={self.__room_id!r}, number={self.__number!r}, price_per_night={self.__price_per_night!r})"
@@ -36,4 +43,36 @@ class Room:
         if price_per_night <= 0:
             raise ValueError("price per night must be greater than 0")
         self.__price_per_night = price_per_night
+
+    @property
+    def roomtype(self):
+        return self.__roomtype
+
+    @roomtype.setter
+    def roomtype(self, roomtype):
+        if not isinstance(roomtype, RoomType):
+            raise TypeError("room type must be a RoomType")
+        self.__roomtype = roomtype
+
+    @property
+    def hotel(self):
+        return self.__hotel
+
+    @hotel.setter
+    def hotel(self, hotel):
+        if not isinstance(hotel, Hotel):
+            raise TypeError("hotel must be a Hotel")
+
+    @property
+    def booking(self):
+        return self.__booking
+
+    @booking.setter
+    def booking(self, booking):
+        if not isinstance(booking, Booking):
+            raise TypeError("booking must be a Booking")
+        self.__booking = booking
+
+
+
 

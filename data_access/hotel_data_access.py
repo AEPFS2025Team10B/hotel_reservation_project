@@ -1,38 +1,65 @@
-import sqlite3
+import model
+from data_access.base_data_access import BaseDataAccess
 
-DB_PATH = "database/hotel_reservation_sample.db"
+class HotelDataAccess(BaseDataAccess):
+    def __init__(self, db_path: str = None):
+        super().__init__(db_path)
 
-#(Userstory 1.1) Search a Hotel by City 
-def get_hotels_by_city(city_name: str) -> list:
-    connection = sqlite3.connect(DB_PATH)
-    cursor = connection.cursor()
+    #(Userstory 1.1) Search a Hotel by City 
+    def get_hotels_by_city(self, city_name: str) -> list[model.Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        WHERE LOWER(Address.city) = LOWER(?);
+        """
+        result = self.fetchall(query, (city_name,))
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
-    query = """
-    SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
-    FROM Hotel
-    JOIN Address ON Hotel.address_id = Address.address_id
-    WHERE LOWER(Address.city) = LOWER(?);
-    """
-    cursor.execute(query, (city_name,))
-    result = cursor.fetchall()
+    #(User Story 1.2) Search a Hotel by City and min star 
+    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[model.Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
+        """
+        result = self.fetchall(query, (city, min_stars))
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
-    connection.close()
-    return result
+    #(User Story 1.5) Combined Filter (city, stars, guests, availability)
+    def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str) -> list[model.Hotel]:
+        query = """
+        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        JOIN Room ON Hotel.hotel_id = Room.hotel_id
+        JOIN Room_Type ON Room.type_id = Room_Type.type_id
+        LEFT JOIN Booking ON Room.room_id = Booking.room_id
+            AND Booking.is_cancelled = 0
+            AND NOT (
+                Booking.check_out_date <= ? OR Booking.check_in_date >= ?
+            )
+        WHERE LOWER(Address.city) = LOWER(?)
+          AND Hotel.stars >= ?
+          AND Room_Type.max_guests >= ?
+          AND Booking.booking_id IS NULL
+        """
+        result = self.fetchall(query, (
+            check_in_date,
+            check_out_date,
+            city,
+            min_stars,
+            guest_count
+        ))
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
 
-#(User Story 1.2) Search a Hotel by City and min star 
-def get_hotels_by_city_and_min_stars(city: str, min_stars: int) -> list:
-    connection = sqlite3.connect(DB_PATH)
-    cursor = connection.cursor()
-
-    query = """
-    SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
-    FROM Hotel
-    JOIN Address ON Hotel.address_id = Address.address_id
-    WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
-    """
-    cursor.execute(query, (city, min_stars))
-    result = cursor.fetchall()
-
-    connection.close()
-    return result
-
+    #(User Story 1.6) Get all hotel details
+    def get_all_hotel_details(self) -> list[model.Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        """
+        result = self.fetchall(query)
+        return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
