@@ -1,11 +1,11 @@
-from address import Address
+from model.address import Address
 
 class Hotel:
-    def __init__(self, hotel_id: int, name: str, stars: int, city: str, street: str):
+    def __init__(self, hotel_id: int, name: str, stars: int, address: Address):
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars
-        self.__address: list[Address] = []
+        self.__address = address
         self.__rooms = []                  
         self.__facilities = []      
 

@@ -19,7 +19,7 @@ def main():
             selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
             if 1 <= selection <= len(hotels):
                 selected = hotels[selection - 1]
-                print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.street}, {selected.city}")
+                print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.address}")
             else:
                 print("Invalid selection.")
         except ValueError:

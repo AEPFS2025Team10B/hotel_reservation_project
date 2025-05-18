@@ -6,7 +6,7 @@ class Address:
         self.__zip_code = zip_code
 
     def __repr__(self):
-        return f"Address(id={self.__address_id!r}, street={self.__street!r}, city={self.__city!r}, state={self.__state!r}, zip={self.__zip_code!r})"
+        return f"Address(id={self.__address_id!r}, street={self.__street!r}, city={self.__city!r}, zip={self.__zip_code!r})"
 
     @property
     def address_id(self):
@@ -35,18 +35,6 @@ class Address:
         if not isinstance(city, str):
             raise TypeError("city must be a string")
         self.__city = city
-
-    @property
-    def state(self):
-        return self.__state
-
-    @state.setter
-    def state(self, state):
-        if not state:
-            raise ValueError("state name is required")
-        if not isinstance(state, str):
-            raise TypeError("state must be a string")
-        self.__state = state
 
     @property
     def zip_code(self):
