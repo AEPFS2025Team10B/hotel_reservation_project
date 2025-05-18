@@ -1,7 +1,7 @@
 """
 User Story 1.5: Ich möchte Wünsche kombinieren können (z.B. Gästezahl, Sterne, Verfügbarkeit).).
 """
-
+from model.hotel import Hotel
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -25,7 +25,7 @@ def main():
     if hotels:
         print(f"\nThese hotels are available for you:\n")
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
         print(f"\nNo hotels available:\n")
 
