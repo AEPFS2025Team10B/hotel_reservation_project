@@ -23,17 +23,23 @@ class HotelDataAccess(BaseDataAccess):
             hotel = Hotel(hotel_id, name, stars, address)
             hotels.append(hotel)
         return hotels
-    #
-    # #(User Story 1.2) Search a Hotel by City and min star
-    # def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[model.Hotel]:
-    #     query = """
-    #     SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
-    #     FROM Hotel
-    #     JOIN Address ON Hotel.address_id = Address.address_id
-    #     WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
-    #     """
-    #     result = self.fetchall(query, (city, min_stars))
-    #     return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+
+    #(User Story 1.2) Search a Hotel by City and min star
+    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
+        """
+        result = self.fetchall(query, (city, min_stars))
+        hotels = []
+        for row in result:
+            hotel_id, name, stars, address_id, city, street, zip_code = row
+            address = Address(address_id, city, street, zip_code)
+            hotel = Hotel(hotel_id, name, stars, address)
+            hotels.append(hotel)
+        return hotels
     #
     # #(User Story 1.5) Combined Filter (city, stars, guests, availability)
     # def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str) -> list[model.Hotel]:
