@@ -2,6 +2,7 @@ from model.hotel import Hotel
 from model.room import Room
 from model.roomtype import RoomType
 from data_access.base_data_access import BaseDataAccess
+from model.address import Address
 
 class RoomDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
@@ -10,7 +11,7 @@ class RoomDataAccess(BaseDataAccess):
     # (User Story 1.3) Filter hotels in a city by room capacity (guest count)
     def get_hotels_by_guest_count(self, city: str, guest_count: int) -> list[Hotel]:
         sql = """
-        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
         FROM Hotel
         JOIN Address ON Hotel.address_id = Address.address_id
         JOIN Room ON Hotel.hotel_id = Room.hotel_id
@@ -18,7 +19,13 @@ class RoomDataAccess(BaseDataAccess):
         WHERE LOWER(Address.city) = LOWER(?) AND Room_Type.max_guests >= ?
         """
         result = self.fetchall(sql, (city, guest_count))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        hotels = []
+        for row in result:
+            hotel_id, name, stars, address_id, city, street, zip_code = row
+            address = Address(address_id, city, street, zip_code)
+            hotel = Hotel(hotel_id, name, stars, address)
+            hotels.append(hotel)
+        return hotels
 
     # (User Story 1.4) Filter hotels by room availability in a date range
     def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[Hotel]:
