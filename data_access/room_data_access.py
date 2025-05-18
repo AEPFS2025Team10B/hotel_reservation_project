@@ -30,7 +30,7 @@ class RoomDataAccess(BaseDataAccess):
     # (User Story 1.4) Filter hotels by room availability in a date range
     def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[Hotel]:
         sql = """
-        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
+        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
         FROM Hotel
         JOIN Address ON Hotel.address_id = Address.address_id
         JOIN Room ON Hotel.hotel_id = Room.hotel_id
@@ -42,7 +42,13 @@ class RoomDataAccess(BaseDataAccess):
         WHERE Booking.booking_id IS NULL
         """
         result = self.fetchall(sql, (check_in_date, check_out_date))
-        return [Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+        hotels = []
+        for row in result:
+            hotel_id, name, stars, address_id, city, street, zip_code = row
+            address = Address(address_id, city, street, zip_code)
+            hotel = Hotel(hotel_id, name, stars, address)
+            hotels.append(hotel)
+        return hotels
     
     
     # (User Story 1.6.1) Show available rooms in hotel *today*
