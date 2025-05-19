@@ -3,7 +3,6 @@ import sqlite3
 
 class BaseDataAccess:
     def __init__(self, db_connection_str: str = None):
-        # Standard-Pfad zur Beispiel-Datenbank, kann überschrieben werden
         self.__db_connection_str = db_connection_str or os.environ.get(
             "DB_FILE", "database/hotel_reservation_sample.db"
         )

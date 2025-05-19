@@ -36,7 +36,7 @@ def main():
                     print("\n-------------------------------")
                     print(f"→ {rt.name}")
                     print(f"   Description: {rt.description}")
-                    print(f"   Max guests: {rt.max_guest}")
+                    print(f"   Max guests: {rt.max_guests}")
                     print(f"   Price per night: CHF {rt.price_per_night:.2f}")
                     print(f"   Facilities: {', '.join(rt.facilities) if rt.facilities else 'None'}")
             else:
