@@ -1,4 +1,3 @@
-#Räume anzeigen, filtern
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
 
@@ -7,11 +6,11 @@ from data_access.room_data_access import RoomDataAccess
 
 # Optional: Übergib den Pfad als Parameter, falls du später dynamisch arbeitest
 hotel_dao = HotelDataAccess()
-room_dao = RoomDataAccess()
+room_dao  = RoomDataAccess()
 
 # (User Story 1.6.1)
 def get_available_rooms_by_hotel(hotel_id: int, today: str):
-    return room_dao.get_available_rooms_for_hotel(hotel_id, today)
+    return room_dao.get_rooms_by_hotel(hotel_id, today)
 
 def get_next_available_date_for_hotel(hotel_id: int):
     return room_dao.get_next_available_date_for_hotel(hotel_id)
@@ -19,3 +18,7 @@ def get_next_available_date_for_hotel(hotel_id: int):
 # (User Story 2.1) Show all Room Types of Hotel
 def get_room_types_by_hotel(hotel_id: int):
     return room_dao.get_room_types_by_hotel(hotel_id)
+
+# (User Story 2.2) Show available rooms of a hotel for a date range
+def get_available_rooms_by_hotel_and_dates(hotel_id: int, check_in: str, check_out: str):
+    return room_dao.get_available_rooms_by_hotel_and_dates(hotel_id, check_in, check_out)

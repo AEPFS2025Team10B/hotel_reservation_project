@@ -1,5 +1,3 @@
-# ui/2.1_search_room_type_by_hotel.py
-
 """
 User Story 2.1: Ich möchte alle Raumtypen pro Hotel sehen.
 """
