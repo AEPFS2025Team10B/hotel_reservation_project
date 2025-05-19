@@ -43,7 +43,7 @@ def main():
         print(f"Fehler beim Anlegen: {e}")
         return
 
-    print("\n✔ Hotel erfolgreich hinzugefügt:")
+    print("\n Hotel erfolgreich hinzugefügt:")
     print(f"  – {new_hotel.name} ({new_hotel.stars}★)")
     addr = new_hotel.address
     print(f"  – Adresse: {addr.street}, {addr.city} {addr.zip_code}")

@@ -13,3 +13,9 @@ if next_date:
     print(f"Next available date for any room: {next_date}")
 else:
     print("No upcoming availability found.")
+
+#Immer importieren
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from business_logic.hotel_manager import find_all_hotel_details, remove_hotel

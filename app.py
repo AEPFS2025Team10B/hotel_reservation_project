@@ -39,7 +39,8 @@ def main():
         (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars)."),
         (7, "2.1_search_room_type_by_hotel.py", "As a guest, I want to see all Room Types of a Hotel"),
         (8, "2.2_search_room_by_date.py", "As a guest, I want to find unoccupied rooms during my travelling time"),
-        (9, "3.1_add_new_hotel.py", "As an admin, i want to be able to add new hotels" )
+        (9, "3.1_add_new_hotel.py", "As an admin, i want to be able to add new hotels"),
+        (10, "3.2_remove_hotel.py", "As an admin, i want to delte a hotel")
         ]
 
     print("\nAvailable User Stories:")

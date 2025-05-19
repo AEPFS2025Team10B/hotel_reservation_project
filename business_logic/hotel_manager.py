@@ -1,3 +1,5 @@
+# business_logic/hotel_manager.py
+
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
 
@@ -39,3 +41,10 @@ def add_new_hotel(name: str, stars: int, street: str, city: str, zip_code: str):
     addr = hotel_dao.create_address(street, city, zip_code)
     hotel = hotel_dao.create_hotel(name, stars, addr.address_id)
     return hotel
+
+# (User Story 3.2) Admin entfernt ein Hotel aus dem System
+def remove_hotel(hotel_id: int):
+    """
+    Löscht das Hotel mit der gegebenen ID.
+    """
+    hotel_dao.delete_hotel(hotel_id)
