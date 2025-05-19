@@ -1,5 +1,7 @@
+# ui/2.1_search_room_type_by_hotel.py
+
 """
-User Story 2.1: Ich möchte alle Raumtypen pro Hotel sehen
+User Story 2.1: Ich möchte alle Raumtypen pro Hotel sehen.
 """
 
 import sys
@@ -16,7 +18,7 @@ def main():
 
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
         print("No hotels found.")
         return

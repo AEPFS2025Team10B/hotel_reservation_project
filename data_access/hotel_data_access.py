@@ -1,91 +1,91 @@
+from data_access.base_data_access import BaseDataAccess
 from model.hotel import Hotel
 from model.address import Address
-
-from data_access.base_data_access import BaseDataAccess
 
 class HotelDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
-    #(Userstory 1.1) Search a Hotel by City 
+    # User Story 1.1: Alle Hotels abrufen
+    def get_all_hotels(self) -> list[Hotel]:
+        sql = """
+        SELECT hotel_id, name, stars
+        FROM hotel
+        """
+        rows = self.fetchall(sql)
+        return [Hotel(hid, name, stars, None) for hid, name, stars in rows]
+
+    # User Story 1.2: Hotel-Details nach ID abrufen
+    def get_hotel_by_id(self, hotel_id: int) -> Hotel | None:
+        sql = """
+        SELECT hotel_id, name, stars, address_id
+        FROM hotel
+        WHERE hotel_id = ?
+        """
+        row = self.fetchone(sql, (hotel_id,))
+        if not row:
+            return None
+        hid, name, stars, aid = row
+        # Adresse separat laden
+        addr_row = self.fetchone(
+            "SELECT address_id, street, city, zip_code FROM address WHERE address_id = ?", (aid,)
+        )
+        address = Address(*addr_row) if addr_row else None
+        return Hotel(hid, name, stars, address)
+
+    # User Story 1.3: Hotels in einer Stadt suchen
     def get_hotels_by_city(self, city_name: str) -> list[Hotel]:
-        query = """
-        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
-        FROM Hotel
-        JOIN Address ON Hotel.address_id = Address.address_id
-        WHERE LOWER(Address.city) = LOWER(?);
+        sql = """
+        SELECT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        WHERE LOWER(a.city) = LOWER(?)
         """
-        result = self.fetchall(query, (city_name,))
-        hotels = []
-        for row in result:
-            hotel_id, name, stars, address_id, city, street, zip_code = row
-            address = Address(address_id, city, street, zip_code)
-            hotel = Hotel(hotel_id, name, stars, address)
-            hotels.append(hotel)
-        return hotels
+        rows = self.fetchall(sql, (city_name,))
+        result: list[Hotel] = []
+        for hid, name, stars, aid, street, city, zipc in rows:
+            addr = Address(aid, street, city, zipc)
+            result.append(Hotel(hid, name, stars, addr))
+        return result
 
-    #(User Story 1.2) Search a Hotel by City and min star
-    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[Hotel]:
-        query = """
-        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
-        FROM Hotel
-        JOIN Address ON Hotel.address_id = Address.address_id
-        WHERE LOWER(Address.city) = LOWER(?) AND Hotel.stars >= ?
-        """
-        result = self.fetchall(query, (city, min_stars))
-        hotels = []
-        for row in result:
-            hotel_id, name, stars, address_id, city, street, zip_code = row
-            address = Address(address_id, city, street, zip_code)
-            hotel = Hotel(hotel_id, name, stars, address)
-            hotels.append(hotel)
-        return hotels
-
-    #(User Story 1.5) Combined Filter (city, stars, guests, availability)
-    def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str) -> list[Hotel]:
-        query = """
-        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
-        FROM Hotel
-        JOIN Address ON Hotel.address_id = Address.address_id
-        JOIN Room ON Hotel.hotel_id = Room.hotel_id
-        JOIN Room_Type ON Room.type_id = Room_Type.type_id
-        LEFT JOIN Booking ON Room.room_id = Booking.room_id
-            AND Booking.is_cancelled = 0
-            AND NOT (
-                Booking.check_out_date <= ? OR Booking.check_in_date >= ?
-            )
-        WHERE LOWER(Address.city) = LOWER(?)
-          AND Hotel.stars >= ?
-          AND Room_Type.max_guests >= ?
-          AND Booking.booking_id IS NULL
-        """
-        result = self.fetchall(query, (
-            check_in_date,
-            check_out_date,
-            city,
-            min_stars,
-            guest_count
-        ))
-        hotels = []
-        for row in result:
-            hotel_id, name, stars, address_id, city, street, zip_code = row
-            address = Address(address_id, city, street, zip_code)
-            hotel = Hotel(hotel_id, name, stars, address)
-            hotels.append(hotel)
-        return hotels
-
-    #(User Story 1.6) Get all hotel details
+    # User Story 1.6: Alle Hoteldetails (Name, Adresse, Sterne)
     def get_all_hotel_details(self) -> list[Hotel]:
-        query = """
-        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id Address.city, Address.street, Address.zip_code
-        FROM Hotel
-        JOIN Address ON Hotel.address_id = Address.address_id
+        sql = """
+        SELECT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
         """
-        result = self.fetchall(query)
-        hotels = []
-        for row in result:
-            hotel_id, name, stars, address_id, city, street, zip_code = row
-            address = Address(address_id, city, street, zip_code)
-            hotel = Hotel(hotel_id, name, stars, address)
-            hotels.append(hotel)
-        return hotels
+        rows = self.fetchall(sql)
+        result: list[Hotel] = []
+        for hid, name, stars, aid, street, city, zipc in rows:
+            addr = Address(aid, street, city, zipc)
+            result.append(Hotel(hid, name, stars, addr))
+        return result
+
+    # User Story 3.1: Neues Hotel anlegen
+    def create_hotel(self, name: str, stars: int, address_id: int) -> Hotel:
+        sql = """
+        INSERT INTO hotel (name, stars, address_id)
+        VALUES (?, ?, ?)
+        """
+        new_id, _ = self.execute(sql, (name, stars, address_id))
+        return self.get_hotel_by_id(new_id)
+
+    # User Story 3.3: Hotel aktualisieren
+    def update_hotel(self, hotel: Hotel) -> None:
+        sql = """
+        UPDATE hotel
+        SET name = ?, stars = ?, address_id = ?
+        WHERE hotel_id = ?
+        """
+        _, _ = self.execute(
+            sql,
+            (hotel.name, hotel.stars, hotel.address.address_id, hotel.hotel_id),
+        )
+
+    # User Story 3.2: Hotel löschen
+    def delete_hotel(self, hotel_id: int) -> None:
+        sql = "DELETE FROM hotel WHERE hotel_id = ?"
+        _, _ = self.execute(sql, (hotel_id,))

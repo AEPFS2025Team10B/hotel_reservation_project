@@ -3,40 +3,43 @@ import sqlite3
 
 class BaseDataAccess:
     def __init__(self, db_connection_str: str = None):
-        if db_connection_str is None:
-            self.__db_connection_str = os.environ.get("DB_FILE", "database/hotel_reservation_sample.db")
-        else:
-            self.__db_connection_str = db_connection_str
+        # Standard-Pfad zur Beispiel-Datenbank, kann überschrieben werden
+        self.__db_connection_str = db_connection_str or os.environ.get(
+            "DB_FILE", "database/hotel_reservation_sample.db"
+        )
 
     def _connect(self):
-        return sqlite3.connect(self.__db_connection_str, detect_types=sqlite3.PARSE_DECLTYPES)
+        return sqlite3.connect(
+            self.__db_connection_str, detect_types=sqlite3.PARSE_DECLTYPES
+        )
 
-    def fetchone(self, sql: str, params: tuple | None = ()): 
+    def fetchone(self, sql: str, params: tuple = ()) -> tuple | None:
         with self._connect() as conn:
             cur = conn.cursor()
             cur.execute(sql, params)
-            result = cur.fetchone()
+            row = cur.fetchone()
             cur.close()
-        return result
+        return row
 
-    def fetchall(self, sql: str, params: tuple | None = ()) -> list:
+    def fetchall(self, sql: str, params: tuple = ()) -> list[tuple]:
         with self._connect() as conn:
             cur = conn.cursor()
             cur.execute(sql, params)
-            result = cur.fetchall()
+            rows = cur.fetchall()
             cur.close()
-        return result
+        return rows
 
-    def execute(self, sql: str, params: tuple | None = ()) -> (int, int):
+    def execute(self, sql: str, params: tuple = ()) -> tuple[int, int]:
         with self._connect() as conn:
+            cur = conn.cursor()
             try:
-                cur = conn.cursor()
                 cur.execute(sql, params)
-            except sqlite3.Error as e:
-                conn.rollback()
-                raise e
-            else:
                 conn.commit()
+            except sqlite3.Error:
+                conn.rollback()
+                raise
             finally:
+                lastrowid = cur.lastrowid
+                rowcount = cur.rowcount
                 cur.close()
-        return cur.lastrowid, cur.rowcount
+        return lastrowid, rowcount

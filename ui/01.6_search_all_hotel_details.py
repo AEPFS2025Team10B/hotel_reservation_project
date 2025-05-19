@@ -1,3 +1,5 @@
+# ui/01.6_search_all_hotel_details.py
+
 """
 User Story 1.6: Ich möchte Name, Adresse und Anzahl der Sterne jedes Hotels sehen.
 """
@@ -49,3 +51,7 @@ def main():
             print("Invalid selection.")
     except ValueError:
         print("Please enter a valid number.")
+
+
+if __name__ == "__main__":
+    main()
