@@ -28,6 +28,7 @@ def main():
     # User Story 1.6: Anzeige von Hoteldetails (Name, Adresse, Sterne).
     # User Story 2.1: Anezige der Raumdetails (Facilities, Beschreibung etc.)
     # User Story 2.2: Ich möchte verfügbare Räume an gewissen Daten anzeigen lassen (Reisezeitraum)
+    # User Story 3.1: Als Admin möchte ich ein neues Hotel hinzufügen können.
 
     stories = [
         (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
@@ -37,7 +38,8 @@ def main():
         (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
         (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars)."),
         (7, "2.1_search_room_type_by_hotel.py", "As a guest, I want to see all Room Types of a Hotel"),
-        (8, "2.2_search_room_by_date.py", "As a guest, I want to find unoccupied rooms during my travelling time")
+        (8, "2.2_search_room_by_date.py", "As a guest, I want to find unoccupied rooms during my travelling time"),
+        (9, "3.1_add_new_hotel.py", "As an admin, i want to be able to add new hotels" )
         ]
 
     print("\nAvailable User Stories:")

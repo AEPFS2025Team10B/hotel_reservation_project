@@ -26,7 +26,6 @@ class HotelDataAccess(BaseDataAccess):
         if not row:
             return None
         hid, name, stars, aid = row
-        # Adresse separat laden
         addr_row = self.fetchone(
             "SELECT address_id, street, city, zip_code FROM address WHERE address_id = ?", (aid,)
         )
@@ -64,6 +63,15 @@ class HotelDataAccess(BaseDataAccess):
             result.append(Hotel(hid, name, stars, addr))
         return result
 
+    # User Story 3.1.1: Neue Adresse anlegen
+    def create_address(self, street: str, city: str, zip_code: str) -> Address:
+        sql = """
+        INSERT INTO address (street, city, zip_code)
+        VALUES (?, ?, ?)
+        """
+        new_id, _ = self.execute(sql, (street, city, zip_code))
+        return Address(new_id, street, city, zip_code)
+
     # User Story 3.1: Neues Hotel anlegen
     def create_hotel(self, name: str, stars: int, address_id: int) -> Hotel:
         sql = """
@@ -73,7 +81,7 @@ class HotelDataAccess(BaseDataAccess):
         new_id, _ = self.execute(sql, (name, stars, address_id))
         return self.get_hotel_by_id(new_id)
 
-    # User Story 3.3: Hotel aktualisieren
+    # Optional: Update und Delete Methoden
     def update_hotel(self, hotel: Hotel) -> None:
         sql = """
         UPDATE hotel
@@ -85,7 +93,6 @@ class HotelDataAccess(BaseDataAccess):
             (hotel.name, hotel.stars, hotel.address.address_id, hotel.hotel_id),
         )
 
-    # User Story 3.2: Hotel löschen
     def delete_hotel(self, hotel_id: int) -> None:
         sql = "DELETE FROM hotel WHERE hotel_id = ?"
         _, _ = self.execute(sql, (hotel_id,))
