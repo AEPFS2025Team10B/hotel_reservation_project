@@ -35,16 +35,20 @@ def find_all_hotel_details():
 
 # (User Story 3.1) Admin fügt neues Hotel hinzu
 def add_new_hotel(name: str, stars: int, street: str, city: str, zip_code: str):
-    """
-    Legt zuerst eine neue Adresse an und erstellt dann ein Hotel.
-    """
     addr = hotel_dao.create_address(street, city, zip_code)
     hotel = hotel_dao.create_hotel(name, stars, addr.address_id)
     return hotel
 
 # (User Story 3.2) Admin entfernt ein Hotel aus dem System
 def remove_hotel(hotel_id: int):
-    """
-    Löscht das Hotel mit der gegebenen ID.
-    """
     hotel_dao.delete_hotel(hotel_id)
+
+    
+# (User Story 3.3) Admin aktualisiert ein Hotel
+def update_hotel(name: str, stars: int, street: str, city: str, zip_code: str, hotel_id: int):
+    addr = hotel_dao.update_address(hotel_id, street, city, zip_code)
+    current = hotel_dao.get_hotel_by_id(hotel_id)
+    current.name  = name
+    current.stars = stars
+    hotel_dao.update_hotel(current)
+    return current

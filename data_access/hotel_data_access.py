@@ -81,7 +81,7 @@ class HotelDataAccess(BaseDataAccess):
         new_id, _ = self.execute(sql, (name, stars, address_id))
         return self.get_hotel_by_id(new_id)
 
-    # Optional: Update und Delete Methoden
+
     def update_hotel(self, hotel: Hotel) -> None:
         sql = """
         UPDATE hotel
