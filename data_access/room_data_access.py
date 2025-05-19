@@ -66,7 +66,13 @@ class RoomDataAccess(BaseDataAccess):
         )
         """
         result = self.fetchall(sql, (hotel_id, today))
-        return [Room(room_id, room_number, price) for room_id, room_number, price in result]
+        rooms = []
+        for row in result:
+            room_id, room_number, price_per_night = row
+            room = Room(room_id, room_number, price_per_night)
+            rooms.append(room)
+        return rooms
+
 
     # Next available date for any room in hotel
     def get_next_available_date_for_hotel(self, hotel_id: int):

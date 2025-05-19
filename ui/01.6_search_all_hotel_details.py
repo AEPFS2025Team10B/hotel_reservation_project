@@ -19,7 +19,7 @@ def main():
     
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.street}, {hotel.city}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
         print("No hotels found.")
         return
@@ -30,7 +30,7 @@ def main():
             selected_hotel = hotels[selection - 1]
 
             print(f"\nDetails for {selected_hotel.name}:")
-            print(f"Address: {selected_hotel.street}, {selected_hotel.city}")
+            print(f"Address: {selected_hotel.address}")
             print(f"Stars: {selected_hotel.stars}")
 
             available_rooms = get_available_rooms_by_hotel(selected_hotel.hotel_id, today)

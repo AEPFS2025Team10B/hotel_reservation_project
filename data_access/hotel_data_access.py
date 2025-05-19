@@ -73,12 +73,19 @@ class HotelDataAccess(BaseDataAccess):
             hotel = Hotel(hotel_id, name, stars, address)
             hotels.append(hotel)
         return hotels
-    # #(User Story 1.6) Get all hotel details
-    # def get_all_hotel_details(self) -> list[model.Hotel]:
-    #     query = """
-    #     SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.city, Address.street
-    #     FROM Hotel
-    #     JOIN Address ON Hotel.address_id = Address.address_id
-    #     """
-    #     result = self.fetchall(query)
-    #     return [model.Hotel(hotel_id, name, stars, city, street) for hotel_id, name, stars, city, street in result]
+
+    #(User Story 1.6) Get all hotel details
+    def get_all_hotel_details(self) -> list[Hotel]:
+        query = """
+        SELECT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id Address.city, Address.street, Address.zip_code
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        """
+        result = self.fetchall(query)
+        hotels = []
+        for row in result:
+            hotel_id, name, stars, address_id, city, street, zip_code = row
+            address = Address(address_id, city, street, zip_code)
+            hotel = Hotel(hotel_id, name, stars, address)
+            hotels.append(hotel)
+        return hotels
