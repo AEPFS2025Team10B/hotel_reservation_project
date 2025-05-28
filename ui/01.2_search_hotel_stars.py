@@ -21,15 +21,19 @@ def main():
         print(f"\nFound hotels in {city} with at least {min_stars} stars:")
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
-
-        try:
-            selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
-            if 1 <= selection <= len(hotels):
-                selected = hotels[selection - 1]
-                print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.address}")
-            else:
-                print("Invalid selection.")
-        except ValueError:
-            print("Please enter a valid number.")
+        valid = False
+        while not valid:
+            try:
+                selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
+                if 1 <= selection <= len(hotels):
+                    selected = hotels[selection - 1]
+                    print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.address}")
+                    print("")
+                    print("Enter to finish...")  # TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
+                    valid = True
+                else:
+                    print("Invalid selection.")
+            except ValueError:
+                print("Please enter a valid number.")
     else:
         print(f"\nNo hotels found in {city} with at least {min_stars} stars.")

@@ -13,11 +13,16 @@ def main():
     print("Hotel Search by Guest Count")
     city = input("Enter city: ").strip()
 
-    try:
-        guest_count = int(input("And how many people should have space in this room? "))
-    except ValueError:
-        print("Enter a valid number.")
-        return
+    valid = False
+    while not valid:
+        try:
+            guest_count = int(input("And how many people should have space in this room? "))
+            print("")
+            print("Enter to finish...")  # TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
+            valid = True
+        except ValueError:
+            print("Enter a valid number.")
+            return
 
     hotels = find_hotels_by_guest_count(city, guest_count)
 

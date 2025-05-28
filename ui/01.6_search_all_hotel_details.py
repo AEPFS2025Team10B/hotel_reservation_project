@@ -25,7 +25,7 @@ def main():
     else:
         print("No hotels found.")
         return
-
+    #TODO: eventuell auch hier while Loop ergänzen
     try:
         selection = int(input("\nEnter the number of the hotel you want to see the details: ").strip())
         if 1 <= selection <= len(hotels):
