@@ -1,11 +1,12 @@
 from model.address import Address
+from model.room import Room
 
 class Hotel:
-    def __init__(self, hotel_id: int, name: str, stars: int, address: Address):
+    def __init__(self, hotel_id: int, name: str, stars: int):
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars
-        self.__address = address
+        self.__address = []
         self.__rooms = []                  
         self.__facilities = []      
 
@@ -35,14 +36,6 @@ class Hotel:
         if not isinstance(stars, int) or not (0 <= stars <= 5):
             raise ValueError("Stars must be an integer between 0 and 5")
         self.__stars = stars
-
-    @property
-    def city(self):
-        return self.__city
-
-    @property
-    def street(self):
-        return self.__street
 
     @property
     def address(self):
