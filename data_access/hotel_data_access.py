@@ -32,7 +32,7 @@ class HotelDataAccess(BaseDataAccess):
         address = Address(*addr_row) if addr_row else None
         return Hotel(hid, name, stars, address)
 
-    # User Story 1.3: Hotels in einer Stadt suchen
+    # User Story 1.1: Hotels in einer Stadt suchen
     def get_hotels_by_city(self, city_name: str) -> list[Hotel]:
         sql = """
         SELECT h.hotel_id, h.name, h.stars,
@@ -44,8 +44,9 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (city_name,))
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows:
-            addr = Address(aid, street, city, zipc)
-            result.append(Hotel(hid, name, stars, addr))
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, street, city, zipc)
+            result.append(hotels)
         return result
 
     # User Story 1.6: Alle Hoteldetails (Name, Adresse, Sterne)
