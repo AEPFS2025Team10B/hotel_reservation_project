@@ -1,3 +1,5 @@
+from tkinter.tix import Select
+
 from data_access.base_data_access import BaseDataAccess
 from model.hotel import Hotel
 from model.address import Address
@@ -64,6 +66,25 @@ class HotelDataAccess(BaseDataAccess):
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
             hotels = Hotel(hid, name, stars)
             hotels.address = Address(aid, street, city, zipc)
+            result.append(hotels)
+        return result
+
+    # User Story 1.3: Hotels suchen, die Zimmer haben welche meiner Gästeanzahl entsprechen
+    def get_hotels_by_guest_count(self, guest_count: int) -> list[Hotel]:
+        sql = """
+      SELECT h.hotel_id, h.name, h.stars,
+             a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        JOIN ROOM AS r ON r.hotel_id = h.hotel_id
+        JOIN Room_Type AS rt ON rt.type_id = r.type_id
+        WHERE rt.max_guests = ?
+        """
+        rows = self.fetchall(sql, (guest_count,))
+        result: list[Hotel] = []
+        for hid, name, stars, aid, street, city, zipcode in rows:
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, street, city, zipcode)
             result.append(hotels)
         return result
 

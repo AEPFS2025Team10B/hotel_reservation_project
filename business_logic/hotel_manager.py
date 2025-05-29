@@ -16,8 +16,8 @@ def find_hotels_by_city_and_min_stars(city: str, min_stars: int):
     return hotel_dao.get_hotels_by_city_and_min_stars(city, min_stars)
 
 # (User Story 1.3) Hotels mit Zimmern für eine bestimmte Gästeanzahl durchsuchen
-def find_hotels_by_guest_count(city: str, guest_count: int):
-    return room_dao.get_hotels_by_guest_count(city, guest_count)
+def find_hotels_by_guest_count(guest_count: int):
+    return hotel_dao.get_hotels_by_guest_count(guest_count)
 
 # (User Story 1.4) Hotels nach Verfügbarkeit im Zeitraum durchsuchen
 def find_hotels_by_availability(check_in_date: str, check_out_date: str):

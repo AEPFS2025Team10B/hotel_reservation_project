@@ -11,8 +11,6 @@ from business_logic.hotel_manager import find_hotels_by_guest_count
 DB_PATH = "database/hotel_reservation_sample.db"
 def main():
     print("Hotel Search by Guest Count")
-    city = input("Enter city: ").strip()
-
     valid = False
     while not valid:
         try:
@@ -24,11 +22,11 @@ def main():
             print("Enter a valid number.")
             return
 
-    hotels = find_hotels_by_guest_count(city, guest_count)
+    hotels = find_hotels_by_guest_count(guest_count)
 
     if hotels:
-        print(f"\nThese hotels in {city} have a room for at least {guest_count} guests:\n")
+        print(f"\nThese hotels have a room for at least {guest_count} guests:\n")
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
-        print(f"\nNo hotels in {city} found with rooms for {guest_count} guests.")
+        print(f"\nNo hotels found with rooms for {guest_count} guests.")
