@@ -14,12 +14,14 @@ def main():
     valid = False
     while not valid:
         try:
-            guest_count = int(input("And how many people should have space in this room? "))
+            guest_count = int(input("How many people should have space in this room? "))
+            if guest_count < 1:
+                raise ValueError
             print("")
             print("Enter to finish...")  # TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
             valid = True
         except ValueError:
-            print("Enter a valid number.")
+            print("Enter a valid number and number must be above 0")
             return
 
     hotels = find_hotels_by_guest_count(guest_count)

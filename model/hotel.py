@@ -6,7 +6,7 @@ class Hotel:
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars
-        self.__address = []
+        self.__address = Address
         self.__rooms = []                  
         self.__facilities = []      
 
