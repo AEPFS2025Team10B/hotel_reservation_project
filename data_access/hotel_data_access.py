@@ -33,7 +33,7 @@ class HotelDataAccess(BaseDataAccess):
         return Hotel(hid, name, stars, address)
 
     # User Story 1.1: Hotels in einer Stadt suchen
-    def get_hotels_by_city(self, city_name: str) -> list[Hotel]:
+    def get_hotels_by_city(self, city: str) -> list[Hotel]:
         sql = """
         SELECT h.hotel_id, h.name, h.stars,
                a.address_id, a.street, a.city, a.zip_code
@@ -41,9 +41,27 @@ class HotelDataAccess(BaseDataAccess):
         JOIN address AS a ON h.address_id = a.address_id
         WHERE LOWER(a.city) = LOWER(?)
         """
-        rows = self.fetchall(sql, (city_name,))
+        rows = self.fetchall(sql, (city,))
         result: list[Hotel] = []
-        for hid, name, stars, aid, street, city, zipc in rows:
+        for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, street, city, zipc)
+            result.append(hotels)
+        return result
+
+    # User Story 1.2: Hotels in einer Stadt durchsuchen mit mind Anzahl Sternen
+    def get_hotels_by_city_and_min_stars(self, city: str, min_stars: int) -> list[Hotel]:
+        sql = """
+        SELECT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        WHERE LOWER(a.city) = LOWER(?)
+        AND h.stars >= ?
+        """
+        rows = self.fetchall(sql, (city, min_stars,))
+        result: list[Hotel] = []
+        for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
             hotels = Hotel(hid, name, stars)
             hotels.address = Address(aid, street, city, zipc)
             result.append(hotels)
