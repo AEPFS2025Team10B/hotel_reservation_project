@@ -21,7 +21,7 @@ def find_hotels_by_guest_count(guest_count: int):
 
 # (User Story 1.4) Hotels nach Verfügbarkeit im Zeitraum durchsuchen
 def find_hotels_by_availability(check_in_date: str, check_out_date: str):
-    return room_dao.get_hotels_by_availability(check_in_date, check_out_date)
+    return hotel_dao.get_hotels_by_availability(check_in_date, check_out_date)
 
 # (User Story 1.5) Hotels nach mehreren Kriterien (Stadt, Sterne, Gäste, Zeitraum) durchsuchen
 def find_hotels_by_multiple_criteria(city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str):
