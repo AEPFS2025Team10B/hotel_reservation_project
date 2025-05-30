@@ -160,3 +160,38 @@ class HotelDataAccess(BaseDataAccess):
     def delete_hotel(self, hotel_id: int) -> None:
         sql = "DELETE FROM hotel WHERE hotel_id = ?"
         _, _ = self.execute(sql, (hotel_id,))
+
+    #User Story 1.5 – Hotels nach mehreren Kriterien suchen
+    def get_hotels_by_multiple_criteria(
+        self,
+        city: str,
+        min_stars: int,
+        guest_count: int,
+        check_in_date: str,
+        check_out_date: str
+    ) -> list[Hotel]:
+        sql = """
+        SELECT DISTINCT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        JOIN room AS r ON r.hotel_id = h.hotel_id
+        JOIN room_type AS rt ON rt.type_id = r.type_id
+        WHERE LOWER(a.city) = LOWER(?)
+          AND h.stars >= ?
+          AND rt.max_guests >= ?
+          AND r.room_id NOT IN (
+              SELECT room_id
+              FROM booking
+              WHERE check_in_date < ?
+                AND check_out_date > ?
+                AND is_cancelled = 0
+          )
+        """
+        rows = self.fetchall(sql, (city, min_stars, guest_count, check_out_date, check_in_date))
+        result: list[Hotel] = []
+        for hid, name, stars, aid, street, city, zipcode in rows:
+            hotel = Hotel(hid, name, stars)
+            hotel.address = Address(aid, street, city, zipcode)
+            result.append(hotel)
+        return result
