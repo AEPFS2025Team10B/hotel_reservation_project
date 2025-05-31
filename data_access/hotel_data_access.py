@@ -47,7 +47,7 @@ class HotelDataAccess(BaseDataAccess):
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
             address = Address(aid, street, city, zipc)
-            hotel = Hotel(hid, name, stars, address)
+            hotel = Hotel(hid, name, stars)
             result.append(hotel)
         return result
 
@@ -88,7 +88,7 @@ class HotelDataAccess(BaseDataAccess):
             result.append(hotels)
         return result
 
-    # User Story 1.4: Hotels , die während des Aufenthaltes verfügbar sind
+    # User Story 1.4: Hotels, die während des Aufenthaltes verfügbar sind
     def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[Hotel]:
         sql = """
         SELECT h.hotel_id, h.name, h.stars, 
@@ -96,13 +96,7 @@ class HotelDataAccess(BaseDataAccess):
         FROM hotel AS h
         JOIN address AS a ON h.address_id = a.address_id
         JOIN room as r ON r.hotel_id = h.hotel_id
-        WHERE room_id NOT IN (
-              SELECT room_id
-              FROM Booking
-              WHERE check_in_date <= ?
-                AND check_out_date > ?
-                AND is_cancelled == 0
-          )
+        WHERE room_id NOT IN (SELECT room_id FROM Booking WHERE check_in_date <= ? AND check_out_date > ? AND is_cancelled = 0)
         """
         rows = self.fetchall(sql, (check_in_date, check_out_date,))
         result: list[Hotel] = []
@@ -111,6 +105,36 @@ class HotelDataAccess(BaseDataAccess):
             hotels.address = Address(aid, street, city, zipcode)
             result.append(hotels)
         return result
+
+    # User Story 1.5: Hotels nach mehreren Kriterien suchen
+    def get_hotels_by_multiple_criteria(self, city: str, min_stars: int, guest_count: int, check_in_date: str,check_out_date: str):
+        sql = """
+        SELECT DISTINCT Hotel.hotel_id, Hotel.name, Hotel.stars, Address.address_id, Address.city, Address.street, Address.zip_code
+        FROM Hotel
+        JOIN Address ON Hotel.address_id = Address.address_id
+        JOIN Room ON Room.hotel_id = Hotel.hotel_id
+        JOIN Room_Type ON Room_Type.type_id = Room.type_id
+        LEFT JOIN Booking ON Booking.room_id = Room.room_id
+        WHERE Room.room_id NOT IN (
+        SELECT room_id 
+        FROM Booking 
+        WHERE check_in_date <= ? 
+          AND check_out_date > ? 
+          AND is_cancelled = 0
+         )
+        AND LOWER(Address.city) = LOWER(?)
+        AND Hotel.stars >= ?
+        AND Room_Type.max_guests >= ?
+            """
+        rows = self.fetchall(sql, (check_in_date, check_out_date, city, min_stars, guest_count))
+        result: list[Hotel] = []
+        for hid, name, stars, aid, city, street, zipcode in rows:
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, street, city, zipcode)
+            result.append(hotels)
+        return result
+
+
 
     # User Story 1.6: Alle Hoteldetails (Name, Adresse, Sterne)
     def get_all_hotel_details(self) -> list[Hotel]:
@@ -122,11 +146,11 @@ class HotelDataAccess(BaseDataAccess):
         """
         rows = self.fetchall(sql)
         result: list[Hotel] = []
-        for hid, name, stars, aid, street, city, zipc in rows:
-            addr = Address(aid, street, city, zipc)
-            result.append(Hotel(hid, name, stars, addr))
+        for hid, name, stars, aid, city, street, zipcode in rows:
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, city, street, zipcode)
+            result.append(hotels)
         return result
-
     # User Story 3.1.1: Neue Adresse anlegen
     def create_address(self, street: str, city: str, zip_code: str) -> Address:
         sql = """
