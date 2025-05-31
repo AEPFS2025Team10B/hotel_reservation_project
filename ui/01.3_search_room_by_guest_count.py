@@ -11,6 +11,8 @@ from business_logic.hotel_manager import find_hotels_by_guest_count
 DB_PATH = "database/hotel_reservation_sample.db"
 def main():
     print("Hotel Search by Guest Count")
+
+    guest_count = None
     valid = False
     while not valid:
         try:
@@ -22,7 +24,7 @@ def main():
             valid = True
         except ValueError:
             print("Enter a valid number and number must be above 0")
-            return
+            continue
 
     hotels = find_hotels_by_guest_count(guest_count)
 
