@@ -8,7 +8,7 @@ class HotelDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
-    # User Story 1.1: Alle Hotels abrufen
+    # User Story 1.1: Alle Hotels abrupt
     def get_all_hotels(self) -> list[Hotel]:
         sql = """
         SELECT hotel_id, name, stars

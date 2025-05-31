@@ -2,7 +2,7 @@ from model.address import Address
 from model.room import Room
 
 class Hotel:
-    def __init__(self, hotel_id: int, name: str, stars: int):
+    def __init__(self, hotel_id: int, name: str, stars: int, address: None):
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars
