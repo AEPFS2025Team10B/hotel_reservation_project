@@ -20,14 +20,17 @@ def main():
     for idx, h in enumerate(hotels, start=1):
         print(f"{idx}. {h.name} ({h.stars}★), {h.address}")
 
-    try:
-        sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
-        if not (1 <= sel <= len(hotels)):
-            print("Invalid Selection.")
-            return
-    except ValueError:
-        print("Please enter a valid number.")
-        return
+    valid = False
+    while not valid:
+        try:
+            sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
+            if not (1 <= sel <= len(hotels)):
+                print("Invalid Selection.")
+                continue
+
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
 
     hotel = hotels[sel - 1]
     confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (j/n): ").strip().lower()
