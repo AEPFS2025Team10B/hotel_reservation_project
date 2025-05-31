@@ -47,7 +47,7 @@ class HotelDataAccess(BaseDataAccess):
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
             address = Address(aid, street, city, zipc)
-            hotel = Hotel(hid, name, stars, address)
+            hotel = Hotel(hid, name, stars)
             result.append(hotel)
         return result
 
@@ -137,20 +137,20 @@ class HotelDataAccess(BaseDataAccess):
 
 
     # User Story 1.6: Alle Hoteldetails (Name, Adresse, Sterne)
-    # def get_all_hotel_details(self) -> list[Hotel]:
-    #     sql = """
-    #     SELECT h.hotel_id, h.name, h.stars,
-    #            a.address_id, a.street, a.city, a.zip_code
-    #     FROM hotel AS h
-    #     JOIN address AS a ON h.address_id = a.address_id
-    #     """
-    #     rows = self.fetchall(sql)
-    #     result: list[Hotel] = []
-    #     for hid, name, stars, aid, street, city, zipc in rows:
-    #         addr = Address(aid, street, city, zipc)
-    #         result.append(Hotel(hid, name, stars, addr))
-    #     return result
-
+    def get_all_hotel_details(self) -> list[Hotel]:
+        sql = """
+        SELECT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        """
+        rows = self.fetchall(sql)
+        result: list[Hotel] = []
+        for hid, name, stars, aid, city, street, zipcode in rows:
+            hotels = Hotel(hid, name, stars)
+            hotels.address = Address(aid, city, street, zipcode)
+            result.append(hotels)
+        return result
     # User Story 3.1.1: Neue Adresse anlegen
     def create_address(self, street: str, city: str, zip_code: str) -> Address:
         sql = """
