@@ -10,6 +10,12 @@ from business_logic.hotel_manager import find_hotels_by_multiple_criteria
 
 def main():
     print("Hotel Search by your availability")
+    city = None
+    min_stars = None
+    guest_count = None
+    check_in_date = None
+    check_out_date = None
+
     valid = False
     while not valid:
         try:
