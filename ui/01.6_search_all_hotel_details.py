@@ -22,35 +22,36 @@ def main():
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+        try:
+            selection = int(input("\nEnter the number of the hotel you want to see the details: ").strip())
+            if 1 <= selection <= len(hotels):
+                selected_hotel = hotels[selection - 1]
+
+                print(f"\nDetails for {selected_hotel.name}:")
+                print(f"Address: {selected_hotel.address}")
+                print(f"Stars: {selected_hotel.stars}")
+
+                available_rooms = get_available_rooms_by_hotel(selected_hotel.hotel_id, today)
+                print("\nAvailable rooms today:")
+                if available_rooms:
+                    for room in available_rooms:
+                        print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
+                else:
+                    print(" No available rooms today.")
+                    next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
+                    if next_date:
+                        print(f"\nNext available date for any room: {next_date}")
+                    else:
+                        print("No future availability found.")
+            else:
+                print("Invalid selection.")
+        except ValueError:
+            print("Please enter a valid number.")
     else:
         print("No hotels found.")
         return
-    #TODO: eventuell auch hier while Loop ergänzen
-    try:
-        selection = int(input("\nEnter the number of the hotel you want to see the details: ").strip())
-        if 1 <= selection <= len(hotels):
-            selected_hotel = hotels[selection - 1]
 
-            print(f"\nDetails for {selected_hotel.name}:")
-            print(f"Address: {selected_hotel.address}")
-            print(f"Stars: {selected_hotel.stars}")
 
-            available_rooms = get_available_rooms_by_hotel(selected_hotel.hotel_id, today)
-            print("\nAvailable rooms today:")
-            if available_rooms:
-                for room in available_rooms:
-                    print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
-            else:
-                print(" No available rooms today.")
-                next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
-                if next_date:
-                    print(f"\nNext available date for any room: {next_date}")
-                else:
-                    print("No future availability found.")
-        else:
-            print("Invalid selection.")
-    except ValueError:
-        print("Please enter a valid number.")
 
 
 if __name__ == "__main__":
