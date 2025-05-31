@@ -17,32 +17,45 @@ def main():
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+        valid = False
+        while not valid:
+            try:
+                selection = int(input("\nEnter the number of the hotel you want to see the Room Types: ").strip())
+                if 1 <= selection <= len(hotels):
+                    selected_hotel = hotels[selection - 1]
+                    print(f"\nRoom Types for {selected_hotel.name}:")
+
+                    room_types = get_room_types_by_hotel(selected_hotel.hotel_id)
+
+                    if room_types:
+                        for rt in room_types:
+                            print("\n-------------------------------")
+                            print(f"→ {rt.name}")
+                            print(f"   Description: {rt.description}")
+                            print(f"   Max guests: {rt.max_guests}")
+                            print(f"   Price per night: CHF {rt.price_per_night:.2f}")
+                            print(f"   Facilities: {', '.join(rt.facilities) if rt.facilities else 'None'}")
+                            print("\n-------------------------------")
+                            input("Press Enter to finish")
+                            valid = True
+
+                    else:
+                        print("No room types found for this hotel.")
+                        valid = True
+                else:
+                    print("Invalid selection.")
+
+
+            except ValueError:
+                print("Please enter a valid number.")
+
+
+
     else:
         print("No hotels found.")
         return
-    #TODO: Eventuell auch hier while loop ergänzen
-    try:
-        selection = int(input("\nEnter the number of the hotel you want to see the Room Types: ").strip())
-        if 1 <= selection <= len(hotels):
-            selected_hotel = hotels[selection - 1]
-            print(f"\nRoom Types for {selected_hotel.name}:")
 
-            room_types = get_room_types_by_hotel(selected_hotel.hotel_id)
 
-            if room_types:
-                for rt in room_types:
-                    print("\n-------------------------------")
-                    print(f"→ {rt.name}")
-                    print(f"   Description: {rt.description}")
-                    print(f"   Max guests: {rt.max_guests}")
-                    print(f"   Price per night: CHF {rt.price_per_night:.2f}")
-                    print(f"   Facilities: {', '.join(rt.facilities) if rt.facilities else 'None'}")
-            else:
-                print("No room types found for this hotel.")
-        else:
-            print("Invalid selection.")
-    except ValueError:
-        print("Please enter a valid number.")
 
 
 if __name__ == "__main__":

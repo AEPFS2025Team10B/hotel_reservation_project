@@ -20,6 +20,8 @@ def main():
     for idx, h in enumerate(hotels, start=1):
         print(f"{idx}. {h.name} ({h.stars}★), {h.address}")
 
+    hotel = None
+
     valid = False
     while not valid:
         try:
