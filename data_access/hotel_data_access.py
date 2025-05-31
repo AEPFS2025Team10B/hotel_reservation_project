@@ -15,7 +15,7 @@ class HotelDataAccess(BaseDataAccess):
         FROM hotel
         """
         rows = self.fetchall(sql)
-        return [Hotel(hid, name, stars, None) for hid, name, stars in rows]
+        return [Hotel(hid, name, stars, Address) for hid, name, stars in rows]
 
     # User Story 1.2: Hotel-Details nach ID abrufen
     def get_hotel_by_id(self, hotel_id: int) -> Hotel | None:
@@ -32,7 +32,7 @@ class HotelDataAccess(BaseDataAccess):
             "SELECT address_id, street, city, zip_code FROM address WHERE address_id = ?", (aid,)
         )
         address = Address(*addr_row) if addr_row else None
-        return Hotel(hid, name, stars, address)
+        return Hotel(hid, name, stars, Address)
 
     # User Story 1.1: Hotels in einer Stadt suchen
     def get_hotels_by_city(self, city: str) -> list[Hotel]:
@@ -47,7 +47,7 @@ class HotelDataAccess(BaseDataAccess):
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
             address = Address(aid, street, city, zipc)
-            hotel = Hotel(hid, name, stars)
+            hotel = Hotel(hid, name, stars, address)
             result.append(hotel)
         return result
 
@@ -64,7 +64,7 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (city, min_stars,))
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
-            hotels = Hotel(hid, name, stars)
+            hotels = Hotel(hid, name, stars, Address)
             hotels.address = Address(aid, street, city, zipc)
             result.append(hotels)
         return result
@@ -83,7 +83,7 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (guest_count,))
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipcode in rows:
-            hotels = Hotel(hid, name, stars)
+            hotels = Hotel(hid, name, stars,Address)
             hotels.address = Address(aid, street, city, zipcode)
             result.append(hotels)
         return result
@@ -101,7 +101,7 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (check_in_date, check_out_date,))
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipcode in rows:
-            hotels = Hotel(hid, name, stars)
+            hotels = Hotel(hid, name, stars, Address)
             hotels.address = Address(aid, street, city, zipcode)
             result.append(hotels)
         return result
@@ -129,7 +129,7 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (check_in_date, check_out_date, city, min_stars, guest_count))
         result: list[Hotel] = []
         for hid, name, stars, aid, city, street, zipcode in rows:
-            hotels = Hotel(hid, name, stars)
+            hotels = Hotel(hid, name, stars,Address)
             hotels.address = Address(aid, street, city, zipcode)
             result.append(hotels)
         return result
@@ -147,7 +147,7 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql)
         result: list[Hotel] = []
         for hid, name, stars, aid, city, street, zipcode in rows:
-            hotels = Hotel(hid, name, stars)
+            hotels = Hotel(hid, name, stars, Address)
             hotels.address = Address(aid, city, street, zipcode)
             result.append(hotels)
         return result

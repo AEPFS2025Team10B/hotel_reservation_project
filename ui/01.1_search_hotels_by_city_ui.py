@@ -4,6 +4,7 @@ Stadtbasierte Hotelsuche
 """
 #Import function
 from business_logic.hotel_manager import find_hotels_by_city
+from common_ui.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City")
@@ -15,19 +16,8 @@ def main():
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
 
-        valid = False
-        while not valid:
-            try:
-                selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
-                if 1 <= selection <= len(hotels):
-                    selected = hotels[selection - 1]
-                    print(f"\nYou selected:\n→ {selected.name} ({selected.stars}★), {selected.address}")
-                    print("")
-                    print("Enter to finish...") #TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
-                    valid = True
-                else:
-                    print("Invalid selection.")
-            except ValueError:
-                print("Please enter a valid number.")
+        selected = find_hotel_by_list_city(hotels)
+        print(f"Hotel-ID for further processing: {selected.hotel_id}")
+
     else:
         print(f"\nNo hotels found in {city}.")
