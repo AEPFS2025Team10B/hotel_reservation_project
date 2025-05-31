@@ -25,9 +25,7 @@ def find_hotels_by_availability(check_in_date: str, check_out_date: str):
 
 # (User Story 1.5) Hotels nach mehreren Kriterien (Stadt, Sterne, Gäste, Zeitraum) durchsuchen
 def find_hotels_by_multiple_criteria(city: str, min_stars: int, guest_count: int, check_in_date: str, check_out_date: str):
-    return hotel_dao.get_hotels_by_multiple_criteria(
-        city, min_stars, guest_count, check_in_date, check_out_date
-    )
+    return hotel_dao.get_hotels_by_multiple_criteria(city, min_stars, guest_count, check_in_date, check_out_date)
 
 # (User Story 1.6) Alle Hotel-Details (Name, Adresse, Sterne) abrufen
 def find_all_hotel_details():
