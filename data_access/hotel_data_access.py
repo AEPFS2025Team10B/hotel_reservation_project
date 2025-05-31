@@ -46,9 +46,9 @@ class HotelDataAccess(BaseDataAccess):
         rows = self.fetchall(sql, (city,))
         result: list[Hotel] = []
         for hid, name, stars, aid, street, city, zipc in rows: #TODO List comprehension
-            hotels = Hotel(hid, name, stars)
-            hotels.address = Address(aid, street, city, zipc)
-            result.append(hotels)
+            address = Address(aid, street, city, zipc)
+            hotel = Hotel(hid, name, stars, address)
+            result.append(hotel)
         return result
 
     # User Story 1.2: Hotels in einer Stadt durchsuchen mit mind Anzahl Sternen
