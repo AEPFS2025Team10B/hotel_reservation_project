@@ -32,17 +32,33 @@ def main():
             print("Please enter a valid number.")
             continue
 
-    hotel = hotels[sel - 1]
-    confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (j/n): ").strip().lower()
-    if confirm != 'j':
-        print("Cancelled.")
-        return
+        hotel = hotels[sel - 1]
+        valid = True
 
-    try:
-        remove_hotel(hotel.hotel_id)
-        print(f"Hotel '{hotel.name}' was deleted succesfully.")
-    except Exception as e:
-        print(f"Deleting didnt work: {e}")
+
+    valid = False
+    while not valid:
+        confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (j/n): ").strip().lower()
+        if confirm == 'n':
+            print("Cancelled.")
+            print("")
+            input("Press Enter to finish...")
+            break
+
+        elif confirm != 'j':
+            print("Cancelled.")
+            print("")
+            continue
+
+
+        try:
+            remove_hotel(hotel.hotel_id)
+            print(f"Hotel '{hotel.name}' was deleted succesfully.")
+            input("Press Enter to finish...")
+            valid = True
+        except Exception as e:
+            print(f"Deleting didnt work: {e}")
+            valid = True
 
 if __name__ == "__main__":
     main()
