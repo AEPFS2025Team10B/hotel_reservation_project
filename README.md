@@ -85,11 +85,13 @@ die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
 - Verwaltung von Hotels (Hinzufügen, Bearbeiten, Löschen)
 
 Zentraler Erkenntnisse:
-- Die Trennung von Datenzugriff (DataAccessLayer), Geschäftslogik (BusinessLogicLayer) und Benutzerschnittstelle(UI) 
-hat sich als sehr nützlich herausgestellt, auch wenn es am Anfang kompliziert schien.
-- Durch die modulare Struktur konnten wir parallel arbeiten und einzelne Komponenten unabhängig entwickeln und testen.
-- Die Nutzung von Objektorientierung (z. B. für Hotel, Adresse, Buchung) hat den Umgang mit komplexen Datenmodellen 
-vereinfacht.
+- Die Trennung von Datenzugriff (DataAccessLayer), Geschäftslogik (BusinessLogicLayer) und 
+Benutzerschnittstelle(UI) hat sich als sehr nützlich herausgestellt, auch wenn es am Anfang kompliziert 
+schien.
+- Durch die modulare Struktur konnten wir parallel arbeiten und einzelne Komponenten unabhängig entwickeln 
+und testen.
+- Die Nutzung von Objektorientierung (z. B. für Hotel, Adresse, Buchung) hat den Umgang mit komplexen 
+Datenmodellen vereinfacht.
 
 Beobachtungen:
 
@@ -99,6 +101,31 @@ Beobachtungen:
 - Interpretation of the results
 - Challenges encountered
 - Were objectives achieved?
+
+Interpretation der Ergebnisse
+die im Projekt implementierten Funktionen zeigen, dass ein einfaches, aber effektives 
+Hotelreservierungssystem mit den verwendeten Technologien erfolgreich umgesetzt werden kann. Die Hauptziele,
+wie die Suche nach Hotels, Verwaltung von Hotels und Adressdaten sowie einfache Buchungslogik, konnten in 
+funktionierender Form realisiert werden. Besonders die modulare und objektorientierte Umsetzung hat sich 
+positiv auf Lesbarkeit, Testbarkeit und Erweiterbarkeit ausgewirkt.
+
+Herausforderungen
+während der Entwicklung traten verschiedene Herausforderungen auf:
+- Adressverwaltung: Die Trennung von Hotel- und Adressdatenbanktabellen erforderte eine saubere Verknüpfung 
+und erhöhte zunächst die Komplexität im Code.
+- Fehlermeldungen und Debugging: Einige Fehler, z. B. bei der Übergabe von Argumenten an Konstruktoren, 
+waren schwer zu identifizieren, insbesondere bei komplexeren Methodenketten.
+- Teamkoordination: Durch unterschiedliche Verfügbarkeiten im Team war es manchmal schwierig, kontinuierlich 
+im gleichen Tempo zu arbeiten. Die wöchentlichen Scrum-Meetings haben jedoch geholfen, Aufgaben zu klären 
+und Fortschritte zu sichern.
+
+Zielerreichung
+Die meisten im Vorfeld gesetzten Ziele wurden erreicht:
+- Die Suchfunktionen sind implementiert und getestet.
+- Hotels können korrekt hinzugefügt, bearbeitet und gelöscht werden.
+- Adressen werden eigenständig gespeichert und sind mit Hotels verknüpft.
+- Die Benutzerführung erfolgt schrittweise und robust gegen fehlerhafte Eingaben.
+
 
 ## Conclusion
 - Summary of key findings
