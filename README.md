@@ -78,6 +78,23 @@ Begonnen haben wir aber mit VisualParadigm, um unsere Modelle korrekt zu visuali
 - Key findings
 - Charts, tables, and important observations
 
+Im Laufe des Projekts konnten wir ein funktionierendes Hotelreservierungssystem programmieren, das 
+die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
+- Hotelsuche nach Stadt, Sternebewertung, Anzahl der Gäste und Verfügbarkeit
+- Anzeige von Hoteldetails inklusive Adresse und Sterne
+- Verwaltung von Hotels (Hinzufügen, Bearbeiten, Löschen)
+
+Zentraler Erkenntnisse:
+- Die Trennung von Datenzugriff (DataAccessLayer), Geschäftslogik (BusinessLogicLayer) und Benutzerschnittstelle(UI) 
+hat sich als sehr nützlich herausgestellt, auch wenn es am Anfang kompliziert schien.
+- Durch die modulare Struktur konnten wir parallel arbeiten und einzelne Komponenten unabhängig entwickeln und testen.
+- Die Nutzung von Objektorientierung (z. B. für Hotel, Adresse, Buchung) hat den Umgang mit komplexen Datenmodellen 
+vereinfacht.
+
+Beobachtungen:
+
+
+
 ## Discussion
 - Interpretation of the results
 - Challenges encountered
