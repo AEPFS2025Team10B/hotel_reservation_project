@@ -49,8 +49,30 @@ zielgerichtet umzusetzen.
 
 ## Methods
 - Approach and methodology
-- Tools, frameworks, and technologies used
+- - Tools, frameworks, and technologies used
+
+Zu Beginn haben wir uns im Team darauf geeinigt, dass wir mit dem Projekt noch etwas warten, 
+da uns das Wissen noch gefehlt hat. Wir haben jedoch die Übungen jede Woche gemacht und uns 
+ausgetauscht. 
+Als wir dann richtig begonnen haben, war es uns wichtig, dass wir flexibel arbeiten können.
+Daher haben wir uns darauf geeinigt, dass alle, in jedem Bericht mithelfen, wir haben uns 
+dann eine kurze Nachricht auf WhatsApp zukommen lassen. Jemand anderes hat dann meist dort 
+weitergemacht, wo die Person vorhin aufgehört hat.
+So konnten alle in jedem Bereich seine eigenen Erfahrungen sammeln und diese teilen.
+
+Für die Umsetzung des Projekts haben wir viele verschiedene Programme verwendet. Für das Programm
+selbst haben wir die Programmiersprache Python 3.12 verwendet. Als Entwicklungsumgebung haben wir 
+uns auf PyCharm von Jetbrains geeinigt, wir hätten auch das jupiter Notebook Deepnote verwenden 
+können. Die Arbeitsumgebung von PyCharm hat uns aber mehr zugesagt. Die Datenbank selber haben wir 
+mithilfe von SQLite3 erstellt.
+Begonnen haben wir aber mit VisualParadigm, um unsere Modelle korrekt zu visualisieren.
+
 - Data sources or experimental setup
+
+
+
+
+
 
 ## Results
 - Key findings
