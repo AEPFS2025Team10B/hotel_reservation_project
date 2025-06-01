@@ -4,7 +4,7 @@
 - **Hotel reservation system:** 
 - **Germann David, Lutz Reto, Nathan Jeremy:** 
 - **Date:** 
-- **Business artificial intelligence  / anwendungsentwiklung python:** 
+- **Business artificial intelligence  / Anwendungsentwiklung python:** 
 
 ## Abstract
 A short summary of the report (around half a page).
@@ -25,6 +25,24 @@ A short summary of the report (around half a page).
 - Problem statement
 - Objectives
 - Structure of the report
+
+Im vergangenen Semester entwickelten wir das Datenbankschema für ein Hotelreservierungssystem. 
+In diesem Semester bauten wir darauf auf und realisierten ein voll funktionsfähiges System zur 
+Hotelreservierung, angelehnt an Plattformen wie Booking.com. Dabei stellten sich verschiedene 
+Herausforderungen, insbesondere im Hinblick auf eine durchdachte Projektstruktur sowie eine 
+effiziente technische Umsetzung.
+
+Für eine saubere und wartbare Entwicklung kamen verschiedene Methoden der Softwareentwicklung 
+zum Einsatz. Auch die Zusammenarbeit im Team war ein zentraler Faktor. Obwohl es zeitlich nicht 
+immer einfach war, gelang es uns in der Regel, einmal pro Woche ein Scrum-Meeting durchzuführen, 
+in dem wir Aufgaben verteilten und den Projektfortschritt besprachen.
+
+Zu Beginn lag der Fokus stärker auf dem theoretischen Austausch, unter anderem durch wöchentliche 
+Übungen. Mit dem Start der eigentlichen Implementierungsphase arbeiteten wir zunehmend strukturiert 
+und konnten durch die regelmäßigen Meetings unsere Arbeit gut koordinieren.
+
+Insgesamt ermöglichte uns dieser iterative und kooperative Ansatz, das Projekt effizient und 
+zielgerichtet umzusetzen.
 
 ## Theoretical Background *(optional)*
 - Theories, models, or frameworks relevant to the topic
