@@ -4,7 +4,7 @@
 - **Hotel reservation system:** 
 - **Germann David, Lutz Reto, Nathan Jeremy:** 
 - **Date:** 
-- **Business artificial intelligence  / Anwendungsentwiklung python:** 
+- **Business Artificial Intelligence  / Anwendungsentwiklung python:** 
 
 ## Abstract
 A short summary of the report (around half a page).
