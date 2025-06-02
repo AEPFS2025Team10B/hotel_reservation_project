@@ -21,3 +21,5 @@ def main():
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
         print(f"\nNo hotels available in that period.")
+
+    return hotels, check_in_date, check_out_date

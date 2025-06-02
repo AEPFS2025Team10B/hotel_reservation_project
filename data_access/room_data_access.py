@@ -1,6 +1,7 @@
 from data_access.base_data_access import BaseDataAccess
 from model.roomtype import RoomType
 from model.room import Room
+from model.facility import Facility
 
 class RoomDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
@@ -91,3 +92,31 @@ class RoomDataAccess(BaseDataAccess):
             for room_id, room_number, price_per_night in rows
         ]
 
+# User Story 4: Verfügbare Zimmer eines Hotels für einen Zeitraum
+    def get_available_rooms_by_hotel_and_dates_2(
+        self, hotel_id: int, check_in_date: str, check_out_date: str
+    ) -> list[Room]:
+        sql = """
+        SELECT r.room_id, r.room_number, r.price_per_night, rt.type_id, rt.max_guests, rt.description, fac.facility_id, fac.facility_name
+        FROM Room AS r
+        JOIN Room_Type AS rt ON rt.type_id = r.type_id
+        JOIN Room_Facilities AS rf ON rf.room_id = r.room_id
+        JOIN Facilities AS fac ON fac.facility_id = rf.facility_id
+        WHERE hotel_id = ?
+          AND r.room_id NOT IN (
+              SELECT b.room_id
+              FROM Booking AS b
+              WHERE NOT (
+                  b.check_out_date <= ?
+                  OR b.check_in_date  >= ?
+              )
+          )
+        """
+        rows = self.fetchall(sql, (hotel_id, check_in_date, check_out_date))
+        result: list[Room] = []
+        for rid, rnr, rpr, rtid, rtmg, rtd, fid, fn in rows:
+            room = Room(rid, rnr, rpr)
+            room.roomtype = RoomType(rtid, rtmg, rtd)
+            room.facility = Facility(fid, fn)
+            result.append(room)
+        return result

@@ -21,3 +21,4 @@ def main():
 
     else:
         print(f"\nNo hotels found in {city}.")
+    return hotels

@@ -40,4 +40,5 @@ def main():
     else:
         print(f"\nNo hotels available:\n")
 
+    return hotels, check_in_date, check_out_date
 

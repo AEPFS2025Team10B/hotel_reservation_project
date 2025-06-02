@@ -26,6 +26,6 @@ def main():
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
 
-
     else:
         print(f"\nNo hotels found in {city} with at least {min_stars} stars.")
+    return hotels

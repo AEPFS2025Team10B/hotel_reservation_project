@@ -1,4 +1,4 @@
-# ui/01.6_search_all_hotel_details.py
+# ui/search_all_hotel_details_01_6.py
 
 """
 User Story 1.6: Ich möchte Name, Adresse und Anzahl der Sterne jedes Hotels sehen.
@@ -49,7 +49,8 @@ def main():
             print("Please enter a valid number.")
     else:
         print("No hotels found.")
-        return
+
+    return hotels
 
 
 

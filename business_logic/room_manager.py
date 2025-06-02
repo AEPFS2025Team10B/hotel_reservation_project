@@ -21,3 +21,7 @@ def get_room_types_by_hotel(hotel_id: int):
 # (User Story 2.2) Show available rooms of a hotel for a date range
 def get_available_rooms_by_hotel_and_dates(hotel_id: int, check_in: str, check_out: str):
     return room_dao.get_available_rooms_by_hotel_and_dates(hotel_id, check_in, check_out)
+
+# (User Story 4) Show available rooms of a hotel for a date range
+def get_available_rooms_by_hotel_and_dates_2(hotel_id: int, check_in_date: str, check_out_date: str):
+    return room_dao.get_available_rooms_by_hotel_and_dates_2(hotel_id, check_in_date, check_out_date)

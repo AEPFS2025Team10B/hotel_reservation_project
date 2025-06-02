@@ -1,4 +1,4 @@
-# ui/3.3_update_hotel.py
+# ui/3_3_update_hotel.py
 
 """
 User Story 3.3: Ich möchte Hotel Infos updaten

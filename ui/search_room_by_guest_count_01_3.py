@@ -34,3 +34,5 @@ def main():
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
     else:
         print(f"\nNo hotels found with rooms for {guest_count} guests.")
+
+    return hotels

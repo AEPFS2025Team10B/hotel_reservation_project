@@ -1,10 +1,17 @@
+from model.hotel import Hotel
+from model.roomtype import RoomType
+from model.booking import Booking
+from testing.test_class_Facility import Facility
+
+
 class Room:
     def __init__(self, room_id: int, number: str, price_per_night: float):
         self.__room_id = room_id
         self.__number = number
         self.__price_per_night = price_per_night
-        self.__roomtype = []
-        self.__hotel = []
+        self.__roomtype = RoomType
+        self.__facilities = []
+        self.__hotel = Hotel
         self.__booking = []
 
     def __repr__(self):
@@ -50,6 +57,15 @@ class Room:
         if not isinstance(roomtype, RoomType):
             raise TypeError("room type must be a RoomType")
         self.__roomtype = roomtype
+
+    @property
+    def facilities(self):
+        return self.__facilities
+
+    @facilities.setter
+    def facilities(self, facilities):
+        if not isinstance(facilities, Facility):
+            raise TypeError("facilities must be a Facility")
 
     @property
     def hotel(self):

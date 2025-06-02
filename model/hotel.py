@@ -1,14 +1,15 @@
 from model.address import Address
-from model.room import Room
+from model.facility import Facility
 
 class Hotel:
     def __init__(self, hotel_id: int, name: str, stars: int):
+        from model.room import Room
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars
         self.__address = Address
-        self.__rooms = []                  
-        self.__facilities = []      
+        self.__rooms = []
+        self.__facilities = []
 
     def __repr__(self):
         return f"Hotel(id={self.__hotel_id!r}, name={self.__name!r})"

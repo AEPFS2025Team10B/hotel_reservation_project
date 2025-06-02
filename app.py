@@ -34,17 +34,18 @@ def main():
 
 
     stories = [
-        (1, "01.1_search_hotels_by_city_ui.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
-        (2, "01.2_search_hotel_stars.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),
-        (3, "01.3_search_room_by_guest_count.py", "As a guest I want to search all hotels in a city that have room for all my guests."),
-        (4, "01.4_search_hotels_by_availability.py", "As a guest I want to search all hotels which have available room for my desired stay time."),
-        (5, "01.5_search_hotels_by_multiple_criteria.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
-        (6, "01.6_search_all_hotel_details.py", "As a guest I want to see hotel details (name, address, stars)."),
-        (7, "2.1_search_room_type_by_hotel.py", "As a guest, I want to see all Room Types of a Hotel"),
-        (8, "2.2_search_room_by_date.py", "As a guest, I want to find unoccupied rooms during my travelling time"),
-        (9, "3.1_add_new_hotel.py", "As an admin, i want to be able to add new hotels"),
-        (10, "3.2_remove_hotel.py", "As an admin, i want to delte a hotel"),
-        (11, "3.3_update_hotel.py", "As an admin, i want to update the details of a hotel")
+        (1, "search_hotels_by_city_01_1.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
+        (2, "search_hotel_stars_01_2.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),
+        (3, "search_room_by_guest_count_01_3.py", "As a guest I want to search all hotels in a city that have room for all my guests."),
+        (4, "search_hotels_by_availability_01_4.py", "As a guest I want to search all hotels which have available room for my desired stay time."),
+        (5, "search_hotels_by_multiple_criteria_01_5.py", "As a guest I want to search hotels by multiple criteria (location, stars, guests, dates)."),
+        (6, "search_all_hotel_details_01_6.py", "As a guest I want to see hotel details (name, address, stars)."),
+        (7, "2_1_search_room_type_by_hotel.py", "As a guest, I want to see all Room Types of a Hotel"),
+        (8, "2_2_search_room_by_date.py", "As a guest, I want to find unoccupied rooms during my travelling time"),
+        (9, "3_1_add_new_hotel.py", "As an admin, i want to be able to add new hotels"),
+        (10, "3_2_remove_hotel.py", "As an admin, i want to delte a hotel"),
+        (11, "3_3_update_hotel.py", "As an admin, i want to update the details of a hotel"),
+        (12, "4_book_a_room.py", "As a customer I want to book a room")
         ]
 
     print("\nAvailable User Stories:")
