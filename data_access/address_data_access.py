@@ -40,6 +40,6 @@ class AddressDataAccess(BaseDataAccess):
     def get_address_id(self, street: str, city: str, zip: str) -> int:
         sql ="""
         SELECT address_id FROM address
-        WHERE street = ?, city = ?, zip_code = ?"""
+        WHERE street = ? AND city = ? AND zip_code = ?"""
         address_id = self.fetchone(sql, (street, city, zip))
         return address_id

@@ -1,3 +1,6 @@
+from model.address import Address
+from model.booking import Booking
+
 class Guest:
     def __init__(self, guest_id:int, last_name:str, first_name:str, email:str):
         self.__guest_id = guest_id
@@ -66,7 +69,6 @@ class Guest:
 
     @booking.setter
     def booking(self, booking):
-        from .booking import Booking
         if not isinstance(booking, Booking):
             raise TypeError("Booking must be a Booking")
         self.__booking = booking

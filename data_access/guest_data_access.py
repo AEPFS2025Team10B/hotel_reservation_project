@@ -14,7 +14,9 @@ class GuestDataAccess(BaseDataAccess):
         VALUES (?, ?, ?, ?)
         """
         new_id, _ = self.execute(sql, (first_name, last_name, email, address_id))
-        return Guest(new_id, first_name, last_name, email, address_id)
+        guest = Guest(new_id, first_name, last_name, email)
+        guest.address_id = address_id
+        return guest
     #Todo check if guest already exists. Maybe with mail
 
     # User Story 2.1 (Teil 2): Gast nach ID lesen
