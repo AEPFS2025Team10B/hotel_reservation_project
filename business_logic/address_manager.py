@@ -1,0 +1,7 @@
+from data_access import AddressDataAccess
+
+# DAO-Instanzen
+address_dao = AddressDataAccess()
+
+def add_new_address(street:str, city:str, zip:str):
+    return address_dao.insert_address(street, city, zip)

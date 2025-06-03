@@ -15,6 +15,7 @@ class GuestDataAccess(BaseDataAccess):
         """
         new_id, _ = self.execute(sql, (first_name, last_name, email))
         return Guest(new_id, first_name, last_name, email)
+    #Todo check if guest already exists. Maybe with mail
 
     # User Story 2.1 (Teil 2): Gast nach ID lesen
     def get_guest_by_id(self, guest_id: int) -> Guest | None:
@@ -51,3 +52,12 @@ class GuestDataAccess(BaseDataAccess):
     def delete_guest(self, guest_id: int) -> None:
         sql = "DELETE FROM guest WHERE guest_id = ?"
         _, _ = self.execute(sql, (guest_id,))
+
+    def get_guest_by_email(self, email: str) -> Guest:
+        sql = """
+        SELECT guest_id, first_name, last_name, email
+        FROM guest
+        WHERE LOWER(email) = LOWER(?)
+        """
+        rows = self.fetchall(sql, (email,))
+        return [Guest(gid, fn, ln, em) for gid, fn, ln, em in rows]

@@ -7,9 +7,9 @@ from  import BaseDataAccess
 # class AlbumDataAccess(BaseDataAccess):
 #     def __init__(self, db_path: str = None):
 #         super().__init__(db_path)
-class AddressDataAccess(BaseDataAccess):
-    det __init__(self, db_path: str = None):
-        super().__init__(db_path)
+# class AddressDataAccess(BaseDataAccess):
+#     det __init__(self, db_path: str = None):
+#         super().__init__(db_path)
 
 
     # def create_new_album(self, title: str, artist: model.Artist = None) -> model.Album:
@@ -31,7 +31,6 @@ class AddressDataAccess(BaseDataAccess):
             city,
             zip
         )
-    
 
          last_row_id, row_count = self.execute(sql, params)
          return model.Address(last_row_id, street, city, zip)

@@ -23,7 +23,7 @@ class AddressDataAccess(BaseDataAccess):
         VALUES (?, ?, ?)
         """
         new_id, _ = self.execute(sql, (street, city, zip_code))
-        return new_id
+        return Address(new_id, street, city, zip_code)
 
     def update_address(self, address: Address) -> None:
         sql = """
