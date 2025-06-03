@@ -41,5 +41,6 @@ class AddressDataAccess(BaseDataAccess):
         sql ="""
         SELECT address_id FROM address
         WHERE street = ? AND city = ? AND zip_code = ?"""
-        address_id = self.fetchone(sql, (street, city, zip))
+        address_id_tuple = self.fetchone(sql, (street, city, zip))
+        return address_id_tuple[0] if address_id_tuple else None
         return address_id

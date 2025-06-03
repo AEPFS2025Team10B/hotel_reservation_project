@@ -9,7 +9,7 @@ from model.guest import Guest
 guest_dao = GuestDataAccess()
 
 def add_new_guest(first_name:str, last_name:str, email:str, street: str, city:str, zip:str) -> Guest:
-    from business_logic import find_address_id
+    from business_logic.address_manager import find_address_id
     address_id = find_address_id(street, city, zip)
     return guest_dao.create_guest(first_name, last_name, email, address_id)
 

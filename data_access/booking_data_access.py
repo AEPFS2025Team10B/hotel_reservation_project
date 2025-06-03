@@ -6,9 +6,10 @@ class BookingDataAccess(BaseDataAccess):
         super().__init__(db_path)
 
     def insert_booking(self, guest_id, room_id, check_in_date: str, check_out_date: str, total_amount) -> Booking:
+        is_cancelled = 0
         sql = """
         INSERT INTO booking (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount)
         VALUES (?, ?, ?, ?, ?, ?)
         """
-        new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, total_amount))
-        return Booking(new_id, guest_id, room_id, check_in_date, check_out_date, total_amount)
+        new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount))
+        return Booking(new_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount)
