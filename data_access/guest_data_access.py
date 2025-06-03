@@ -6,15 +6,15 @@ class GuestDataAccess(BaseDataAccess):
         super().__init__(db_path)
 
     # User Story 4.1: Neuer Gast anlegen
-    def create_guest(self, first_name: str, last_name: str, email: str) -> Guest:
+    def create_guest(self, first_name: str, last_name: str, email: str, address_id: int) -> Guest:
         if not first_name or not last_name:
             raise ValueError("Vor- und Nachname sind erforderlich")
         sql = """
-        INSERT INTO guest (first_name, last_name, email)
-        VALUES (?, ?, ?)
+        INSERT INTO guest (first_name, last_name, email, address_id)
+        VALUES (?, ?, ?, ?)
         """
-        new_id, _ = self.execute(sql, (first_name, last_name, email))
-        return Guest(new_id, first_name, last_name, email)
+        new_id, _ = self.execute(sql, (first_name, last_name, email, address_id))
+        return Guest(new_id, first_name, last_name, email, address_id)
     #Todo check if guest already exists. Maybe with mail
 
     # User Story 2.1 (Teil 2): Gast nach ID lesen
@@ -53,11 +53,11 @@ class GuestDataAccess(BaseDataAccess):
         sql = "DELETE FROM guest WHERE guest_id = ?"
         _, _ = self.execute(sql, (guest_id,))
 
-    def get_guest_by_email(self, email: str) -> Guest:
+    def get_guest_id_by_email(self, email: str) -> Guest:
         sql = """
-        SELECT guest_id, first_name, last_name, email
+        SELECT guest_id
         FROM guest
         WHERE LOWER(email) = LOWER(?)
         """
-        rows = self.fetchall(sql, (email,))
-        return [Guest(gid, fn, ln, em) for gid, fn, ln, em in rows]
+        guest_id = self.fetchone(sql, (email,))
+        return guest_id

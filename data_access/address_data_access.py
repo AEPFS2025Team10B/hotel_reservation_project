@@ -36,3 +36,10 @@ class AddressDataAccess(BaseDataAccess):
     def delete_address(self, address_id: int) -> None:
         sql = "DELETE FROM address WHERE address_id = ?"
         self.execute(sql, (address_id,))
+
+    def get_address_id(self, street: str, city: str, zip: str) -> int:
+        sql ="""
+        SELECT address_id FROM address
+        WHERE street = ?, city = ?, zip_code = ?"""
+        address_id = self.fetchone(sql, (street, city, zip))
+        return address_id

@@ -78,13 +78,13 @@ def main ():
                     selected_room = rooms[room_booking - 1]
                 Live = True
                 print(f"\nYou have selected  {selected_room}")
-                first_name = input("\nPlease Enter your first name: ")
-                last_name = input("\nPlease Enter your last name: ")
-                email = input("\nPlease Enter your email: ")
                 street = input("\nPlease Enter your street address including hous number: ")
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
-                new_guest = add_new_guest(first_name, last_name, email)
+                first_name = input("\nPlease Enter your first name: ")
+                last_name = input("\nPlease Enter your last name: ")
+                email = input("\nPlease Enter your email: ")
+                new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
                 new_address = add_new_address(street, city, zip)
                 new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date)
                 return
