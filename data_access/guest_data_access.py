@@ -61,5 +61,5 @@ class GuestDataAccess(BaseDataAccess):
         FROM guest
         WHERE LOWER(email) = LOWER(?)
         """
-        guest_id = self.fetchone(sql, (email,))
-        return guest_id
+        guest_id_tuple = self.fetchone(sql, (email,))
+        return guest_id_tuple[0] if guest_id_tuple else None

@@ -1,14 +1,14 @@
 from datetime import date
 
 class Booking:
-    def __init__(self, booking_id: int, check_in_date: date, check_out_date: date, number_of_guests: int):
+    def __init__(self, booking_id: int, check_in_date: date, check_out_date: date):
         self.__booking_id = booking_id
         self.__check_in_date = check_in_date
         self.__check_out_date = check_out_date
-        self.__number_of_guests = number_of_guests
         self.__is_cancelled = False
         self.__total_price = 0.0
         self.__guest = None
+        self.__room = None
         self.__invoice = None
 
     def __repr__(self):
@@ -41,16 +41,6 @@ class Booking:
         self.__check_out_date = value
 
     @property
-    def number_of_guests(self):
-        return self.__number_of_guests
-
-    @number_of_guests.setter
-    def number_of_guests(self, value):
-        if not isinstance(value, int) or value <= 0:
-            raise ValueError("number_of_guests must be a positive integer")
-        self.__number_of_guests = value
-
-    @property
     def is_cancelled(self):
         return self.__is_cancelled
 
@@ -80,6 +70,17 @@ class Booking:
         if not isinstance(value, Guest):
             raise TypeError("guest must be a Guest object")
         self.__guest = value
+
+    @property
+    def room(self):
+        return self.__room
+
+    @room.setter
+    def room(self, value):
+        from .room import Room
+        if not isinstance(value, Room):
+            raise TypeError("room must be a Room object")
+        self.__room = value
 
     @property
     def invoice(self):
