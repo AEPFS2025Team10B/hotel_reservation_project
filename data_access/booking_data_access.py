@@ -1,5 +1,7 @@
+from business_logic import find_room_by_id
 from data_access.base_data_access import BaseDataAccess
 from model.booking import Booking
+from business_logic.guest_manager import find_guest_by_id
 
 class BookingDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
@@ -13,3 +15,14 @@ class BookingDataAccess(BaseDataAccess):
         new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount))
         booking = Booking(new_id, check_in_date, check_out_date)
         return booking
+
+    def get_booking_by_id(self, booking_id: int) -> Booking | None:
+        sql = """
+        SELECT booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount
+        FROM booking
+        WHERE booking_id = ?
+        """
+        row = self.fetchone(sql, (booking_id,))
+        find_guest_by_id(row['guest_id'])
+        find_room_by_id(row['room_id'])
+        return [Booking(booking_id, check_in_date, check_out_date) for booking_id, check_in_date, check_out_date in row]

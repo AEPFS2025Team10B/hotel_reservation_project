@@ -120,3 +120,21 @@ class RoomDataAccess(BaseDataAccess):
             room.facility = Facility(fid, fn)
             result.append(room)
         return result
+
+    def get_room_by_id(self, room_id: int) -> Room | None:
+        sql = """
+        SELECT r.room_id, r.room_number, r.price_per_night, rt.type_id, rt.max_guests, rt.description, fac.facility_id, fac.facility_name
+        FROM Room AS r
+        JOIN Room_Type AS rt ON rt.type_id = r.type_id
+        JOIN Room_Facilities AS rf ON rf.room_id = r.room_id
+        JOIN Facilities AS fac ON fac.facility_id = rf.facility_id
+        WHERE room_id = ?
+        """
+        row = self.fetchone(sql, (room_id,))
+        customer_room: Room
+        for rid, rnr, rpr, rtid, rtmg, rtd, fid, fn in row:
+            room = Room(rid, rnr, rpr)
+            room.roomtype = RoomType(rtid, rtmg, rtd)
+            room.facility = Facility(fid, fn)
+            customer_room.append(room)
+        return customer_room
