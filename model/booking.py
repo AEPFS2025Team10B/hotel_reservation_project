@@ -102,3 +102,16 @@ class Booking:
     def rating(self, value):
         if not isinstance(value, int) or 1 <= value <= 10:
             raise ValueError("rating must be number between 1 and 10")
+
+    @property
+    def recommendation(self):
+        return self.__recommendation
+
+    @recommendation.setter
+    def recommendation(self, value):
+        if value is not None:
+            if not isinstance(value, str):
+                raise ValueError("recommendation must be a string or None")
+            if len(value) > 500:
+                raise ValueError("recommendation must not exceed 500 characters")
+        self.__recommendation = value
