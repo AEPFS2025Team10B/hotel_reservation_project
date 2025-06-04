@@ -29,7 +29,9 @@ class BookingDataAccess(BaseDataAccess):
     
     def insert_hotelrecommendation(self, rating, recommendation):
         sql = """
-        INSERT INTO booking (rating, recommendation)
+        UPDATE booking 
+        SET rating = ?, recommendation = ?
+        WHERE booking_id = ?
         VALUES (?, ?)
         """
         
