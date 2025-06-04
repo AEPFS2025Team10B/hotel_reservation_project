@@ -26,3 +26,11 @@ def find_booking_by_id(booking_id: int):
     booking.room = customer_room
     booking.guest = guest
     return booking
+
+def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: str):
+    if not (1 <= rating <= 10):
+        raise ValueError("Rating must be between 1 and 10")
+    if recommendation and len(recommendation) > 500:
+        raise ValueError("Recommendation too long")
+    booking_dao.insert_hotelrecommendation(booking_id, rating, recommendation)
+    return
