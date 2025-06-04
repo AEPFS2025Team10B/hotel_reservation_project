@@ -1,7 +1,7 @@
 from business_logic import find_room_by_id
 from data_access.base_data_access import BaseDataAccess
 from model.booking import Booking
-from business_logic.guest_manager import find_guest_by_id
+
 
 class BookingDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
