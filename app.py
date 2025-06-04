@@ -3,7 +3,7 @@
 import importlib.util
 import os
 import sys
-
+from logo import print_logo
 # Sicherstellen, dass das Hauptverzeichnis im Pfad ist, damit Imports funktionieren
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
@@ -33,6 +33,7 @@ def main():
     # User Story 3.3: Als Admin möchte ich die Details eines Hotels ändern können.
 
 
+    print_logo()
     stories = [
         (1, "search_hotels_by_city_01_1.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
         (2, "search_hotel_stars_01_2.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city) and minimum star count."),

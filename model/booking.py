@@ -10,6 +10,8 @@ class Booking:
         self.__guest = None
         self.__room = None
         self.__invoice = None
+        self.__rating = None
+        self.__recommendation = None
 
     def __repr__(self):
         return (f"Booking(id={self.__booking_id!r}, check_in={self.__check_in_date!r}, "
@@ -91,3 +93,25 @@ class Booking:
         if not isinstance(value, Invoice):
             raise TypeError("invoice must be an Invoice object")
         self.__invoice = value
+
+    @property
+    def rating(self):
+        return self.__rating
+
+    @rating.setter
+    def rating(self, value):
+        if not isinstance(value, int) or 1 <= value <= 10:
+            raise ValueError("rating must be number between 1 and 10")
+
+    @property
+    def recommendation(self):
+        return self.__recommendation
+
+    @recommendation.setter
+    def recommendation(self, value):
+        if value is not None:
+            if not isinstance(value, str):
+                raise ValueError("recommendation must be a string or None")
+            if len(value) > 500:
+                raise ValueError("recommendation must not exceed 500 characters")
+        self.__recommendation = value

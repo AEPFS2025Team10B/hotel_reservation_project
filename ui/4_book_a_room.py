@@ -29,6 +29,7 @@ def main ():
     check_in_date = None
     check_out_date = None
     while not valid:
+        #hotels = None #TODO: Eventuell ist das die Lösung für: if isinstance(hotels, tuple) and len(hotels) == 3:
         print("1. Would you like to select the hotel of a list ?")
         print("2. Would you like to search a hotel by city ?")
         print("3. Would you like to search a hotel by city and star ?")
@@ -78,7 +79,7 @@ def main ():
                     selected_room = rooms[room_booking - 1]
                 live = True
                 print(f"\nYou have selected  {selected_room}")
-                street = input("\nPlease Enter your street address including hous number: ")
+                street = input("\nPlease Enter your street address including house number: ")
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
                 first_name = input("\nPlease Enter your first name: ")

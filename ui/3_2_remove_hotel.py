@@ -24,6 +24,8 @@ def main():
 
     valid = False
     while not valid:
+        # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
+        # jetzt kann er es einfach wieder eingeben.
         try:
             sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
             if not (1 <= sel <= len(hotels)):

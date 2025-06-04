@@ -1,3 +1,7 @@
+# find_hotels_by_list_city haben wir implementiert, da wir nicht wollten,
+# dass sich unser code bei der user story 1.1 & 1.2 wiederholt.
+# Bei uns haben nämlich beide zu einem grossem teil dasselbe UI.
+
 def find_hotel_by_list_city(hotels):
     if len(hotels) > 1:
         print("\nAvailable hotels:")

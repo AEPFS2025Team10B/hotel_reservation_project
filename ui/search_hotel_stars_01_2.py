@@ -1,3 +1,6 @@
+#Ähnlich wie 1.1 geht, kann hier der Kunde eine Stadt eingaben und alle Hotels in der Stadt werden angezeigt.
+#ZUsätzlich kann der Kunde hier aber noch die Mindestanzahl Sterne filtern.
+
 """
 User Story 1.2: Hotels nach Mindestanzahl Sterne filtern
 """
@@ -9,6 +12,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import the correct function
 from business_logic.hotel_manager import find_hotels_by_city_and_min_stars
+
+#sehr ähnlich wie 1.1, daher in find_hotels_by_list_city aufgebaut, und hier diversifiziert.
 from common_ui.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():

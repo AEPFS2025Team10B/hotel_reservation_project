@@ -19,6 +19,8 @@ def main():
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
         valid = False
         while not valid:
+            # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
+            # jetzt kann er es einfach wieder eingeben.
             try:
                 selection = int(input("\nEnter the number of the hotel you want to see the Room Types: ").strip())
                 if 1 <= selection <= len(hotels):
