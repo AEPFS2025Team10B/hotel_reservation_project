@@ -26,3 +26,14 @@ class BookingDataAccess(BaseDataAccess):
         find_guest_by_id(row['guest_id'])
         find_room_by_id(row['room_id'])
         return [Booking(booking_id, check_in_date, check_out_date) for booking_id, check_in_date, check_out_date in row]
+    
+
+    def display_all_bookings_of_all_hotels(self, booking_id: int) -> Booking | None:
+        sql =""""
+        SELECT Hotel.name AS hotel_name, Booking.booking_id, Booking.room_id, check_in_date, check_out_date, is_cancelled
+        FROM Booking
+        JOIN Room ON Booking.room_id = Room.room_id
+        JOIN Hotel ON Room.hotel_id = Hotel.hotel_id;
+        """
+        row = self.fetchone(sql, (booking_id,))
+        return Booking
