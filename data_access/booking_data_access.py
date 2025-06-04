@@ -26,3 +26,10 @@ class BookingDataAccess(BaseDataAccess):
         find_guest_by_id(row['guest_id'])
         find_room_by_id(row['room_id'])
         return [Booking(booking_id, check_in_date, check_out_date) for booking_id, check_in_date, check_out_date in row]
+    
+    def insert_hotelrecommendation(self, rating, recommendation):
+        sql = """
+        INSERT INTO booking (rating, recommendation)
+        VALUES (?, ?)
+        """
+        
