@@ -15,6 +15,8 @@ def main():
     guest_count = None
     valid = False
     while not valid:
+    # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
+    # jetzt kann er es einfach wieder eingeben.
         try:
             guest_count = int(input("How many people should have space in this room? "))
             if guest_count < 1:

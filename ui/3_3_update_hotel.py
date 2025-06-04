@@ -13,6 +13,8 @@ from business_logic.hotel_manager import find_all_hotel_details, update_hotel
 
 def ask_date_int(prompt: str, min_val: int, max_val: int) -> int:
     while True:
+        # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
+        # jetzt kann er es einfach wieder eingeben.
         try:
             val = int(input(prompt).strip())
             if min_val <= val <= max_val:

@@ -29,6 +29,7 @@ def main ():
     check_in_date = None
     check_out_date = None
     while not valid:
+        #hotels = None #TODO: Eventuell ist das die Lösung für: if isinstance(hotels, tuple) and len(hotels) == 3:
         print("1. Would you like to select the hotel of a list ?")
         print("2. Would you like to search a hotel by city ?")
         print("3. Would you like to search a hotel by city and star ?")

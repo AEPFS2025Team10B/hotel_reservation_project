@@ -1,9 +1,14 @@
+#Bei search_hotels_by_city geht es darum, dass der User nur eine Stadt eingeben kann,
+# und dann alle Hotels findet, die es in dieser Stadt gibt.
+
 """
 User Story 1.1
 Stadtbasierte Hotelsuche
 """
 #Import function
 from business_logic.hotel_manager import find_hotels_by_city
+
+#sehr ähnlich wie 1.2, daher in find_hotels_by_list_city aufgebaut, und hier diversifiziert.
 from common_ui.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():

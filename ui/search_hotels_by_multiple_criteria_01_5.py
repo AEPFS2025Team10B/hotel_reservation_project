@@ -18,6 +18,8 @@ def main():
 
     valid = False
     while not valid:
+        # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
+        # jetzt kann er es einfach wieder eingeben.
         try:
             city = input("Enter a city: ").strip()
             min_stars = int(input("Enter minimum stars: "))
