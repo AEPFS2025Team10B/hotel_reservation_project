@@ -78,7 +78,7 @@ def main ():
                     selected_room = rooms[room_booking - 1]
                 live = True
                 print(f"\nYou have selected  {selected_room}")
-                street = input("\nPlease Enter your street address including hous number: ")
+                street = input("\nPlease Enter your street address including house number: ")
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
                 first_name = input("\nPlease Enter your first name: ")
