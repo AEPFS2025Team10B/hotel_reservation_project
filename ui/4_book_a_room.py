@@ -25,10 +25,10 @@ def ask_date(prompt: str) -> str:
 
 
 def main ():
-    Valid = False
+    valid = False
     check_in_date = None
     check_out_date = None
-    while not Valid:
+    while not valid:
         print("1. Would you like to select the hotel of a list ?")
         print("2. Would you like to search a hotel by city ?")
         print("3. Would you like to search a hotel by city and star ?")
@@ -52,9 +52,9 @@ def main ():
         if isinstance(hotels, tuple) and len(hotels) == 3:
             hotels, check_in_date, check_out_date = hotels
 
-        Valid = True
-    Correct = False
-    while not Correct:
+        valid = True
+    correct = False
+    while not correct:
         if hotels:
             for index, hotel in enumerate(hotels, start=1):
                 print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
@@ -65,18 +65,18 @@ def main ():
             check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
         if not check_out_date:
             check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
-        Correct = True
+        correct = True
         print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
         rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
-        Live = False
-        while not Live:
+        live = False
+        while not live:
             if rooms:
                 for index, r in enumerate(rooms, start=1):
                     print(f"{index} - Zimmer {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} pro Nacht")
                 room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
                 if 1 <= selection <= len(rooms):
                     selected_room = rooms[room_booking - 1]
-                Live = True
+                live = True
                 print(f"\nYou have selected  {selected_room}")
                 street = input("\nPlease Enter your street address including hous number: ")
                 city = input("\nPlease Enter your city: ")
