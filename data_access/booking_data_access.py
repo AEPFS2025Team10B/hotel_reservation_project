@@ -27,11 +27,12 @@ class BookingDataAccess(BaseDataAccess):
         find_room_by_id(row['room_id'])
         return [Booking(booking_id, check_in_date, check_out_date) for booking_id, check_in_date, check_out_date in row]
     
-    def insert_hotelrecommendation(self, rating, recommendation):
+    def insert_hotelrecommendation(self, rating, recommendation, booking_id: int):
         sql = """
         UPDATE booking 
         SET rating = ?, recommendation = ?
         WHERE booking_id = ?
-        VALUES (?, ?)
         """
+        self.execute(sql, (rating, recommendation, booking_id))
+        # führt das SQL Statement aus
         
