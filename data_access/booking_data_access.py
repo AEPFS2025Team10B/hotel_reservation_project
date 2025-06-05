@@ -1,4 +1,3 @@
-
 from data_access.base_data_access import BaseDataAccess
 from model.booking import Booking
 
@@ -23,9 +22,8 @@ class BookingDataAccess(BaseDataAccess):
         WHERE booking_id = ?
         """
         row = self.fetchone(sql, (booking_id,))
-        # TODO: use other da to load associated objects
-        #find_guest_by_id(row['guest_id'])
-        #find_room_by_id(row['room_id'])
+        if row is None:
+            return None
         booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
         # TODO: check booking constructor to give more attributes.
         booking = Booking(booking_id, check_in_date, check_out_date)
@@ -33,7 +31,16 @@ class BookingDataAccess(BaseDataAccess):
         booking.total_amount = total_amount
         return booking
 
-
+    def get_booking_relations(self, booking_id: int) -> tuple[int, int] | None:
+        sql = """
+        SELECT guest_id, room_id
+        FROM booking
+        WHERE booking_id = ?
+        """
+        row = self.fetchone(sql, (booking_id,))
+        if row:
+            return row[0], row[1]  # guest_id, room_id
+        return None
 
     def insert_hotelrecommendation(self, booking_id: int, rating: int, recommendation: str):
         sql = """Add commentMore actions
