@@ -14,6 +14,9 @@ from business_logic.booking_manager import find_booking_by_id, add_new_hotelreco
 
 
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+def main():
+    print("\n=== Hotel Recommendation System ===")
+    print("Please provide your feedback for your stay.")
 
 def ask_booking_id():
     valid = False
@@ -30,19 +33,57 @@ def ask_booking_id():
         print(f"Check-in Date: {booking.check_in_date}")
         print(f"Check-out Date: {booking.check_out_date}")
         print(f"Room: {booking.room.number}")
-        print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
-        print(f"Total Amount: {booking.total_amount}")
+        #print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
+        #print(f"Total Amount: {booking.total_amount}")
 
-        correcht = input("Is this youre booking? (Y/N)")
+        correct = input("Is this youre booking? (Y/N)")
 
-        if correcht.lower() == "y":
+        if correct.lower() == "y":
             valid = True
-        elif correcht.lower() == "n":
+        elif correct.lower() == "n":
             print("Alright, the process has been canceled.")
-            return
+            quit()
+
+def ask_hotelrecommendation():
+    valid = False
+    while not valid:
+        try:
+            rating = int(input("\nPlease enter your rating (1-10): "))
+            if 1 <= rating <= 10:
+                valid = True
+            else:
+                print("Invalid input please enter 1 to 10.")
+        except ValueError:
+            print("Invalid input please enter 1 to 10.")
+
+    valid = False
+    while not valid:
+        try:
+            recommendation = input("\nPlease enter your recommendation(not mandatory): ")
+            if recommendation == "" or len(recommendation) <= 500:
+                break
+            else:
+                print("The recommendation can not be longer than 500 characters")
+        except Exception as e:
+            print(f"Unexpected error: {e}")
 
 
-    ask_booking_id()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ask_booking_id()
+ask_hotelrecommendation()
 
 
 if __name__ == "__main__":
