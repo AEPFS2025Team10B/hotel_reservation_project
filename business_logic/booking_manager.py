@@ -41,3 +41,6 @@ def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: st
     booking_dao.insert_hotelrecommendation(booking_id, rating, recommendation)
     #gibt Inputs weiter an booking_data_access.py
     return
+
+def get_reviews_by_hotel_name(hotel_name: str):
+    return booking_dao.get_reviews_by_hotel_name(hotel_name)
