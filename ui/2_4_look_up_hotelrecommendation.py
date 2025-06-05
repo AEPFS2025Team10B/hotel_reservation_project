@@ -19,38 +19,43 @@ def main():
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★)")
         #Alle Hotels werden als Auswahlmenü aufgelistet
-        try:
-            selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
-            if 1 <= selection <= len(hotels):
-                selected_hotel = hotels[selection - 1]
-                print(f"\nRecommendation(s) for {selected_hotel.name}:")
-                reviews = get_reviews_by_hotel_name(selected_hotel.name)
-                if reviews:
-                    # Mittelwert berechnen
-                    ratings = [r[0] for r in reviews if r[0] is not None]
-                    if ratings:
-                        avg_rating = round(sum(ratings) / len(ratings), 1)
-                        print(f"Average Rating: {avg_rating}/10\n")
-                        #das durchschnittliche rating wird ausgegeben
+        valid = False
+        while not valid:
+            try:
+                selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
+                if 1 <= selection <= len(hotels):
+                    selected_hotel = hotels[selection - 1]
+                    print(f"\nRecommendation(s) for {selected_hotel.name}:")
+                    reviews = get_reviews_by_hotel_name(selected_hotel.name)
+                    if reviews:
+                        # Mittelwert berechnen
+                        ratings = [r[0] for r in reviews if r[0] is not None]
+                        if ratings:
+                            avg_rating = round(sum(ratings) / len(ratings), 1)
+                            print(f"Average Rating: {avg_rating}/10\n")
+                            #das durchschnittliche rating wird ausgegeben
+                        else:
+                            print("no recommendation jet, for this hotel.\n")
+                            valid = True
+                        # Einzelne Reviews ausgeben
+                        for rating, recommendation, first_name, last_name in reviews:
+                            rec_text = '' if not recommendation or str(recommendation).lower() == 'none' else recommendation
+                            print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
+                            valid = True
                     else:
-                        print("no recommendation jet, for this hotel.\n")
-                    # Einzelne Reviews ausgeben
-                    for rating, recommendation, first_name, last_name in reviews:
-                        rec_text = '' if not recommendation or str(recommendation).lower() == 'none' else recommendation
-                        print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
+                        print("There are no recommendations for this Hotel.")
+                        valid = True
+                        #TODO: wenn es keine Bewertung gibt, soll nur diese Meldung angezeigt werden
+                        #wenn es kein Rating hat, kommt diese Meldung zum Zug,
+                        #sieht nicht optimal aus aber ist auch nicht so, dass es nicht funktioniert
                 else:
-                    print("There are no recommendations for this Hotel.")
-                    #TODO: wenn es keine Bewertung gibt, soll nur diese Meldung angezeigt werden
-                    #wenn es kein Rating hat, kommt diese Meldung zum Zug,
-                    #sieht nicht optimal aus aber ist auch nicht so, dass es nicht funktioniert
-            else:
-                print("Invalid Input. Please try again.")
-                #kommt zum zug, wenn man eine nummer eingibt,
-                # die es nicht gibt (bsp. 10 hotels aufgelistet, man gibt 11 ein).
+                    print("Invalid Input. Please try again.")
+                    #kommt zum zug, wenn man eine nummer eingibt,
+                    # die es nicht gibt (bsp. 10 hotels aufgelistet, man gibt 11 ein).
 
-        except ValueError:
-            print("Pleas enter a valid number.")
-            #es wird ein Integer verlangt, kommt keiner, wird diese Meldung angezeigt
+            except ValueError:
+                print("Pleas enter a valid number.")
+                #es wird ein Integer verlangt, kommt keiner, wird diese Meldung angezeigt
     else:
         print("no hotels found.")
         #kommt nur zum Zug, wenn es keine Hotels in der Datenbank gibt
