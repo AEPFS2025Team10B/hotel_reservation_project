@@ -46,6 +46,8 @@ def ask_booking_id():
             quit()
 
 def ask_hotelrecommendation(booking):
+    rating = None
+    recommendation = None
     valid = False
     while not valid:
         try:
@@ -67,16 +69,14 @@ def ask_hotelrecommendation(booking):
                 print("The recommendation can not be longer than 500 characters")
         except Exception as e:
             print(f"Unexpected error: {e}")
-
-    valid = False
-    while not valid:
-        try:
-            add_new_hotelrecommendation(booking.booking_id, rating, recommendation)
-            print("Thank you for your feedback!")
-            valid = True
-
-        except ValueError as e:
-            print(f"Error saving your feedback: {e}")
+    
+    try:
+        if recommendation is None:
+            recommendation = ""
+        add_new_hotelrecommendation(booking.booking_id, rating, recommendation)
+        print("Thank you for your feedback!")
+    except ValueError as e:
+        print(f"Error saving your feedback: {e}")
 
 if __name__ == "__main__":
     #print(os.getcwd())
