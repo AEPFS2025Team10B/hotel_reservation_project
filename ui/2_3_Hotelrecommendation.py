@@ -9,12 +9,11 @@ import sys
 import os
 from datetime import datetime
 
-
-from data_access.booking_data_access import BookingDataAccess
+os.environ["DB_FILE"] = "database/test_hotel_reservation_sample.db"
 from business_logic.booking_manager import find_booking_by_id, add_new_hotelrecommendation
 
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 def ask_booking_id():
     valid = False
@@ -22,5 +21,6 @@ def ask_booking_id():
         user_input = int(input("Please enter your booking id: "))
         correct_booking_id = find_booking_by_id(user_input)
 
-
-ask_booking_id()
+if __name__ == "__main__":
+    #print(os.getcwd())
+    ask_booking_id()
