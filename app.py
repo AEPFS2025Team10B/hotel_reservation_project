@@ -46,7 +46,8 @@ def main():
         (9, "3_1_add_new_hotel.py", "As an admin, i want to be able to add new hotels"),
         (10, "3_2_remove_hotel.py", "As an admin, i want to delte a hotel"),
         (11, "3_3_update_hotel.py", "As an admin, i want to update the details of a hotel"),
-        (12, "4_book_a_room.py", "As a customer I want to book a room")
+        (12, "4_book_a_room.py", "As a customer I want to book a room"),
+        (20, "2_3_Hotelrecommendation.py", "3. As a guest I want to leave a recommendation after my stay")
         ]
 
     print("\nAvailable User Stories:")
