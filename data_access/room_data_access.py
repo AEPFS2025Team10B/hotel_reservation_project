@@ -128,13 +128,14 @@ class RoomDataAccess(BaseDataAccess):
         JOIN Room_Type AS rt ON rt.type_id = r.type_id
         JOIN Room_Facilities AS rf ON rf.room_id = r.room_id
         JOIN Facilities AS fac ON fac.facility_id = rf.facility_id
-        WHERE room_id = ?
+        WHERE r.room_id = ?
         """
         row = self.fetchone(sql, (room_id,))
-        customer_room: Room
-        for rid, rnr, rpr, rtid, rtmg, rtd, fid, fn in row:
-            room = Room(rid, rnr, rpr)
-            room.roomtype = RoomType(rtid, rtmg, rtd)
-            room.facility = Facility(fid, fn)
-            customer_room.append(room)
-        return customer_room
+        if row is None:
+            return None
+            
+        rid, rnr, rpr, rtid, rtmg, rtd, fid, fn = row
+        room = Room(rid, rnr, rpr)
+        room.roomtype = RoomType(rtid, rtmg, rtd)
+        room.facility = Facility(fid, fn)
+        return room
