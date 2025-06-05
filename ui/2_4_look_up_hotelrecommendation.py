@@ -17,16 +17,25 @@ def main():
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★)")
         try:
-            selection = int(input("\nPlease enter the number oft the hotel you want to see the recommendations of").strip())
+            selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
             if 1 <= selection <= len(hotels):
                 selected_hotel = hotels[selection - 1]
                 print(f"\nRecommendation(s) for {selected_hotel.name}:")
                 reviews = get_reviews_by_hotel_name(selected_hotel.name)
                 if reviews:
+                    # Mittelwert berechnen
+                    ratings = [r[0] for r in reviews if r[0] is not None]
+                    if ratings:
+                        avg_rating = round(sum(ratings) / len(ratings), 1)
+                        print(f"Average Rating: {avg_rating}/10\n")
+                    else:
+                        print("no recommendation jet, for this hotel.\n")
+                    # Einzelne Reviews ausgeben
                     for rating, recommendation, first_name, last_name in reviews:
-                        print(f"- {rating}/10 von {first_name} {last_name}: '{recommendation}'")
+                        rec_text = '' if not recommendation or str(recommendation).lower() == 'none' else recommendation
+                        print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
                 else:
-                    print("There are no Recommendations for this Hotel.")
+                    print("There are no recommendations for this Hotel.")
             else:
                 print("Invalid Input. Please try again.")
         except ValueError:
