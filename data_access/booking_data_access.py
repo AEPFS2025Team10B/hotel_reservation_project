@@ -53,7 +53,7 @@ class BookingDataAccess(BaseDataAccess):
         # führt das SQL Statement aus
 
     def display_all_bookings_of_all_hotels(self, booking_id: int) -> Booking | None:
-        sql = """"
+        sql = """
         SELECT Hotel.name AS hotel_name, Booking.booking_id, Booking.room_id, check_in_date, check_out_date, is_cancelled
         FROM Booking
         JOIN Room ON Booking.room_id = Room.room_id
@@ -61,3 +61,14 @@ class BookingDataAccess(BaseDataAccess):
         """
         row = self.fetchone(sql, (booking_id,))
         return Booking
+
+    def get_reviews_by_hotel_name(self, hotel_name: str):
+        sql = """
+        SELECT b.rating, b.recommendation, g.first_name, g.last_name
+        FROM booking AS b
+        JOIN room AS r ON b.room_id = r.room_id
+        JOIN hotel AS h ON r.hotel_id = h.hotel_id
+        JOIN guest AS g ON b.guest_id = g.guest_id
+        WHERE h.name = ? AND b.rating IS NOT NULL
+        """
+        return self.fetchall(sql, (hotel_name,))
