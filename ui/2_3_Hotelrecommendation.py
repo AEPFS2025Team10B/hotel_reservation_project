@@ -40,6 +40,7 @@ def ask_booking_id():
         correct = input("Is this your booking? (Y/N): ")
         if correct.lower() == "y":
             ask_hotelrecommendation(booking)
+            return
         elif correct.lower() == "n":
             print("Alright, the process has been canceled.")
             input("Press Enter to Exit")
@@ -75,6 +76,7 @@ def ask_hotelrecommendation(booking):
             recommendation = ""
         add_new_hotelrecommendation(booking.booking_id, rating, recommendation)
         print("Thank you for your feedback!")
+        input("Press Enter to Exit")
     except ValueError as e:
         print(f"Error saving your feedback: {e}")
 
