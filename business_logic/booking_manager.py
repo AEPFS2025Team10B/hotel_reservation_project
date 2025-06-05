@@ -39,4 +39,5 @@ def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: st
     if recommendation and len(recommendation) > 500:
         raise ValueError("Recommendation too long")
     booking_dao.insert_hotelrecommendation(booking_id, rating, recommendation)
+    #gibt Inputs weiter an booking_data_access.py
     return
