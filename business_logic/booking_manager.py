@@ -23,8 +23,14 @@ def add_new_booking(email: str, selected_room: Room, check_in_date: str, check_o
 
 def find_booking_by_id(booking_id: int):
     booking = booking_dao.get_booking_by_id(booking_id)
-    booking.room = customer_room
-    booking.guest = guest
+    if booking is None:
+        return None
+    
+    relations = booking_dao.get_booking_relations(booking_id)
+    if relations:
+        guest_id, room_id = relations
+        booking.room = find_room_by_id(room_id)
+        booking.guest = find_guest_by_id(guest_id)
     return booking
 
 def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: str):
