@@ -43,7 +43,7 @@ class BookingDataAccess(BaseDataAccess):
         return None
 
     def insert_hotelrecommendation(self, booking_id: int, rating: int, recommendation: str):
-        sql = """Add commentMore actions
+        sql = """
         UPDATE booking 
         SET rating = ?, recommendation = ?
         WHERE booking_id = ?

@@ -17,6 +17,7 @@ from business_logic.booking_manager import find_booking_by_id, add_new_hotelreco
 def main():
     print("\n=== Hotel Recommendation System ===")
     print("Please provide your feedback for your stay.")
+    ask_booking_id()
 
 def ask_booking_id():
     valid = False
@@ -36,15 +37,15 @@ def ask_booking_id():
         #print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
         #print(f"Total Amount: {booking.total_amount}")
 
-        correct = input("Is this youre booking? (Y/N)")
-
+        correct = input("Is this your booking? (Y/N): ")
         if correct.lower() == "y":
-            valid = True
+            ask_hotelrecommendation(booking)
         elif correct.lower() == "n":
             print("Alright, the process has been canceled.")
+            input("Press Enter to Exit")
             quit()
 
-def ask_hotelrecommendation():
+def ask_hotelrecommendation(booking):
     valid = False
     while not valid:
         try:
@@ -61,30 +62,21 @@ def ask_hotelrecommendation():
         try:
             recommendation = input("\nPlease enter your recommendation(not mandatory): ")
             if recommendation == "" or len(recommendation) <= 500:
-                break
+                valid = True
             else:
                 print("The recommendation can not be longer than 500 characters")
         except Exception as e:
             print(f"Unexpected error: {e}")
 
+    valid = False
+    while not valid:
+        try:
+            add_new_hotelrecommendation(booking.booking_id, rating, recommendation)
+            print("Thank you for your feedback!")
+            valid = True
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ask_booking_id()
-ask_hotelrecommendation()
-
+        except ValueError as e:
+            print(f"Error saving your feedback: {e}")
 
 if __name__ == "__main__":
     #print(os.getcwd())
