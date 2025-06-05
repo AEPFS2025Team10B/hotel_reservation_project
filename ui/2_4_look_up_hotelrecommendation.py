@@ -1,10 +1,12 @@
 """
 4. Als Gast möchte ich Hotelbewertungen vor der Buchung lesen
 """
+#Zie ist es, das der Kunde von einer Liste von Hotels eines auswählen kann und
+# von diesem dann die Bewertungen siht und lesen kann.
 
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.booking_manager import get_reviews_by_hotel_name
@@ -16,6 +18,7 @@ def main():
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★)")
+        #Alle Hotels werden als Auswahlmenü aufgelistet
         try:
             selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
             if 1 <= selection <= len(hotels):
@@ -28,6 +31,7 @@ def main():
                     if ratings:
                         avg_rating = round(sum(ratings) / len(ratings), 1)
                         print(f"Average Rating: {avg_rating}/10\n")
+                        #das durchschnittliche rating wird ausgegeben
                     else:
                         print("no recommendation jet, for this hotel.\n")
                     # Einzelne Reviews ausgeben
@@ -36,12 +40,20 @@ def main():
                         print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
                 else:
                     print("There are no recommendations for this Hotel.")
+                    #TODO: wenn es keine Bewertung gibt, soll nur diese Meldung angezeigt werden
+                    #wenn es kein Rating hat, kommt diese Meldung zum Zug,
+                    #sieht nicht optimal aus aber ist auch nicht so, dass es nicht funktioniert
             else:
                 print("Invalid Input. Please try again.")
+                #kommt zum zug, wenn man eine nummer eingibt,
+                # die es nicht gibt (bsp. 10 hotels aufgelistet, man gibt 11 ein).
+
         except ValueError:
             print("Pleas enter a valid number.")
+            #es wird ein Integer verlangt, kommt keiner, wird diese Meldung angezeigt
     else:
         print("no hotels found.")
+        #kommt nur zum Zug, wenn es keine Hotels in der Datenbank gibt
 
 if __name__ == "__main__":
     main()
