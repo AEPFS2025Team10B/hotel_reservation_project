@@ -1,4 +1,4 @@
-# Hotel reservation python semester project 2025
+# FS25 Anwendungsentwicklung mit Python
 
 ## General
 - **Hotel reservation system:** 
@@ -49,7 +49,7 @@ zielgerichtet umzusetzen.
 
 ## Methods
 - Approach and methodology
-- - Tools, frameworks, and technologies used
+- Tools, frameworks, and technologies used
 
 Zu Beginn haben wir uns im Team darauf geeinigt, dass wir mit dem Projekt noch etwas warten, 
 da uns das Wissen noch gefehlt hat. Wir haben jedoch die Übungen jede Woche gemacht und uns 
@@ -69,11 +69,6 @@ Begonnen haben wir aber mit VisualParadigm, um unsere Modelle korrekt zu visuali
 
 - Data sources or experimental setup
 
-
-
-
-
-
 ## Results
 - Key findings
 - Charts, tables, and important observations
@@ -84,18 +79,22 @@ die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
 - Anzeige von Hoteldetails inklusive Adresse und Sterne
 - Verwaltung von Hotels (Hinzufügen, Bearbeiten, Löschen)
 
-Zentraler Erkenntnisse:
+Zentrale Erkenntnisse:
 - Die Trennung von Datenzugriff (DataAccessLayer), Geschäftslogik (BusinessLogicLayer) und 
 Benutzerschnittstelle(UI) hat sich als sehr nützlich herausgestellt, auch wenn es am Anfang kompliziert 
 schien.
 - Durch die modulare Struktur konnten wir parallel arbeiten und einzelne Komponenten unabhängig entwickeln 
 und testen.
-- Die Nutzung von Objektorientierung (z. B. für Hotel, Adresse, Buchung) hat den Umgang mit komplexen 
+- Die Nutzung von Objektorientierung (z. B. für Hotel, Adresse, Buchung) hat den Umgang mit komplexen 
 Datenmodellen vereinfacht.
 
 Beobachtungen:
-
-
+- Die Implementierung der dreischichtigen Architektur führte zu einer klaren Trennung der Verantwortlichkeiten
+- Die Verwendung von SQLite3 erwies sich als effiziente Lösung für die Datenhaltung
+- Die Konsolen-basierte Benutzeroberfläche ermöglichte eine schnelle Entwicklung und Testung
+- Die modulare Struktur erleichterte das Debugging und die Wartung des Codes
+- Die Implementierung von Fehlerbehandlung und Eingabevalidierung verbesserte die Benutzerfreundlichkeit
+- Die Verwendung von Git für die Versionskontrolle unterstützte die parallele Entwicklung im Team
 
 ## Discussion
 - Interpretation of the results
@@ -103,14 +102,14 @@ Beobachtungen:
 - Were objectives achieved?
 
 Interpretation der Ergebnisse
-die im Projekt implementierten Funktionen zeigen, dass ein einfaches, aber effektives 
+Die im Projekt implementierten Funktionen zeigen, dass ein einfaches, aber effektives 
 Hotelreservierungssystem mit den verwendeten Technologien erfolgreich umgesetzt werden kann. Die Hauptziele,
 wie die Suche nach Hotels, Verwaltung von Hotels und Adressdaten sowie einfache Buchungslogik, konnten in 
 funktionierender Form realisiert werden. Besonders die modulare und objektorientierte Umsetzung hat sich 
 positiv auf Lesbarkeit, Testbarkeit und Erweiterbarkeit ausgewirkt.
 
 Herausforderungen
-während der Entwicklung traten verschiedene Herausforderungen auf:
+Während der Entwicklung traten verschiedene Herausforderungen auf:
 - Adressverwaltung: Die Trennung von Hotel- und Adressdatenbanktabellen erforderte eine saubere Verknüpfung 
 und erhöhte zunächst die Komplexität im Code.
 - Fehlermeldungen und Debugging: Einige Fehler, z. B. bei der Übergabe von Argumenten an Konstruktoren, 
@@ -130,6 +129,14 @@ Die meisten im Vorfeld gesetzten Ziele wurden erreicht:
 ## Conclusion
 - Summary of key findings
 - Reflection: what went well and what could be improved
+
+Zusammenfassung zentraler Erkenntnisse
+
+-
+
+Was ging gut, was könnte man besser machen
+
+
 
 ## Outlook *(optional)*
 - Future work
