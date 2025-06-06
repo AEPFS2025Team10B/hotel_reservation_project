@@ -44,3 +44,21 @@ def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: st
 
 def get_reviews_by_hotel_name(hotel_name: str):
     return booking_dao.get_reviews_by_hotel_name(hotel_name)
+
+
+def get_all_bookings_with_details():
+    rows = booking_dao.display_all_bookings_of_all_hotels()
+
+    result = []
+    for row in rows:
+        hotel_name, booking_id, guest_name, room_number, check_in, check_out = row
+        result.append({
+            "Buchungsnummer": booking_id,
+            "Hotelname": hotel_name,
+            "Gastname": guest_name,
+            "Zimmernummer": room_number,
+            "CheckInDatum": check_in,
+            "CheckOutDatum": check_out
+        })
+
+    return result
