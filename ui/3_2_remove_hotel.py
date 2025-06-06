@@ -9,7 +9,7 @@ from business_logic.hotel_manager import find_all_hotel_details, remove_hotel
 
 def main():
     print("___________________")
-    print("|- Hotel löschen -|")
+    print("|- delete hotel -|")
     print("___________________")
     hotels = find_all_hotel_details()
 

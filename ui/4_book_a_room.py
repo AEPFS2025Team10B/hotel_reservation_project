@@ -21,7 +21,7 @@ def ask_date(prompt: str) -> str:
             datetime.strptime(s, DATE_FORMAT)
             return s
         except ValueError:
-            print("Bitte ein Datum im Format YYYY-MM-DD eingeben.")
+            print("Please enter a date in the format: YYYY-MM-DD.")
 
 
 def main ():
@@ -73,7 +73,7 @@ def main ():
         while not live:
             if rooms:
                 for index, r in enumerate(rooms, start=1):
-                    print(f"{index} - Zimmer {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} pro Nacht")
+                    print(f"{index} - room {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} per night")
                 room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
                 if 1 <= selection <= len(rooms):
                     selected_room = rooms[room_booking - 1]
@@ -91,7 +91,7 @@ def main ():
                 return
 
             if not rooms:
-                print("Keine verfügbaren Zimmer in diesem Zeitraum in allen Hotels.")
+                print("No available rooms, in all the hotels in this time period.")
 
 
 

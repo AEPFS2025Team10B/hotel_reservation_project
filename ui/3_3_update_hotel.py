@@ -21,7 +21,7 @@ def ask_date_int(prompt: str, min_val: int, max_val: int) -> int:
                 return val
         except ValueError:
             pass
-        print(f"Bitte eine ganze Zahl von {min_val} bis {max_val} eingeben.")
+        print(f"Please enter a natural number between {min_val} to {max_val}.")
 
 def main():
     print("__________________________")
@@ -54,9 +54,9 @@ def main():
     # 4) Update durchführen
     try:
         update_hotel(new_name, new_stars, street, city, zip_code, hotel.hotel_id)
-        print(f"\nHotel '{hotel.name}' wurde erfolgreich aktualisiert.")
+        print(f"\nHotel '{hotel.name}' got successfully updated.")
     except Exception as e:
-        print(f"\nFehler beim Aktualisieren: {e}")
+        print(f"\nError updating: {e}")
 
 if __name__ == "__main__":
     main()

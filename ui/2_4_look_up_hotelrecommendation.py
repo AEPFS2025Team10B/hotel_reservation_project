@@ -35,7 +35,7 @@ def main():
                             print(f"Average Rating: {avg_rating}/10\n")
                             #das durchschnittliche rating wird ausgegeben
                         else:
-                            print("no recommendation jet, for this hotel.\n")
+                            print("No recommendation jet, for this hotel.\n")
                             valid = True
                         # Einzelne Reviews ausgeben
                         for rating, recommendation, first_name, last_name in reviews:

@@ -21,14 +21,14 @@ def ask_date(prompt: str) -> str:
             datetime.strptime(s, DATE_FORMAT)
             return s
         except ValueError:
-            print("Bitte ein Datum im Format YYYY-MM-DD eingeben.")
+            print("Please enter a date in the format: YYYY-MM-DD. ")
 
 def main():
     check_in  = ask_date("Check-in (YYYY-MM-DD): ")
     check_out = ask_date("Check-out (YYYY-MM-DD): ")
 
     hotels = find_all_hotel_details()
-    print(f"\nVerfügbare Zimmer vom {check_in} bis {check_out} in allen Hotels:")
+    print(f"\nAvailable room from {check_in} to {check_out} in all hotels:")
     any_available = False
 
     for hotel in hotels:
@@ -37,10 +37,10 @@ def main():
             any_available = True
             print(f"\n{hotel.name} ({hotel.address}):")
             for r in rooms:
-                print(f" - Zimmer {r.number}, CHF {r.price_per_night:.2f} pro Nacht")
+                print(f" - Room {r.number}, CHF {r.price_per_night:.2f} per night")
 
     if not any_available:
-        print("Keine verfügbaren Zimmer in diesem Zeitraum in allen Hotels.")
+        print("No available rooms, in all the hotels in this time period.")
 
 if __name__ == "__main__":
     main()
