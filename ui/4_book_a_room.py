@@ -101,8 +101,8 @@ def main ():
                     first_name = input("\nPlease Enter your first name: ")
                     last_name = input("\nPlease Enter your last name: ")
                     new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
-                new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date)
-                return
+                new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
+                print(new_booking)
 
             if not rooms:
                 print("No available rooms, in all the hotels in this time period.")
