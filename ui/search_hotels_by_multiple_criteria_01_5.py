@@ -26,8 +26,6 @@ def main():
             guest_count = int(input("And how many people should have space in this room? "))
             check_in_date = input("Enter your check-in Date in the Format: YYYY-MM-DD: ")
             check_out_date = input("Enter your check-out Date in the Format: YYYY-MM-DD: ")
-            print("")
-            print("Enter to finish...")  # TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
             valid = True
         except ValueError:
             print("Please enter a valid date in the format: YYYY-MM-DD")
@@ -39,6 +37,8 @@ def main():
         print(f"\nThese hotels are available for you:\n")
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+        print("")
+        input("\nPress Enter to finish")
     else:
         print(f"\nNo hotels available:\n")
 
