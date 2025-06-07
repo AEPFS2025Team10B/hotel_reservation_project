@@ -131,12 +131,32 @@ Die meisten im Vorfeld gesetzten Ziele wurden erreicht:
 - Reflection: what went well and what could be improved
 
 Zusammenfassung zentraler Erkenntnisse
+- Die Einführung einer modularen Schichtenarchitektur (UI, Business Logic, Data Access, Models) 
+  hat zu sauberer Trennung von Verantwortlichkeiten geführt.
+- Der Umgang mit SQLite und Python, wurde deutlich verbessert.
+- Die Fehlerbehandlung, insbesondere bei Benutzereingaben, wurde systematisch ausgebaut.
+- Git und GitHub wurden für Versionskontrolle, Teamarbeit und Problemanalyse effizient genutzt.
 
--
+Was ging gut: 
+- Git-Workflow wurde sinnvoll angewendet (Commit/Push/Pull, Branching, Konfliktlösung).
+- Die Teamarbeit / die Kommunikation hat stets gut funktioniert.
+- Wir konnten uns gut an die, im Unterricht, gelernten Konzepte halten. 
+- Fehler wurden gemeinsam analysiert und lösungsorientiert behoben.
+- Wir konnten neue Python-Kenntnisse anwenden (z. B. Properties, Klassenstruktur, 
+  Try-Except-Blöcke).
+- Trotz Herausforderungen mit der Datenbankanbindung wurde eine funktionierende 
+  Lösung gefunden.
 
-Was ging gut, was könnte man besser machen
-
-
+Was hätte man besser machen können
+- Datenbankzugriff zentralisieren: Mehr Wiederverwendung von Methoden im base_data_access, 
+  um Redundanzen zu vermeiden.
+- Validierungen früher implementieren (z. B. für Eingaben, Konsistenzprüfungen in model-Klassen).
+- Projektstruktur standardisieren, z. B. einheitlichere Benennung, klarere Trennung von 
+  Test- und Produktivdaten.
+- Frühzeitigeres Testing: Einzelne Funktionen hätten mit Unit-Tests früher auf Fehler überprüft 
+  werden können.
+- Wir haben uns zu Beginn etwas zu viel zeig gelassen. Wir wollten abwarten, bis wir alle konzepte 
+  gelernt haben. Im Nachhinein, hätten wir früher beginnen sollen und einfach mit falschen Datenbanken
 
 ## Outlook *(optional)*
 - Future work
