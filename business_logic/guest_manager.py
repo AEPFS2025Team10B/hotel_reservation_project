@@ -13,8 +13,8 @@ def add_new_guest(first_name:str, last_name:str, email:str, street: str, city:st
     address_id = find_address_id(street, city, zip)
     return guest_dao.create_guest(first_name, last_name, email, address_id)
 
-def find_guest_by_email(email:str):
-    return guest_dao.get_guest_id_by_email(email)
+def find_guest_by_email(email: str) -> Guest | None:
+    return guest_dao.get_guest_by_email(email)
 
 def find_guest_by_id(guest_id:int):
     return guest_dao.get_guest_by_id(guest_id)

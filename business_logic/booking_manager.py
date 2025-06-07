@@ -15,8 +15,8 @@ booking_dao = BookingDataAccess()
 
 def add_new_booking(email: str, selected_room: Room, check_in_date: str, check_out_date: str):
     is_cancelled = 0
-    guest_id = find_guest_by_email(email)
-    guest = find_guest_by_id(guest_id)
+    guest = find_guest_by_email(email)
+    guest_id = guest.guest_id
     room_id = selected_room.room_id
     check_in = datetime.strptime(check_in_date, "%Y-%m-%d")
     check_out = datetime.strptime(check_out_date, "%Y-%m-%d")

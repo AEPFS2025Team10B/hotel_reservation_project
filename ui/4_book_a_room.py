@@ -1,5 +1,7 @@
 from business_logic import add_new_booking
 from business_logic.address_manager import add_new_address
+from business_logic.address_manager import find_address_id
+from business_logic.guest_manager import find_guest_by_email
 from model import hotel
 from ui import search_hotels_by_city_01_1
 from ui import search_hotel_stars_01_2
@@ -83,11 +85,22 @@ def main ():
                 street = input("\nPlease Enter your street address including house number: ")
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
-                first_name = input("\nPlease Enter your first name: ")
-                last_name = input("\nPlease Enter your last name: ")
                 email = input("\nPlease Enter your email: ")
-                new_address = add_new_address(street, city, zip)
-                new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
+
+                address_id = find_address_id(street, city, zip)
+                if not address_id:
+                    new_address = add_new_address(street, city, zip)
+                    address_id = new_address.address_id
+
+                existing_guest = find_guest_by_email(email)
+
+                if existing_guest:
+                    print(f"✅ Existing guest found: {existing_guest.first_name} {existing_guest.last_name}")
+                    new_guest = existing_guest
+                else:
+                    first_name = input("\nPlease Enter your first name: ")
+                    last_name = input("\nPlease Enter your last name: ")
+                    new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
                 new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date)
                 return
 

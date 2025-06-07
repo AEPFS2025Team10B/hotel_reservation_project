@@ -63,3 +63,12 @@ class GuestDataAccess(BaseDataAccess):
         """
         guest_id_tuple = self.fetchone(sql, (email,))
         return guest_id_tuple[0] if guest_id_tuple else None
+
+    def get_guest_by_email(self, email: int) -> Guest | None:
+        sql = """
+           SELECT guest_id, first_name, last_name, email
+           FROM guest
+           WHERE email = ?
+           """
+        row = self.fetchone(sql, (email,))
+        return Guest(*row) if row else None
