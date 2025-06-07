@@ -1,5 +1,6 @@
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
+from datetime import datetime
 
 #from model.hotel import Hotel
 
@@ -28,3 +29,18 @@ def get_available_rooms_by_hotel_and_dates_2(hotel_id: int, check_in_date: str, 
 
 def find_room_by_id(room_id: int):
     return room_dao.get_room_by_id(room_id)
+
+
+def apply_seasonal_discount(rooms: list, check_in_date_str: str) -> list:
+    check_in_date = datetime.strptime(check_in_date_str, "%Y-%m-%d")
+    month = check_in_date.month
+
+    if 2 <= month <= 6 or 10 <= month <= 11:
+        for room in rooms:
+            original_price = room.price_per_night
+            room.price_per_night *= 0.9
+            print(f"✅ Rabatt angewendet: {original_price:.2f} ➜ {room.price_per_night:.2f}")
+    else:
+        print("🟦 Kein Rabatt für dieses Datum")
+
+    return rooms
