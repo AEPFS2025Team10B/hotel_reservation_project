@@ -47,9 +47,10 @@ def main():
         (10, "3_2_remove_hotel.py", "As an admin, i want to delte a hotel"),
         (11, "3_3_update_hotel.py", "As an admin, i want to update the details of a hotel"),
         (12, "4_book_a_room.py", "As a customer I want to book a room"),
+        (17, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels"),
         (20, "2_3_Hotelrecommendation.py", "3. As a guest I want to leave a recommendation after my stay"),
         (21, "2_4_look_up_hotelrecommendation.py", "4. As a guest I want to read hotel reviews before booking"),
-        (22, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels")
+
         ]
 
     print("\nAvailable User Stories:")
