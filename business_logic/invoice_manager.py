@@ -11,3 +11,12 @@ def create_invoice_by_booking_id(booking_id: int):
     invoice = invoice_dao.create_invoice(booking_id, issue_date, total_amount)
     invoice.booking
     return invoice
+
+def find_invoice_by_booking_id(booking_id: int):
+    booking = booking_manager.find_booking_by_id(booking_id)
+    booking_id = booking.booking_id
+    invoice = invoice_dao.get_invoice_by_booking_id(booking_id)
+    invoice.booking
+    return invoice
+
+

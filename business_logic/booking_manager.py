@@ -5,6 +5,7 @@ from model.room import Room
 from business_logic.guest_manager import find_guest_by_email
 from business_logic.guest_manager import find_guest_by_id
 from business_logic.room_manager import find_room_by_id
+from business_logic.invoice_manager import create_invoice_by_booking_id
 
 # DAO-Instanzen
 booking_dao = BookingDataAccess()
@@ -19,6 +20,7 @@ def add_new_booking(email: str, selected_room: Room, check_in_date: str, check_o
     booking.room = selected_room
     booking.guest = guest
     booking.total_amount = total_amount
+    invoice = create_invoice_by_booking_id(booking.booking_id)
     return booking
 
 def find_booking_by_id(booking_id: int):

@@ -13,3 +13,16 @@ class InvoiceDataAccess(BaseDataAccess):
         new_id, _ = self.execute(sql, (booking_id, issue_date, total_amount))
         invoice = Invoice(new_id, issue_date, total_amount)
         return invoice
+
+    def get_invoice_by_booking_id(self, booking_id: int) -> Invoice:
+        sql = """
+               SELECT invoice_id, booking_id, issue_date, total_amount
+               FROM invoice
+               WHERE booking_id = ?
+               """
+        row = self.fetchone(sql, (booking_id,))
+        if row is None:
+            return None
+        invoice_id, booking_id, issue_date, total_amount = row
+        # TODO: check booking constructor to give more attributes.
+        return Invoice(invoice_id, issue_date, total_amount)
