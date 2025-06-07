@@ -52,8 +52,8 @@ def main ():
 
         if isinstance(hotels, tuple) and len(hotels) == 3:
             hotels, check_in_date, check_out_date = hotels
-
         valid = True
+
     correct = False
     while not correct:
         if hotels:
@@ -69,6 +69,7 @@ def main ():
         correct = True
         print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
         rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
+
         live = False
         while not live:
             if rooms:
