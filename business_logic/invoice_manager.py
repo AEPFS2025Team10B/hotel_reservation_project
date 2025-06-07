@@ -19,4 +19,5 @@ def find_invoice_by_booking_id(booking_id: int):
     invoice.booking
     return invoice
 
-
+def delete_invoice_by_booking_id(booking_id: int):
+    return invoice_dao.delete_invoice(booking_id)

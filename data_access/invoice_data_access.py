@@ -26,3 +26,10 @@ class InvoiceDataAccess(BaseDataAccess):
         invoice_id, booking_id, issue_date, total_amount = row
         # TODO: check booking constructor to give more attributes.
         return Invoice(invoice_id, issue_date, total_amount)
+
+    def delete_invoice(self, booking_id: int):
+        sql = """
+        DELETE FROM invoice
+        WHERE booking_id = ?
+        """
+        self.execute(sql, (booking_id,))

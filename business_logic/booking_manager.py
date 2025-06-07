@@ -1,4 +1,5 @@
 #Buchungen verwalten, Verfügbarkeit
+from business_logic import invoice_manager
 from data_access import BookingDataAccess
 from model import guest
 from model.room import Room
@@ -64,3 +65,9 @@ def get_all_bookings_with_details():
         })
 
     return result
+
+def cancel_booking_by_id(booking_id: int):
+   booking_dao.cancel_booking(booking_id)
+   booking = find_booking_by_id(booking_id)
+   delete_invoice = invoice_manager.delete_invoice_by_booking_id(booking.booking_id)
+   return booking

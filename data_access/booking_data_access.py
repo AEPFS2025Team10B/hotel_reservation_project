@@ -80,3 +80,11 @@ class BookingDataAccess(BaseDataAccess):
         ORDER BY h.name, b.check_in_date
         """
         return self.fetchall(sql)
+
+    def cancel_booking(self, booking_id: int):
+        sql = """
+        UPDATE booking 
+        SET is_cancelled = 1
+        WHERE booking_id = ?
+        """
+        self.execute(sql, (booking_id,))
