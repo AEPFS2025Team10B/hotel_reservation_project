@@ -9,7 +9,6 @@ import sys
 import os
 from datetime import datetime
 
-os.environ["DB_FILE"] = "database/test_hotel_reservation_sample.db"
 from business_logic.booking_manager import find_booking_by_id, add_new_hotelrecommendation
 
 
