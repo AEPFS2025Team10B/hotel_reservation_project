@@ -1,8 +1,9 @@
 from model.address import Address
 from model.booking import Booking
+import datetime
 
 class Guest:
-    def __init__(self, guest_id:int, last_name:str, first_name:str, email:str, birthday: str, nationality: str):
+    def __init__(self, guest_id:int, last_name:str, first_name:str, email:str, birthday: datetime.date | None, nationality: str):
         self.__guest_id = guest_id
         self.__last_name = last_name
         self.__first_name = first_name
@@ -60,9 +61,7 @@ class Guest:
         return self.__birthday
 
     @birthday.setter
-    def birthday(self, birthday):
-        if not birthday:
-            raise ValueError("Birthday is required")
+    def birthday(self, birthday: datetime.date | None):
         self.__birthday = birthday
 
     @property
