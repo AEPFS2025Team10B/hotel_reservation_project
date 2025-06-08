@@ -9,7 +9,7 @@ class BaseDataAccess:
 
     def _connect(self):
         return sqlite3.connect(
-            self.__db_connection_str, detect_types=sqlite3.PARSE_DECLTYPES
+            self.__db_connection_str
         )
 
     def fetchone(self, sql: str, params: tuple = ()) -> tuple | None:

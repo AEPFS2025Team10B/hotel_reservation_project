@@ -17,6 +17,8 @@ class BookingDataAccess(BaseDataAccess):
         """
         new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount))
         booking = Booking(new_id, check_in_date, check_out_date)
+        booking.is_cancelled = bool(is_cancelled)
+        booking.total_price = total_amount
         return booking
 
     def get_booking_by_id(self, booking_id: int) -> Booking | None:
@@ -29,10 +31,9 @@ class BookingDataAccess(BaseDataAccess):
         if row is None:
             return None
         booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
-        # TODO: check booking constructor to give more attributes.
         booking = Booking(booking_id, check_in_date, check_out_date)
         booking.is_cancelled = bool(is_cancelled)
-        booking.total_amount = total_amount
+        booking.total_price = total_amount
         return booking
 
     def get_booking_relations(self, booking_id: int) -> tuple[int, int] | None:
@@ -112,5 +113,22 @@ class BookingDataAccess(BaseDataAccess):
             room.hotel = find_hotel_by_id_2(hotel_id)
             booking.room = room
 
+            bookings.append(booking)
+        return bookings
+
+    def get_all_bookings(self) -> list[Booking]:
+        sql = """
+        SELECT booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount
+        FROM booking
+        """
+        rows = self.fetchall(sql)
+        bookings = []
+        for row in rows:
+            booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
+            booking = Booking(booking_id, check_in_date, check_out_date)
+            booking.is_cancelled = bool(is_cancelled)
+            booking.total_price = total_amount
+            booking.guest_id = guest_id
+            booking.room_id = room_id
             bookings.append(booking)
         return bookings

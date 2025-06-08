@@ -12,6 +12,8 @@ class Booking:
         self.__invoice = None
         self.__rating = None
         self.__recommendation = None
+        self.__guest_id = None
+        self.__room_id = None
 
     def __repr__(self):
         return (f"Booking(id={self.__booking_id!r}, check_in={self.__check_in_date!r}, "
@@ -115,3 +117,23 @@ class Booking:
             if len(value) > 500:
                 raise ValueError("recommendation must not exceed 500 characters")
         self.__recommendation = value
+
+    @property
+    def guest_id(self):
+        return self.__guest_id
+
+    @guest_id.setter
+    def guest_id(self, value):
+        if not isinstance(value, int):
+            raise TypeError("guest_id must be an integer")
+        self.__guest_id = value
+
+    @property
+    def room_id(self):
+        return self.__room_id
+
+    @room_id.setter
+    def room_id(self, value):
+        if not isinstance(value, int):
+            raise TypeError("room_id must be an integer")
+        self.__room_id = value

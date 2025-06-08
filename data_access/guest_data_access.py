@@ -72,3 +72,23 @@ class GuestDataAccess(BaseDataAccess):
            """
         row = self.fetchone(sql, (email,))
         return Guest(*row) if row else None
+
+    def get_all_guests(self) -> list[Guest]:
+        sql = """
+        SELECT guest_id, first_name, last_name, email, birthday, nationality
+        FROM guest
+        """
+        rows = self.fetchall(sql)
+        guests = []
+        for row in rows:
+            gid, fn, ln, em, birthday_str, nat = row
+            # Convert birthday string to date object if it exists
+            birthday_obj = None
+            if birthday_str:
+                from datetime import datetime
+                try:
+                    birthday_obj = datetime.strptime(birthday_str, "%Y-%m-%d").date()
+                except (ValueError, TypeError):
+                    pass  # Keep as None if conversion fails
+            guests.append(Guest(gid, fn, ln, em, birthday_obj, nat))
+        return guests
