@@ -8,6 +8,8 @@ from ui import search_hotels_by_availability_01_4
 from ui import search_hotels_by_multiple_criteria_01_5
 from ui import search_all_hotel_details_01_6
 from model import guest
+from business_logic.address_manager import find_address_id
+from business_logic.guest_manager import find_guest_by_email
 from business_logic.guest_manager import add_new_guest
 from business_logic.room_manager import get_available_rooms_by_hotel_and_dates_2
 from datetime import datetime
@@ -70,30 +72,37 @@ def main ():
         print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
         rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
         rooms = apply_seasonal_discount(rooms, check_in_date)
-        live = False
-        while not live:
-            if rooms:
-                for index, r in enumerate(rooms, start=1):
-                    print(f"{index} - room {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} per night")
-                room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
-                if 1 <= selection <= len(rooms):
-                    selected_room = rooms[room_booking - 1]
-                live = True
-                print(f"\nYou have selected  {selected_room}")
-                street = input("\nPlease Enter your street address including house number: ")
-                city = input("\nPlease Enter your city: ")
-                zip = input("\nPlease Enter your zip code: ")
+    live = False
+    while not live:
+        if rooms:
+            for index, r in enumerate(rooms, start=1):
+                print(f"{index} - room {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} per night")
+            room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
+            if 1 <= selection <= len(rooms):
+                selected_room = rooms[room_booking - 1]
+            live = True
+            print(f"\nYou have selected  {selected_room}")
+            street = input("\nPlease Enter your street address including house number: ")
+            city = input("\nPlease Enter your city: ")
+            zip = input("\nPlease Enter your zip code: ")
+            email = input("\nPlease Enter your email: ")
+
+            address_id = find_address_id(street, city, zip)
+            if not address_id:
+                new_address = add_new_address(street, city, zip)
+                address_id = new_address.address_id
+
+            existing_guest = find_guest_by_email(email)
+
+            if existing_guest:
+                print(f"✅ Existing guest found: {existing_guest.first_name} {existing_guest.last_name}")
+                new_guest = existing_guest
+            else:
                 first_name = input("\nPlease Enter your first name: ")
                 last_name = input("\nPlease Enter your last name: ")
-                email = input("\nPlease Enter your email: ")
-                new_address = add_new_address(street, city, zip)
                 new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
-                new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date)
-                return
+            new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
+            print(new_booking)
 
-            if not rooms:
-                print("No available rooms, in all the hotels in this time period.")
-
-
-
-
+        if not rooms:
+            print("No available rooms, in all the hotels in this time period.")

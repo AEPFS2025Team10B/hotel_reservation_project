@@ -219,3 +219,29 @@ class HotelDataAccess(BaseDataAccess):
             hotel.address = Address(aid, street, city, zipcode)
             result.append(hotel)
         return result
+
+    def get_hotel_id_by_room_id(self, room_id:int):
+        sql = """
+        SELECT h.hotel_id, h.name, h.stars, a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        JOIN room AS r ON r.hotel_id = h.hotel_id
+        where room_id = ?
+        """
+        row = self.fetchone(sql, (room_id,))
+        hid, name, stars, aid, city, street, zipcode = row
+        return hid
+
+    def get_hotel_by_id_2(self, hotel_id: int) -> Hotel | None:
+        sql = """
+        SELECT DISTINCT h.hotel_id, h.name, h.stars, a.address_id, a.street, a.city, a.zip_code
+        FROM hotel AS h
+        JOIN address AS a ON h.address_id = a.address_id
+        WHERE hotel_id = ?
+        """
+        row = self.fetchone(sql, (hotel_id,))
+        hid, name, stars, aid, astr, acity, azip = row
+        hotel = Hotel(hid, name, stars)
+        address = Address(aid, astr, acity, azip)
+        hotel.address = address
+        return hotel

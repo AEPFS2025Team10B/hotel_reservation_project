@@ -6,7 +6,7 @@ def find_hotel_by_list_city(hotels):
     if len(hotels) > 1:
         print("\nAvailable hotels:")
         for i, hotel in enumerate(hotels, start=1):
-            print(f"{i}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(f"{i}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
 
     while True:
         try:

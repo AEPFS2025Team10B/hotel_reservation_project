@@ -19,7 +19,7 @@ def main():
     if hotels:
         print(f"\nFound hotels in {city}:")
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
 
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")

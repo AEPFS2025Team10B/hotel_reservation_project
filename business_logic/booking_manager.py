@@ -12,6 +12,8 @@ from business_logic.invoice_manager import create_invoice_by_booking_id
 from business_logic.room_manager import apply_seasonal_discount
 from model.booking import Booking
 from datetime import datetime
+from business_logic.room_manager import find_room_by_id
+from business_logic.hotel_manager import find_hotel_id_by_room_id
 
 # DAO-Instanzen
 booking_dao = BookingDataAccess()
@@ -87,6 +89,7 @@ def generate_booking_confirmation(booking: Booking) -> str:
     lines = []
     lines.append("\n✅ Booking Confirmation")
     lines.append("=" * 40)
+    lines.append(f" Booking ID: {booking.booking_id}")
     lines.append(f"👤 Guest: {booking.guest.first_name} {booking.guest.last_name}  |  📧 {booking.guest.email}")
     lines.append(f"🏨 Hotel: {booking.room.hotel.name}, {booking.room.hotel.address}")
     lines.append(f"🛏️ Room Number: {booking.room.number}  |  Type: {booking.room.roomtype.description}")
@@ -96,3 +99,10 @@ def generate_booking_confirmation(booking: Booking) -> str:
     lines.append(f"💵 Total Amount: CHF {booking.total_amount:.2f}")
     lines.append("=" * 40)
     return "\n".join(lines)
+
+def find_bookings_by_email(email: str) -> list[Booking]:
+    guest = find_guest_by_email(email)
+    if not guest:
+        return f"No Guest found for {email}"
+    bookings = booking_dao.get_bookings_by_guest_id(guest.guest_id)
+    return bookings

@@ -21,14 +21,14 @@ def main():
     
     if hotels:
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
         try:
             selection = int(input("\nEnter the number of the hotel you want to see the details: ").strip())
             if 1 <= selection <= len(hotels):
                 selected_hotel = hotels[selection - 1]
 
                 print(f"\nDetails for {selected_hotel.name}:")
-                print(f"Address: {selected_hotel.address}")
+                print(f"Address: {selected_hotel.address.street}, {selected_hotel.address.zip_code}, {selected_hotel.address.city}")
                 print(f"Stars: {selected_hotel.stars}")
 
                 available_rooms = get_available_rooms_by_hotel(selected_hotel.hotel_id, today)

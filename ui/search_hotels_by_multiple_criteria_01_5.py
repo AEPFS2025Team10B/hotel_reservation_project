@@ -36,7 +36,7 @@ def main():
     if hotels:
         print(f"\nThese hotels are available for you:\n")
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
         print("")
         input("\nPress Enter to finish")
     else:

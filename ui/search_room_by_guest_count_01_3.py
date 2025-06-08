@@ -33,7 +33,7 @@ def main():
     if hotels:
         print(f"\nThese hotels have a room for at least {guest_count} guests:\n")
         for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
     else:
         print(f"\nNo hotels found with rooms for {guest_count} guests.")
 

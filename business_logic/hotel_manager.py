@@ -53,3 +53,9 @@ def update_hotel(name: str, stars: int, street: str, city: str, zip_code: str, h
 
 def find_hotel_by_id(hotel_id: int):
     return hotel_dao.get_hotel_by_id(hotel_id)
+
+def find_hotel_id_by_room_id(room_id: int):
+    return hotel_dao.get_hotel_id_by_room_id(room_id)
+
+def find_hotel_by_id_2(hotel_id: int):
+    return hotel_dao.get_hotel_by_id_2(hotel_id)

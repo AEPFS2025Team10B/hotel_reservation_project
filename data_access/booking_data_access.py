@@ -1,5 +1,9 @@
 from data_access.base_data_access import BaseDataAccess
 from model.booking import Booking
+from business_logic.room_manager import find_room_by_id
+from business_logic.hotel_manager import find_hotel_by_id
+from business_logic.hotel_manager import find_hotel_id_by_room_id
+from business_logic.hotel_manager import find_hotel_by_id_2
 
 
 class BookingDataAccess(BaseDataAccess):
@@ -88,3 +92,25 @@ class BookingDataAccess(BaseDataAccess):
         WHERE booking_id = ?
         """
         self.execute(sql, (booking_id,))
+
+    def get_bookings_by_guest_id(self, guest_id: int) -> list[Booking]:
+        sql = """
+        SELECT booking_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount
+        FROM Booking
+        WHERE guest_id = ?
+        """
+        rows = self.fetchall(sql, (guest_id,))
+
+        bookings = []
+        for booking_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount in rows:
+            booking = Booking(booking_id, check_in_date, check_out_date)
+            booking.is_cancelled = bool(is_cancelled)
+            booking.total_amount = total_amount
+
+            room = find_room_by_id(room_id)
+            hotel_id = find_hotel_id_by_room_id(room.room_id)
+            room.hotel = find_hotel_by_id_2(hotel_id)
+            booking.room = room
+
+            bookings.append(booking)
+        return bookings
