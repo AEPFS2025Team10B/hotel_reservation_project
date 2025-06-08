@@ -139,3 +139,21 @@ class RoomDataAccess(BaseDataAccess):
         room.roomtype = RoomType(rtid, rtmg, rtd)
         room.facility = Facility(fid, fn)
         return room
+    
+    def get_all_rooms_with_facilities(self):
+        sql = """
+        SELECT h.name AS Hotelname,
+            r.room_number,
+            rt.description AS RoomType,
+            rt.max_guests,
+            r.price_per_night,
+            GROUP_CONCAT(f.facility_name, ', ') AS Facilities
+        FROM Room r
+        JOIN Hotel h ON r.hotel_id = h.hotel_id
+        JOIN Room_Type rt ON r.type_id = rt.type_id
+        LEFT JOIN Room_Facilities rf ON r.room_id = rf.room_id
+        LEFT JOIN Facilities f ON rf.facility_id = f.facility_id
+        GROUP BY r.room_id
+        ORDER BY h.name, r.room_number
+        """
+        return self.fetchall(sql)

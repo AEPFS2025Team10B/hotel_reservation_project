@@ -51,6 +51,7 @@ def main():
         (14, "6_cancel_booking.py", "As a customer I want to cancel booking"),
         (15, "7_price_seasons.py", "As a customer I want to see the price depending on seasons"),
         (17, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels"),
+        (18, "display_all_rooms_with_facilities_9.py", "9. Als Admin möchte ich eine Liste der Zimmer mit ihrer Ausstattung sehen."),
         (20, "2_3_Hotelrecommendation.py", "3. As a guest I want to leave a recommendation after my stay"),
         (21, "2_4_look_up_hotelrecommendation.py", "4. As a guest I want to read hotel reviews before booking"),
         (22, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests).")

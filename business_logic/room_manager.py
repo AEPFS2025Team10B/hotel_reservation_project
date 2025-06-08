@@ -44,3 +44,17 @@ def apply_seasonal_discount(rooms: list, check_in_date_str: str) -> list:
         print("🟦 Kein Rabatt für dieses Datum")
 
     return rooms
+
+def get_all_rooms_with_facilities():
+    rows = room_dao.get_all_rooms_with_facilities()
+    result = []
+    for row in rows:
+        result.append({
+            "hotel_name": row[0],
+            "room_number": row[1],
+            "room_type": row[2],
+            "max_guests": row[3],
+            "price_per_night": row[4],
+            "facilities": row[5] or "Keine"
+        })
+    return result
