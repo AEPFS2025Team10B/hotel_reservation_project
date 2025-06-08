@@ -78,7 +78,7 @@ def main ():
                 for index, r in enumerate(rooms, start=1):
                     print(f"{index} - room {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} per night")
                 room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
-                if 1 <= selection <= len(rooms):
+                if 1 <= room_booking <= len(rooms):
                     selected_room = rooms[room_booking - 1]
                 live = True
                 print(f"\nYou have selected  {selected_room}")
@@ -102,7 +102,7 @@ def main ():
                 else:
                     first_name = input("\nPlease Enter your first name: ")
                     last_name = input("\nPlease Enter your last name: ")
-                    new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
+                    new_guest = add_new_guest(first_name, last_name, email, street, city, zip, nationality, birthday)
                 new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
                 print(new_booking)
 
