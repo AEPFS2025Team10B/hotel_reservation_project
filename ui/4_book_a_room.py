@@ -86,6 +86,8 @@ def main ():
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
                 email = input("\nPlease Enter your email: ")
+                birthday = input("\nPlease Enter your birthday: ")
+                nationality = input("\nPlease Enter your nationality: ")
 
                 address_id = find_address_id(street, city, zip)
                 if not address_id:
