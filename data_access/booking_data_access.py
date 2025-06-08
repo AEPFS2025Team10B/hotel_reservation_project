@@ -4,11 +4,15 @@ from business_logic.room_manager import find_room_by_id
 from business_logic.hotel_manager import find_hotel_by_id
 from business_logic.hotel_manager import find_hotel_id_by_room_id
 from business_logic.hotel_manager import find_hotel_by_id_2
+from datetime import datetime
 
 
 class BookingDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
+
+    def _parse_date(self, date_str: str) -> datetime.date:
+        return datetime.strptime(date_str, "%Y-%m-%d").date()
 
     def insert_booking(self, guest_id: int, room_id: int, check_in_date: str, check_out_date: str, is_cancelled: int, total_amount: float) -> Booking:
         sql = """
@@ -16,7 +20,7 @@ class BookingDataAccess(BaseDataAccess):
         VALUES (?, ?, ?, ?, ?, ?)
         """
         new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount))
-        booking = Booking(new_id, check_in_date, check_out_date)
+        booking = Booking(new_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
         booking.is_cancelled = bool(is_cancelled)
         booking.total_price = total_amount
         return booking
@@ -31,7 +35,7 @@ class BookingDataAccess(BaseDataAccess):
         if row is None:
             return None
         booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
-        booking = Booking(booking_id, check_in_date, check_out_date)
+        booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
         booking.is_cancelled = bool(is_cancelled)
         booking.total_price = total_amount
         return booking
@@ -104,9 +108,9 @@ class BookingDataAccess(BaseDataAccess):
 
         bookings = []
         for booking_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount in rows:
-            booking = Booking(booking_id, check_in_date, check_out_date)
+            booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
             booking.is_cancelled = bool(is_cancelled)
-            booking.total_amount = total_amount
+            booking.total_price = total_amount
 
             room = find_room_by_id(room_id)
             hotel_id = find_hotel_id_by_room_id(room.room_id)
@@ -125,7 +129,7 @@ class BookingDataAccess(BaseDataAccess):
         bookings = []
         for row in rows:
             booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
-            booking = Booking(booking_id, check_in_date, check_out_date)
+            booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
             booking.is_cancelled = bool(is_cancelled)
             booking.total_price = total_amount
             booking.guest_id = guest_id

@@ -96,7 +96,7 @@ def generate_booking_confirmation(booking: Booking) -> str:
     lines.append(f"💰 Price per Night: CHF {booking.room.price_per_night:.2f}")
     lines.append(f"📅 Stay: {booking.check_in_date.strftime('%d.%m.%Y')} to {booking.check_out_date.strftime('%d.%m.%Y')}")
     lines.append(f"🌙 Nights: {(booking.check_out_date - booking.check_in_date).days}")
-    lines.append(f"💵 Total Amount: CHF {booking.total_amount:.2f}")
+    lines.append(f"💵 Total Amount: CHF {booking.total_price:.2f}")
     lines.append("=" * 40)
     return "\n".join(lines)
 
