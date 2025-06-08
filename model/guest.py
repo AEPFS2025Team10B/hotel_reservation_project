@@ -2,16 +2,18 @@ from model.address import Address
 from model.booking import Booking
 
 class Guest:
-    def __init__(self, guest_id:int, last_name:str, first_name:str, email:str):
+    def __init__(self, guest_id:int, last_name:str, first_name:str, email:str, birthday: str, nationality: str):
         self.__guest_id = guest_id
         self.__last_name = last_name
         self.__first_name = first_name
         self.__email = email
+        self.__birthday = birthday
+        self.__nationality = nationality
         self.__address = None
         self.__booking = None
 
     def __repr__(self):
-        return f"Guest(id={self.__guest_id!r}, last_name={self.__last_name!r}, first_name={self.__first_name!r}, email={self.__email!r})"
+        return f"Guest(id={self.__guest_id!r}, last_name={self.__last_name!r}, first_name={self.__first_name!r}, email={self.__email!r}, birthday={self.__birthday!r}, nationality={self.__nationality!r})"
 
     @property
     def guest_id(self):
@@ -52,6 +54,26 @@ class Guest:
         if not isinstance(email, str):
             raise TypeError("email must be a string")
         self.__email = email
+
+    @property
+    def birthday(self):
+        return self.__birthday
+
+    @birthday.setter
+    def birthday(self, birthday):
+        if not birthday:
+            raise ValueError("Birthday is required")
+        self.__birthday = birthday
+
+    @property
+    def nationality(self):
+        return self.__nationality
+
+    @nationality.setter
+    def nationality(self, nationality):
+        if not nationality:
+            raise ValueError("Nationality is required")
+        self.__nationality = nationality
 
     @property
     def address(self):
