@@ -9,7 +9,7 @@ Stadtbasierte Hotelsuche
 from business_logic.hotel_manager import find_hotels_by_city
 
 #sehr ähnlich wie 1.2, daher in find_hotels_by_list_city aufgebaut, und hier diversifiziert.
-from common_ui.find_hotel_by_list_city import find_hotel_by_list_city
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City")

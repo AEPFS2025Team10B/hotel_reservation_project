@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_hotels_by_city_and_min_stars
 
 #sehr ähnlich wie 1.1, daher in find_hotels_by_list_city aufgebaut, und hier diversifiziert.
-from common_ui.find_hotel_by_list_city import find_hotel_by_list_city
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City with Minimum Stars")
