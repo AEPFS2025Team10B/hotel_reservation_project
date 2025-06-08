@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic import room_manager
 
 
-# 🛏 Funktion zur Auswahl eines Zimmers und Preisänderung
+# Funktion zur Auswahl eines Zimmers und Preisänderung
 def choose_room_and_update_price():
     rooms = room_manager.get_all_rooms_with_facilities()
     print("\nAvailable Rooms:")
@@ -24,12 +24,12 @@ def choose_room_and_update_price():
         print("❌ Invalid selection or input.")
 
 
-# 🧩 Funktion zur Auswahl eines Raumtyps und Aktualisierung von max. Gästen und Beschreibung
+# Funktion zur Auswahl eines Raumtyps und Aktualisierung von max. Gästen und Beschreibung
 def choose_room_type_and_update():
     room_types = room_manager.get_all_room_types()
     print("\nRoom Types:")
     for idx, rt in enumerate(room_types, start=1):
-        print(f"{idx}. ID: {rt.type_id} | Description: {rt.description} | Max Guests: {rt.max_guests}")
+        print(f"{idx}. ID: {rt.room_type_id} | Description: {rt.description} | Max Guests: {rt.max_guests}")
     try:
         choice = int(input("Select room type to update: ")) - 1
         selected = room_types[choice]
@@ -41,37 +41,37 @@ def choose_room_type_and_update():
         print("❌ Invalid selection or input.")
 
 
-# 🛎 Funktion zur Auswahl einer Einrichtung und Aktualisierung des Namens
+# Funktion zur Auswahl einer Einrichtung und Aktualisierung des Namens
 def choose_facility_and_update():
     facilities = room_manager.get_all_facilities()
     print("\nFacilities:")
     for idx, f in enumerate(facilities, start=1):
-        print(f"{idx}. ID: {f.facility_id} | Name: {f.facility_name}")
+        print(f"{idx}. ID: {f.facility_id} | Name: {f.name}")
     try:
         choice = int(input("Select facility to update: ")) - 1
         selected = facilities[choice]
         new_name = input("Enter new facility name: ")
         room_manager.update_facility(selected.facility_id, new_name)
-        print(f"✅ Facility '{selected.facility_name}' renamed to '{new_name}'.")
+        print(f"✅ Facility '{selected.name}' renamed to '{new_name}'.")
     except (IndexError, ValueError):
         print("❌ Invalid selection or input.")
 
 
-# 📋 Funktion zur Anzeige aller Raumtypen
+# Funktion zur Anzeige aller Raumtypen
 def list_room_types():
     print("\nAll Room Types:")
     for rt in room_manager.get_all_room_types():
-        print(f"ID: {rt.type_id} | Description: {rt.description} | Max Guests: {rt.max_guests}")
+        print(f"ID: {rt.room_type_id} | Description: {rt.description} | Max Guests: {rt.max_guests}")
 
 
-# 🧾 Funktion zur Anzeige aller Einrichtungen
+# Funktion zur Anzeige aller Einrichtungen
 def list_facilities():
     print("\nAll Facilities:")
     for fac in room_manager.get_all_facilities():
-        print(f"ID: {fac.facility_id} | Name: {fac.facility_name}")
+        print(f"ID: {fac.facility_id} | Name: {fac.name}")
 
 
-# 🧠 Hauptmenü für die Verwaltung der Stammdaten
+# Hauptmenü für die Verwaltung der Stammdaten
 def main():
     print("\n🛠️  Master Data Management (User Story 10) 🛠️")
     print("1. Update room price")

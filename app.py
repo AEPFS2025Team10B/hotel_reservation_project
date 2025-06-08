@@ -4,6 +4,7 @@ import importlib.util
 import os
 import sys
 from logo import print_logo
+
 # Sicherstellen, dass das Hauptverzeichnis im Pfad ist, damit Imports funktionieren
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
@@ -20,19 +21,6 @@ def run_story(filename):
         print("No main() function found in", filename)
 
 def main():
-    # User Story 1.1: Stadtbasierte Hotelsuche.
-    # User Story 1.2: Hotels nach Mindestanzahl Sterne filtern.
-    # User Story 1.3: Hotels mit Zimmern für bestimmte Gästezahl.
-    # User Story 1.4: Hotels mit Verfügbarkeit im Zeitraum filtern.
-    # User Story 1.5: Kombination von Wünschen (Sterne, Gästezahl, Zeitraum).
-    # User Story 1.6: Anzeige von Hoteldetails (Name, Adresse, Sterne).
-    # User Story 2.1: Anezige der Raumdetails (Facilities, Beschreibung etc.)
-    # User Story 2.2: Ich möchte verfügbare Räume an gewissen Daten anzeigen lassen (Reisezeitraum)
-    # User Story 3.1: Als Admin möchte ich ein neues Hotel hinzufügen können.
-    # User Story 3.2: Als Admin möchte ich ein Hotel löschen können.
-    # User Story 3.3: Als Admin möchte ich die Details eines Hotels ändern können.
-
-
     print_logo()
     stories = [
         (1, "search_hotels_by_city_01_1.py", "As a guest, I want to browse all hotels in a city so that I can choose one based on location (city)."),
@@ -52,11 +40,11 @@ def main():
         (15, "7_price_seasons.py", "As a customer I want to see the price depending on seasons"),
         (17, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels"),
         (18, "display_all_rooms_with_facilities_9.py", "9. Als Admin möchte ich eine Liste der Zimmer mit ihrer Ausstattung sehen."),
-        (19, "manage_master_data_10.py","10. Als Admin möchte ich Stammdaten anpassen können."),
+        (19, "manage_master_data_10.py", "10. Als Admin möchte ich Stammdaten anpassen können."),
         (20, "2_3_Hotelrecommendation.py", "3. As a guest I want to leave a recommendation after my stay"),
         (21, "2_4_look_up_hotelrecommendation.py", "4. As a guest I want to read hotel reviews before booking"),
         (22, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests).")
-        ]
+    ]
 
     print("\nAvailable User Stories:")
     for idx, fname, doc in stories:
