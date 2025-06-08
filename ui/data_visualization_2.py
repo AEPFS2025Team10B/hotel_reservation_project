@@ -2,10 +2,11 @@ import sys
 import os
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Ziel ist es dass ein Admin User nach diversen sachen suchen kann, Nationalität, altersspannen,
-# oder ob gäste wieder kommen
+# Ziel ist es dass ein Admin User nach diversen Sachen suchen kann: Nationalität, Altersspannen, oder ob Gäste wiederkommen
 from business_logic import guest_manager
+from data_access import GuestDataAccess, BookingDataAccess
 import pandas as pd
+from datetime import date
 
 
 def print_age_groups(demographics):
@@ -30,8 +31,8 @@ def print_recurring_guests(demographics):
     print("\nRecurring guests:")
     print(f"Amount recurring guests: {demographics['recurring_guests']} ")
 
-    #print_age_groups, print_nationalities & print_recurring_guests separat gemacht,
-    # dass es später, falls es anpassungen gibt, einfacher ist
+    # print_age_groups, print_nationalities & print_recurring_guests separat gemacht,
+    # damit spätere Anpassungen einfacher sind
 
 
 def compute_demographics():
@@ -52,27 +53,57 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
         list(demographics['nationalities'].items()),
         columns=['Nationality', 'Count']
     )
-    df_rec = pd.DataFrame(
-        [{'Recurring Guests': demographics['recurring_guests']}]
-    )
+
+    # DataFrame für wiederkehrende Gäste mit Details
+    guest_dao = GuestDataAccess()
+    booking_dao = BookingDataAccess()
+    all_guests = guest_dao.get_all_guests()
+    all_bookings = booking_dao.get_all_bookings()
+
+    # Statistiken pro Gast sammeln
+    stats = {}
+    for b in all_bookings:
+        gid = b.guest_id
+        ci = b.check_in_date
+        co = b.check_out_date
+        nights = (co - ci).days if isinstance(co, date) and isinstance(ci, date) else 0
+        if gid not in stats:
+            stats[gid] = {'visits': 0, 'nights': 0, 'last_stay': None}
+        stats[gid]['visits'] += 1
+        stats[gid]['nights'] += nights
+        if stats[gid]['last_stay'] is None or co > stats[gid]['last_stay']:
+            stats[gid]['last_stay'] = co
+
+    rows = []
+    for gid, data in stats.items():
+        if data['visits'] > 1:
+            guest = next((g for g in all_guests if g.guest_id == gid), None)
+            name = f"{guest.first_name} {guest.last_name}" if guest else str(gid)
+            rows.append({
+                'Guest Name': name,
+                'Visits': data['visits'],
+                'Total Nights': data['nights'],
+                'Last Stay': data['last_stay']
+            })
+    df_rec = pd.DataFrame(rows)
 
     # .outputs Ordner erstellen, falls nicht vorhanden
-    output_dir = '.outputs'
+    output_dir = 'outputs'
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, filename)
 
     # Excel-Writer mit XlsxWriter
-    with pd.ExcelWriter(file_path, engine='xlsxwriter') as writer:
-        wb  = writer.book
+    with pd.ExcelWriter(file_path, engine='xlsxwriter', datetime_format='yyyy-mm-dd') as writer:
+        wb = writer.book
 
         # Altersgruppen
         df_age.to_excel(writer, sheet_name='Age Groups', index=False)
         ws1 = writer.sheets['Age Groups']
         chart1 = wb.add_chart({'type': 'column'})
         chart1.add_series({
-            'name':       'Gäste nach Altersgruppe',
+            'name': 'Gäste nach Altersgruppe',
             'categories': ['Age Groups', 1, 0, len(df_age), 0],
-            'values':     ['Age Groups', 1, 1, len(df_age), 1],
+            'values': ['Age Groups', 1, 1, len(df_age), 1],
         })
         chart1.set_title({'name': 'Gäste nach Altersgruppe'})
         ws1.insert_chart('D2', chart1)
@@ -82,17 +113,17 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
         ws2 = writer.sheets['Nationalities']
         chart2 = wb.add_chart({'type': 'pie'})
         chart2.add_series({
-            'name':       'Gäste nach Nationalität',
+            'name': 'Gäste nach Nationalität',
             'categories': ['Nationalities', 1, 0, len(df_nat), 0],
-            'values':     ['Nationalities', 1, 1, len(df_nat), 1],
+            'values': ['Nationalities', 1, 1, len(df_nat), 1],
         })
         chart2.set_title({'name': 'Gäste nach Nationalität'})
         ws2.insert_chart('D2', chart2)
 
-        # Wiederkehrende Gäste
+        # Wiederkehrende Gäste mit Details
         df_rec.to_excel(writer, sheet_name='Recurring', index=False)
         ws3 = writer.sheets['Recurring']
-        ws3.write('A3', 'Dies ist die Anzahl der wiederkehrenden Gäste.')
+        ws3.write('A1', 'Gastname, Anzahl Besuche, Gesamtanzahl Nächte, Letzter Aufenthalt')
 
     print(f"✅ Excel-Bericht gespeichert unter: {file_path}")
 
@@ -100,8 +131,7 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
 def main():
     print("\nGuest demographic report")
 
-    valid = False
-    while not valid:
+    while True:
         print("\nWas möchten Sie sehen?")
         print("1. Age groups")
         print("2. Nationalities")
@@ -137,7 +167,6 @@ def main():
 
         print("")
         input("Press enter to finish")
-        valid = True
 
 
 if __name__ == "__main__":

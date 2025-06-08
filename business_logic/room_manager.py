@@ -12,8 +12,7 @@ room_dao  = RoomDataAccess()
 def get_available_rooms_by_hotel(hotel_id: int, today: str):
     return room_dao.get_rooms_by_hotel(hotel_id, today)
 
-def get_next_available_date_for_hotel(hotel_id: int):
-    return room_dao.get_next_available_date_for_hotel(hotel_id)
+
 
 # (User Story 2.1) Show all Room Types of Hotel
 def get_room_types_by_hotel(hotel_id: int):

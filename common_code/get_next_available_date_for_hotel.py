@@ -1,12 +1,12 @@
-from .age_calculator import calculate_age
 from business_logic.room_manager import get_available_rooms_by_hotel
 from datetime import date, timedelta
 
-
-def get_next_available_date_for_hotel(hotel_id: int,
-                                      room_type_id: int = None,
-                                      start_date: date = None,
-                                      lookahead_days: int = 365) -> date | None:
+def get_next_available_date_for_hotel(
+        hotel_id: int,
+        room_type_id: int = None,
+        start_date: date = None,
+        lookahead_days: int = 365
+    ) -> date | None:
     """
     Findet das nächste Datum innerhalb von `lookahead_days`, an dem mindestens ein Zimmer im Hotel verfügbar ist.
 
@@ -31,4 +31,5 @@ def get_next_available_date_for_hotel(hotel_id: int,
             available = get_available_rooms_by_hotel(hotel_id, check_date)
         if available:
             return check_date
+
     return None

@@ -1,5 +1,3 @@
-# ui/search_all_hotel_details_01_6.py
-
 """
 User Story 1.6: Ich möchte Name, Adresse und Anzahl der Sterne jedes Hotels sehen.
 """
@@ -9,11 +7,11 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from datetime import date
-today = date.today().isoformat()
-
 from business_logic.hotel_manager import find_all_hotel_details
-from business_logic.room_manager import get_available_rooms_by_hotel, get_next_available_date_for_hotel
+from business_logic.room_manager import get_available_rooms_by_hotel
+from common_code.get_next_available_date_for_hotel import get_next_available_date_for_hotel
 
+today = date.today().isoformat()
 
 def main():
     print("All Hotels")
@@ -31,6 +29,7 @@ def main():
                 print(f"Address: {selected_hotel.address.street}, {selected_hotel.address.zip_code}, {selected_hotel.address.city}")
                 print(f"Stars: {selected_hotel.stars}")
 
+                # Heute verfügbare Zimmer anzeigen
                 available_rooms = get_available_rooms_by_hotel(selected_hotel.hotel_id, today)
                 print("\nAvailable rooms today:")
                 if available_rooms:
@@ -38,6 +37,8 @@ def main():
                         print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
                 else:
                     print(" No available rooms today.")
+
+                    # Nächstes verfügbares Datum ermitteln
                     next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
                     if next_date:
                         print(f"\nNext available date for any room: {next_date}")
@@ -51,8 +52,6 @@ def main():
         print("No hotels found.")
 
     return hotels
-
-
 
 
 if __name__ == "__main__":
