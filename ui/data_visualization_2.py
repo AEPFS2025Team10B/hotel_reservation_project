@@ -1,7 +1,10 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+
+# Ziel ist es dass ein Admin User nach diversen sachen suchen kann, Nationalität, altersspannen,
+# oder ob gäste wieder kommen
 from business_logic import guest_manager
 
 def print_age_groups(demographics):
@@ -23,6 +26,9 @@ def print_nationalities(demographics):
 def print_recurring_guests(demographics):
     print("\nRecurring guests:")
     print(f"Amount recurring guests: {demographics["recurring_guests"]} ")
+
+    #print_age_groups, print_nationalities & print_recurring_guests separat gemacht,
+    # dass es später, falls es anpassungen gibt, einfacher ist
 
 def main():
     print("\nGuest demographic report")
@@ -65,7 +71,7 @@ def main():
             print("")
             input("Press enter to finish")
             valid = True
-
+            #nachdem der User seinen input gegeben hat, werden die Ergebnisse angezeigt
         elif choice == 0:
             break
         else:
