@@ -52,9 +52,31 @@ def get_all_rooms_with_facilities():
         result.append({
             "hotel_name": row[0],
             "room_number": row[1],
-            "room_type": row[2],
+            "room_type": row[2],  
             "max_guests": row[3],
             "price_per_night": row[4],
-            "facilities": row[5] or "Keine"
+            "facilities": row[5] or "Keine",
+            "room_id": row[6],         
+            "type_id": row[7],         
         })
     return result
+
+# Update the price of a room
+def update_room_price(room_id: int, new_price: float):
+    room_dao.update_room_price(room_id, new_price)
+
+# Update a room type (max guests + description)
+def update_room_type(type_id: int, max_guests: int, description: str):
+    room_dao.update_room_type(type_id, max_guests, description)
+
+# Update a facility name
+def update_facility(facility_id: int, new_name: str):
+    room_dao.update_facility(facility_id, new_name)
+
+# Return all room types
+def get_all_room_types():
+    return room_dao.get_all_room_types()
+
+# Return all facilities
+def get_all_facilities():
+    return room_dao.get_all_facilities()

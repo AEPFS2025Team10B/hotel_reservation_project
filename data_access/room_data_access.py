@@ -142,12 +142,14 @@ class RoomDataAccess(BaseDataAccess):
     
     def get_all_rooms_with_facilities(self):
         sql = """
-        SELECT h.name AS Hotelname,
+        SELECT h.name AS hotel_name,
             r.room_number,
-            rt.description AS RoomType,
+            rt.description AS room_type,
             rt.max_guests,
             r.price_per_night,
-            GROUP_CONCAT(f.facility_name, ', ') AS Facilities
+            GROUP_CONCAT(f.facility_name, ', ') AS facilities,
+            r.room_id,
+            rt.type_id
         FROM Room r
         JOIN Hotel h ON r.hotel_id = h.hotel_id
         JOIN Room_Type rt ON r.type_id = rt.type_id
@@ -157,3 +159,33 @@ class RoomDataAccess(BaseDataAccess):
         ORDER BY h.name, r.room_number
         """
         return self.fetchall(sql)
+    
+    def update_room_price(self, room_id: int, new_price: float):
+        sql = "UPDATE Room SET price_per_night = ? WHERE room_id = ?"
+        self.execute(sql, (new_price, room_id))
+
+    # Beschreibung und max Gäste eines Raumtyps aktualisieren
+    def update_room_type(self, type_id: int, max_guests: int, description: str):
+        sql = """
+        UPDATE Room_Type
+        SET max_guests = ?, description = ?
+        WHERE type_id = ?
+        """
+        self.execute(sql, (max_guests, description, type_id))
+
+    # Namen einer Einrichtung aktualisieren
+    def update_facility(self, facility_id: int, new_name: str):
+        sql = "UPDATE Facilities SET facility_name = ? WHERE facility_id = ?"
+        self.execute(sql, (new_name, facility_id))
+
+    # Alle Einrichtungen abrufen
+    def get_all_facilities(self) -> list[Facility]:
+        sql = "SELECT facility_id, facility_name FROM Facilities"
+        rows = self.fetchall(sql)
+        return [Facility(fid, name) for fid, name in rows]
+
+    # Alle Raumtypen abrufen
+    def get_all_room_types(self) -> list[RoomType]:
+        sql = "SELECT type_id, max_guests, description FROM Room_Type"
+        rows = self.fetchall(sql)
+        return [RoomType(type_id, max_guests, description) for type_id, max_guests, description in rows]
