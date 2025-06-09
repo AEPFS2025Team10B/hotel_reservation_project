@@ -53,6 +53,10 @@ class Hotel:
     def rooms(self):
         return self.__rooms
 
+    @rooms.setter
+    def rooms(self, value):
+        self.__rooms = value
+
     def add_room(self, room):
         from .room import Room
         if not isinstance(room, Room):

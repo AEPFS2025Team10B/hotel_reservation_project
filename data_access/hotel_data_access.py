@@ -3,6 +3,8 @@ from tkinter.tix import Select
 from data_access.base_data_access import BaseDataAccess
 from model.hotel import Hotel
 from model.address import Address
+from model.roomtype import RoomType
+from model.room import Room
 
 class HotelDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
@@ -73,19 +75,27 @@ class HotelDataAccess(BaseDataAccess):
     def get_hotels_by_guest_count(self, guest_count: int) -> list[Hotel]:
         sql = """
       SELECT h.hotel_id, h.name, h.stars,
-             a.address_id, a.street, a.city, a.zip_code
+             a.address_id, a.street, a.city, a.zip_code,
+             rt.type_id,rt.description, rt.max_guests
         FROM hotel AS h
         JOIN address AS a ON h.address_id = a.address_id
         JOIN ROOM AS r ON r.hotel_id = h.hotel_id
         JOIN Room_Type AS rt ON rt.type_id = r.type_id
-        WHERE rt.max_guests = ?
+        WHERE rt.max_guests >= ?
         """
         rows = self.fetchall(sql, (guest_count,))
         result: list[Hotel] = []
-        for hid, name, stars, aid, street, city, zipcode in rows:
-            hotels = Hotel(hid, name, stars)
-            hotels.address = Address(aid, street, city, zipcode)
-            result.append(hotels)
+        for hid, name, stars, aid, street, city, zipcode, rt_id, rt_desc, rt_guests in rows:
+            hotel = Hotel(hid, name, stars)
+            hotel.address = Address(aid, street, city, zipcode)
+
+            roomtype = RoomType(rt_id, rt_guests, rt_desc)
+            hotel.rooms = []  # optional, wenn nicht schon da
+            room = Room(0, "N/A", 0.0)  # Dummy-Zimmer
+            room.roomtype = roomtype
+            hotel.rooms.append(room)
+
+            result.append(hotel)
         return result
 
     # User Story 1.4: Hotels, die während des Aufenthaltes verfügbar sind
