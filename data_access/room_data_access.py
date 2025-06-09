@@ -74,10 +74,17 @@ class RoomDataAccess(BaseDataAccess):
         self, hotel_id: int, check_in: str, check_out: str
     ) -> list[Room]:
         sql = """
-        SELECT room_id, room_number, price_per_night
-        FROM Room
-        WHERE hotel_id = ?
-          AND room_id NOT IN (
+        SELECT
+            r.room_id,
+            r.room_number,
+            r.price_per_night,
+            rt.type_id,
+            rt.max_guests,
+            rt.description
+        FROM Room AS r
+        JOIN Room_Type AS rt ON r.type_id = rt.type_id
+        WHERE r.hotel_id = ?
+          AND r.room_id NOT IN (
               SELECT room_id
               FROM Booking
               WHERE NOT (
@@ -87,10 +94,12 @@ class RoomDataAccess(BaseDataAccess):
           )
         """
         rows = self.fetchall(sql, (hotel_id, check_in, check_out))
-        return [
-            Room(room_id, room_number, price_per_night)
-            for room_id, room_number, price_per_night in rows
-        ]
+        result: list[Room] = []
+        for rid, rnr, price, rtid, rtmg, rtd in rows:
+            room = Room(rid, rnr, price)
+            room.roomtype = RoomType(rtid, rtmg, rtd)
+            result.append(room)
+        return result
 
 # User Story 4: Verfügbare Zimmer eines Hotels für einen Zeitraum
     def get_available_rooms_by_hotel_and_dates_2(
