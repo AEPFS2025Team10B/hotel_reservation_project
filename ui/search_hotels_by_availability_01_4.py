@@ -10,6 +10,18 @@ from business_logic.hotel_manager import find_hotels_by_availability
 
 def main():
     print(" Hotel Search by Availability")
+    valid = False
+    while not valid:
+        choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
+        if choice.lower() == "y":
+            print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+            valid = True
+        elif choice.lower() == "n":
+            valid = True
+        else:
+            print("Please enter either 'y' or 'n'.")
+        #das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
+
     check_in_date = input("Enter check-in date (YYYY-MM-DD): ").strip()
     check_out_date = input("Enter check-out date (YYYY-MM-DD): ").strip()
 
