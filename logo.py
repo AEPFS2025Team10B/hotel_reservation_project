@@ -29,10 +29,10 @@ def print_logo():
     print()
 
     # Blinkender Start­prompt
-    prompt = _BLINK + "Drücke Y um zu starten".center(60) + _RESET
+    prompt = _BLINK + "Enter Y to start".center(60) + _RESET
     choice = input(prompt + "\n").strip().lower()
     while choice != 'y':
-        choice = input("Bitte drücke Y zum Starten: ").strip().lower()
+        choice = input("Pleas enter Y to start: ").strip().lower()
 
     # Sobald Y gedrückt wurde, kehrt die Funktion zurück und
     # der restliche Programm-Flow (User-Story-Auswahl) läuft weiter.
