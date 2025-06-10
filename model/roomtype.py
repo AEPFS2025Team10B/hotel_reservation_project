@@ -4,7 +4,6 @@ class RoomType:
         room_type_id: int,
         max_guests: int,
         description: str = "No Description",
-
     ):
         self.__room_type_id = room_type_id
         self.__description = description
