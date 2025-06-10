@@ -52,7 +52,10 @@ INSERT INTO Guest(first_name, last_name, email, birthday, nationality, address_i
   ('Benedikt','Frey',     'benedikt.frey@example.com', '1985-06-20', 'United Kingdom', 1),
   ('Claudia', 'Zürcher',  'claudia.zuercher@example.com', '1995-03-10', 'Germany', 2),
   ('Daniel',  'Huber',    'daniel.huber@example.com', '1988-12-05', 'Germany', 3),
-  ('Elena',   'Schmid',   'elena.schmid@example.com', '1992-08-25', 'United Kingdom', 4);
+  ('Elena',   'Schmid',   'elena.schmid@example.com', '1992-08-25', 'United Kingdom', 4),
+  ('Thomas',  'Weber',    'thomas.weber@example.com', '1978-11-30', 'Switzerland', 1),
+  ('Maria',   'Koller',   'maria.koller@example.com', '1982-04-15', 'Austria', 2),
+  ('Peter',   'Müller',   'peter.mueller@example.com', '1991-07-22', 'Germany', 3);
 
 -- Zimmertypen (5 Einträge)
 INSERT INTO Room_Type(description, max_guests) VALUES
@@ -90,6 +93,25 @@ INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date) VALUES
   (4, 4, '2025-08-05','2025-08-07'),
   (5, 5, '2025-08-20','2025-08-22');
 
+-- Zusätzliche Buchungen für Oktober 2025 (realistische Überlappungen)
+INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date) VALUES
+  (1, 1, '2025-10-25','2025-11-02'),  -- Langer Aufenthalt
+  (6, 2, '2025-10-26','2025-10-29'),  -- Kurzer Aufenthalt
+  (3, 3, '2025-10-27','2025-10-30'),  -- Überlappt mit anderen
+  (7, 4, '2025-10-28','2025-10-31'),  -- Hauptzeitraum
+  (8, 5, '2025-10-29','2025-11-01'),  -- Versetzt
+  (2, 1, '2025-10-30','2025-11-03'),  -- Nachfolger
+  (4, 2, '2025-10-31','2025-11-04'),  -- Nachfolger
+  (5, 3, '2025-11-01','2025-11-05'),  -- Nachfolger
+  (6, 4, '2025-11-02','2025-11-06'),  -- Nachfolger
+  (7, 5, '2025-11-03','2025-11-07'),  -- Nachfolger
+  -- Zusätzliche Buchungen für den kritischen Zeitraum
+  (8, 1, '2025-10-28','2025-10-31'),  -- Hotel Baur au Lac
+  (1, 2, '2025-10-28','2025-10-31'),  -- Four Seasons
+  (2, 3, '2025-10-28','2025-10-31'),  -- Grand Hotel National
+  (3, 4, '2025-10-28','2025-10-31'),  -- Bellevue Palace
+  (4, 5, '2025-10-28','2025-10-31');  -- Les Trois Rois
+
 -- Rechnungen (5 Einträge)
 INSERT INTO Invoice(booking_id, total_amount) VALUES
   (1, 240.00),
@@ -97,6 +119,25 @@ INSERT INTO Invoice(booking_id, total_amount) VALUES
   (3, 600.00),
   (4, 440.00),
   (5, 500.00);
+
+-- Rechnungen für Oktober-Buchungen
+INSERT INTO Invoice(booking_id, total_amount) VALUES
+  (6, 960.00),  -- 8 Nächte * 120.00
+  (7, 540.00),  -- 3 Nächte * 180.00
+  (8, 900.00),  -- 3 Nächte * 300.00
+  (9, 660.00),  -- 3 Nächte * 220.00
+  (10, 750.00), -- 3 Nächte * 250.00
+  (11, 480.00), -- 4 Nächte * 120.00
+  (12, 720.00), -- 4 Nächte * 180.00
+  (13, 1200.00),-- 4 Nächte * 300.00
+  (14, 880.00), -- 4 Nächte * 220.00
+  (15, 1000.00),-- 4 Nächte * 250.00
+  -- Rechnungen für die zusätzlichen Buchungen
+  (16, 360.00), -- 3 Nächte * 120.00
+  (17, 540.00), -- 3 Nächte * 180.00
+  (18, 900.00), -- 3 Nächte * 300.00
+  (19, 660.00), -- 3 Nächte * 220.00
+  (20, 750.00); -- 3 Nächte * 250.00
 
 COMMIT;
 PRAGMA foreign_keys = ON;
