@@ -101,12 +101,20 @@ class HotelDataAccess(BaseDataAccess):
     # User Story 1.4: Hotels, die während des Aufenthaltes verfügbar sind
     def get_hotels_by_availability(self, check_in_date: str, check_out_date: str) -> list[Hotel]:
         sql = """
-        SELECT h.hotel_id, h.name, h.stars, 
+        SELECT DISTINCT h.hotel_id, h.name, h.stars, 
                a.address_id, a.street, a.city, a.zip_code
         FROM hotel AS h
         JOIN address AS a ON h.address_id = a.address_id
         JOIN room as r ON r.hotel_id = h.hotel_id
-        WHERE room_id NOT IN (SELECT room_id FROM Booking WHERE check_in_date <= ? AND check_out_date > ? AND is_cancelled = 0)
+        WHERE r.room_id NOT IN (
+            SELECT room_id 
+            FROM Booking 
+            WHERE NOT (
+                check_out_date <= ? 
+                OR check_in_date >= ?
+            )
+            AND is_cancelled = 0
+        )
         """
         rows = self.fetchall(sql, (check_in_date, check_out_date,))
         result: list[Hotel] = []
