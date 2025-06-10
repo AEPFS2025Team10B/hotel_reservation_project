@@ -61,16 +61,22 @@ def main ():
         if hotels:
             for index, hotel in enumerate(hotels, start=1):
                 print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
-        selection = int(input("\nEnter the number of the hotel you want to see the available rooms for your desired stay dates: ").strip())
-        if 1 <= selection <= len(hotels):
-            selected_hotel = hotels[selection - 1]
-        if not check_in_date:
-            check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
-        if not check_out_date:
-            check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
-        correct = True
-        print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
-        rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
+            selection = int(input("\nEnter the number of the hotel you want to see the available rooms for your desired stay dates: ").strip())
+            if 1 <= selection <= len(hotels):
+                selected_hotel = hotels[selection - 1]
+                if not check_in_date:
+                    check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
+                if not check_out_date:
+                    check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
+                correct = True
+                print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
+                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
+            else:
+                print("Invalid selection. Please try again.")
+                correct = True
+        else:
+            print("No hotels available for the selected criteria. Please try different dates or criteria.")
+            return
 
         live = False
         while not live:
@@ -108,6 +114,7 @@ def main ():
 
             if not rooms:
                 print("No available rooms, in all the hotels in this time period.")
+                live = True
 
 
 
