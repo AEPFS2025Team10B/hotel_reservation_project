@@ -47,12 +47,12 @@ INSERT INTO Hotel(name, stars, address_id) VALUES
   ('Les Trois Rois',                 5, 5);
 
 -- Gäste (5 Einträge)
-INSERT INTO Guest(first_name, last_name, email) VALUES
-  ('Anna',    'Meier',    'anna.meier@example.com'),
-  ('Benedikt','Frey',     'benedikt.frey@example.com'),
-  ('Claudia', 'Zürcher',  'claudia.zuercher@example.com'),
-  ('Daniel',  'Huber',    'daniel.huber@example.com'),
-  ('Elena',   'Schmid',   'elena.schmid@example.com');
+INSERT INTO Guest(first_name, last_name, email, birthday, nationality, address_id) VALUES
+  ('Anna',    'Meier',    'anna.meier@example.com', '1990-01-15', 'Germany', 1),
+  ('Benedikt','Frey',     'benedikt.frey@example.com', '1985-06-20', 'United Kingdom', 1),
+  ('Claudia', 'Zürcher',  'claudia.zuercher@example.com', '1995-03-10', 'Germany', 2),
+  ('Daniel',  'Huber',    'daniel.huber@example.com', '1988-12-05', 'Germany', 3),
+  ('Elena',   'Schmid',   'elena.schmid@example.com', '1992-08-25', 'United Kingdom', 4);
 
 -- Zimmertypen (5 Einträge)
 INSERT INTO Room_Type(description, max_guests) VALUES
@@ -109,5 +109,4 @@ PRAGMA foreign_keys = ON;
     print("✅ Alle Tabellen wurden mit mindestens 5 Einträgen befüllt.")
 
 if __name__ == '__main__':
-    main()
     main()
