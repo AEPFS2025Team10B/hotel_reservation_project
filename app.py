@@ -68,8 +68,9 @@ def main():
         ("Datenvisualisierung", [
             (22, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests)."),
         ]),
-        ("System Utilities", [
-            (100, "add_example_data.py", "Add example data to the system"),
+        ("Datenbank Verwaltung", [
+            (100, "add_example_data.py", "Reset data back to original"),
+            #genau genommen, wird die Datenbank komplett gelöscht und dann wieder eingefügt
         ]),
     ]
 

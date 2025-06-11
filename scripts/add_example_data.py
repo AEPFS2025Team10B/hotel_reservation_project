@@ -97,25 +97,25 @@ INSERT INTO Room_Facilities(room_id, facility_id) VALUES
   (1,1),(2,2),(3,3),(4,4),(5,5);
 
 -- Buchungen (5 Einträge, Mai–Aug 2025)
-INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date) VALUES
-  (1, 1, '2025-05-20','2025-05-22'),
-  (2, 2, '2025-06-01','2025-06-03'),
-  (3, 3, '2025-07-10','2025-07-12'),
-  (4, 4, '2025-08-05','2025-08-07'),
-  (5, 5, '2025-08-20','2025-08-22');
+INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date, rating, recommendation) VALUES
+  (1, 1, '2025-05-20','2025-05-22', 9, 'Excellent service and beautiful rooms!'),
+  (2, 2, '2025-06-01','2025-06-03', 7, NULL),
+  (3, 3, '2025-07-10','2025-07-12', 10, 'Best hotel experience ever!'),
+  (4, 4, '2025-08-05','2025-08-07', NULL, NULL,
+  (5, 5, '2025-08-20','2025-08-22', 6, 'Good but could be better.');
 
 -- Zusätzliche Buchungen für Oktober 2025 (realistische Überlappungen)
-INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date) VALUES
-  (1, 1, '2025-10-25','2025-11-02'),  -- Langer Aufenthalt
-  (6, 2, '2025-10-26','2025-10-29'),  -- Kurzer Aufenthalt
-  (3, 3, '2025-10-27','2025-10-30'),  -- Überlappt mit anderen
-  (7, 4, '2025-10-28','2025-10-31'),  -- Hauptzeitraum
-  (8, 5, '2025-10-29','2025-11-01'),  -- Versetzt
-  (2, 1, '2025-10-30','2025-11-03'),  -- Nachfolger
-  (4, 2, '2025-10-31','2025-11-04'),  -- Nachfolger
-  (5, 3, '2025-11-01','2025-11-05'),  -- Nachfolger
-  (6, 4, '2025-11-02','2025-11-06'),  -- Nachfolger
-  (7, 5, '2025-11-03','2025-11-07');  -- Nachfolger
+INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date, rating, recommendation) VALUES
+  (1, 1, '2025-10-25','2025-11-02', 8, 'Perfect stay, will come back!'),
+  (6, 2, '2025-10-26','2025-10-29', NULL, NULL),
+  (3, 3, '2025-10-27','2025-10-30', 9, NULL),
+  (7, 4, '2025-10-28','2025-10-31', 10, 'Absolutely amazing experience!'),
+  (8, 5, '2025-10-29','2025-11-01', 6, NULL),
+  (2, 1, '2025-10-30','2025-11-03', 7, 'Very comfortable rooms.'),
+  (4, 2, '2025-10-31','2025-11-04', NULL, NULL),
+  (5, 3, '2025-11-01','2025-11-05', 8, 'Luxury at its finest!'),
+  (6, 4, '2025-11-02','2025-11-06', 5, 'Decent stay but overpriced.'),
+  (7, 5, '2025-11-03','2025-11-07', 8, NULL);
 
 -- Rechnungen (5 Einträge)
 INSERT INTO Invoice(booking_id, total_amount) VALUES
