@@ -36,6 +36,9 @@ def add_new_hotel(name: str, stars: int, street: str, city: str, zip_code: str):
     # Prüfe ob das Hotel bereits existiert
     if hotel_dao.hotel_exists(name, street, city, zip_code):
         raise ValueError(f"A hotel with the name:'{name}' and address '{street}, {city} {zip_code}' already exists.")
+    #Der Fehler kommt nur, wenn Der Name und die Adresse übereinstimmt.
+    #Überlegung: Es kann sein das ein hotel denselben namen hat, wie ein anderes,
+    # aber es kann nicht die gleiche Adresse haben.
     
     # Wenn nicht, erstelle das neue Hotel
     addr = hotel_dao.create_address(street, city, zip_code)

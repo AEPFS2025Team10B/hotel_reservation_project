@@ -11,6 +11,21 @@ from business_logic.hotel_manager import add_new_hotel
 
 def main():
     print("=== Add a new hotel ===")
+    valid = False
+    while not valid:
+        choice = input("for coach: Do you want to check you add a hotel that already exists (y/n)?")
+        if choice.lower() == "y":
+            print("Enter as follows:")
+            print("Name:    Les Trois Rois")
+            print("Stars:   5")
+            print("Street:  Freiestrasse 10")
+            print("City:    Basel")
+            print("ZIP:     4051")
+            valid = True
+        elif choice.lower() == "n":
+            valid = True
+        else:
+            print("Please enter either 'y' or 'n'.")
 
     # 1) Hotel-Grunddaten
     name = input("Name of the hotel: ").strip()
@@ -30,7 +45,7 @@ def main():
     print("\nAddress of the hotel:")
     street   = input("  Street: ").strip()
     city     = input("  City:   ").strip()
-    zip_code = input("  Zip:     ").strip()
+    zip_code = input("  Zip:    ").strip()
 
     if not street or not city or not zip_code:
         print("street, city and zip are valid.")

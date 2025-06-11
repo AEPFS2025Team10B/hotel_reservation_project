@@ -27,6 +27,7 @@ def main():
         # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
         # jetzt kann er es einfach wieder eingeben.
         try:
+            print("for Coach: do not delete hotel: Les Trois Rois, its good to check user story 3_1_add_new_hotel")
             sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
             if not (1 <= sel <= len(hotels)):
                 print("Invalid Selection.")
