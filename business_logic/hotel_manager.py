@@ -33,6 +33,11 @@ def find_all_hotel_details():
 
 # (User Story 3.1) Admin fügt neues Hotel hinzu
 def add_new_hotel(name: str, stars: int, street: str, city: str, zip_code: str):
+    # Prüfe ob das Hotel bereits existiert
+    if hotel_dao.hotel_exists(name, street, city, zip_code):
+        raise ValueError(f"A hotel with the name:'{name}' and address '{street}, {city} {zip_code}' already exists.")
+    
+    # Wenn nicht, erstelle das neue Hotel
     addr = hotel_dao.create_address(street, city, zip_code)
     hotel = hotel_dao.create_hotel(name, stars, addr.address_id)
     return hotel

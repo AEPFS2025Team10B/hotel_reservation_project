@@ -265,3 +265,16 @@ class HotelDataAccess(BaseDataAccess):
         address = Address(aid, astr, acity, azip)
         hotel.address = address
         return hotel
+
+    def hotel_exists(self, name: str, street: str, city: str, zip_code: str) -> bool:
+        sql = """
+        SELECT COUNT(*)
+        FROM hotel h
+        JOIN address a ON h.address_id = a.address_id
+        WHERE LOWER(h.name) = LOWER(?)
+        AND LOWER(a.street) = LOWER(?)
+        AND LOWER(a.city) = LOWER(?)
+        AND LOWER(a.zip_code) = LOWER(?)
+        """
+        count, = self.fetchone(sql, (name, street, city, zip_code))
+        return count > 0

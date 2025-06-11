@@ -39,14 +39,16 @@ def main():
     # 3) Anlegen und Bestätigung
     try:
         new_hotel = add_new_hotel(name, stars, street, city, zip_code)
+        print("\n Hotel successfully created:")
+        print(f"  – {new_hotel.name} ({new_hotel.stars}★)")
+        addr = new_hotel.address
+        print(f"  – address: {addr.street}, {addr.city} {addr.zip_code}")
+    except ValueError as e:
+        print(f"\nFehler: {e}")
+        return
     except Exception as e:
         print(f"Error creating entry: {e}")
         return
-
-    print("\n Hotel successfully created:")
-    print(f"  – {new_hotel.name} ({new_hotel.stars}★)")
-    addr = new_hotel.address
-    print(f"  – address: {addr.street}, {addr.city} {addr.zip_code}")
 
 if __name__ == "__main__":
     main()
