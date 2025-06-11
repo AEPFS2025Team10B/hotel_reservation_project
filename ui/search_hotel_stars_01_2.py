@@ -34,3 +34,9 @@ def main():
     else:
         print(f"\nNo hotels found in {city} with at least {min_stars} stars.")
     return hotels
+
+#Was könnte man besser machen: Es wäre noch gut, dass wenn man eine Stadt eingibt,
+# es in dieser Stadt aber kein Hotel hat, bereits unterbrochen wird. Jetzt weis man
+# nicht, ob es an der Stadt oder an den sternen liegt.
+# Wie: Zuerst prüfen gibt es in der Stadt überhaupt Hotels und nur wenn ja, nach
+# der mindestanzahl Sternen fragen

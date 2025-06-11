@@ -21,8 +21,7 @@ def main():
             guest_count = int(input("How many people should have space in this room? "))
             if guest_count < 1:
                 raise ValueError
-            print("")
-            print("Enter to finish...")  # TODO: Auf verschiednen Files, eventuell so machen, dass man nur 1 mal anpassen muss
+
             valid = True
         except ValueError:
             print("Enter a valid number and number must be above 0")
@@ -37,7 +36,11 @@ def main():
             description = matching_room.roomtype.description if matching_room and matching_room.roomtype else "Unbekannt"
             max_guests = matching_room.roomtype.max_guests if matching_room and matching_room.roomtype else "?"
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}, {description} (Max. Guests: {max_guests})")
+            print("")
+            input("Enter to finish...")
     else:
         print(f"\nNo hotels found with rooms for {guest_count} guests.")
+        print("")
+        input("Enter to finish...")
 
     return hotels
