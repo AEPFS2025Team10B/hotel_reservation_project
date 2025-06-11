@@ -28,17 +28,16 @@ def ask_date(prompt: str) -> str:
 
 def get_valid_nationality():
     """Get a valid nationality from the user."""
-    print("\nAvailable countries (enter country code, e.g. 'CH' for Switzerland):")
-    # Sort countries by name for better readability
-    sorted_countries = sorted(COUNTRIES.items(), key=lambda x: x[1]['en'])
-    for code, names in sorted_countries:
-        print(f"{code} = {names['en']}")
-    
     while True:
-        code = input("\nPlease enter your nationality (country code): ").strip().upper()
+        code = input("\nPlease enter your nationality (country code, e.g. 'CH' for Switzerland): ").strip().upper()
         if code in COUNTRIES:
-            return code
-        print("Invalid country code. Please enter a valid two-letter country code (e.g. 'CH' for Switzerland)")
+            return COUNTRIES[code]['en']  # Return English country name instead of code
+        
+        # Only show the list if the input was invalid
+        print("\nInvalid country code. Here are all available countries:")
+        sorted_countries = sorted(COUNTRIES.items(), key=lambda x: x[1]['en'])
+        for code, names in sorted_countries:
+            print(f"{code} = {names['en']}")
 
 def main ():
     valid = False
