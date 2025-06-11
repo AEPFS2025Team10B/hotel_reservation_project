@@ -13,6 +13,7 @@ from model import guest
 from business_logic.guest_manager import add_new_guest
 from business_logic.room_manager import get_available_rooms_by_hotel_and_dates_2
 from datetime import datetime
+from common_code.country_list import COUNTRIES
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -25,6 +26,19 @@ def ask_date(prompt: str) -> str:
         except ValueError:
             print("Please enter a date in the format: YYYY-MM-DD.")
 
+def get_valid_nationality():
+    """Get a valid nationality from the user."""
+    print("\nAvailable countries (enter country code, e.g. 'CH' for Switzerland):")
+    # Sort countries by name for better readability
+    sorted_countries = sorted(COUNTRIES.items(), key=lambda x: x[1]['en'])
+    for code, names in sorted_countries:
+        print(f"{code} = {names['en']}")
+    
+    while True:
+        code = input("\nPlease enter your nationality (country code): ").strip().upper()
+        if code in COUNTRIES:
+            return code
+        print("Invalid country code. Please enter a valid two-letter country code (e.g. 'CH' for Switzerland)")
 
 def main ():
     valid = False
@@ -93,7 +107,7 @@ def main ():
                 zip = input("\nPlease Enter your zip code: ")
                 email = input("\nPlease Enter your email: ")
                 birthday = input("\nPlease Enter your birthday: ")
-                nationality = input("\nPlease Enter your nationality: ")
+                nationality = get_valid_nationality()
 
                 address_id = find_address_id(street, city, zip)
                 if not address_id:
