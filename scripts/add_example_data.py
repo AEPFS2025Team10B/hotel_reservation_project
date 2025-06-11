@@ -15,8 +15,9 @@ def main():
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
 
-    sql = r"""
+    sql = """
 PRAGMA foreign_keys = OFF;
+
 BEGIN TRANSACTION;
 
 -- Vorhandene Daten löschen (Kind- vor Eltern-Tabellen)
@@ -101,7 +102,7 @@ INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date, rating, re
   (1, 1, '2025-05-20','2025-05-22', 9, 'Excellent service and beautiful rooms!'),
   (2, 2, '2025-06-01','2025-06-03', 7, NULL),
   (3, 3, '2025-07-10','2025-07-12', 10, 'Best hotel experience ever!'),
-  (4, 4, '2025-08-05','2025-08-07', NULL, NULL,
+  (4, 4, '2025-08-05','2025-08-07', NULL, 'Great location and friendly staff.'),
   (5, 5, '2025-08-20','2025-08-22', 6, 'Good but could be better.');
 
 -- Zusätzliche Buchungen für Oktober 2025 (realistische Überlappungen)
@@ -110,12 +111,12 @@ INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date, rating, re
   (6, 2, '2025-10-26','2025-10-29', NULL, NULL),
   (3, 3, '2025-10-27','2025-10-30', 9, NULL),
   (7, 4, '2025-10-28','2025-10-31', 10, 'Absolutely amazing experience!'),
-  (8, 5, '2025-10-29','2025-11-01', 6, NULL),
+  (8, 5, '2025-10-29','2025-11-01', NULL, 'Very comfortable rooms.'),
   (2, 1, '2025-10-30','2025-11-03', 7, 'Very comfortable rooms.'),
   (4, 2, '2025-10-31','2025-11-04', NULL, NULL),
   (5, 3, '2025-11-01','2025-11-05', 8, 'Luxury at its finest!'),
   (6, 4, '2025-11-02','2025-11-06', 5, 'Decent stay but overpriced.'),
-  (7, 5, '2025-11-03','2025-11-07', 8, NULL);
+  (7, 5, '2025-11-03','2025-11-07', NULL, 'Would recommend for business travelers.');
 
 -- Rechnungen (5 Einträge)
 INSERT INTO Invoice(booking_id, total_amount) VALUES
@@ -139,6 +140,7 @@ INSERT INTO Invoice(booking_id, total_amount) VALUES
   (15, 1000.00);-- 4 Nächte * 250.00
 
 COMMIT;
+
 PRAGMA foreign_keys = ON;
 """
 
