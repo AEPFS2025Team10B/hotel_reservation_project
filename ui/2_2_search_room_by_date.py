@@ -30,6 +30,17 @@ def ask_date(prompt: str) -> str:
             print("Invalid date. Please enter a valid date.")
 
 def main():
+    valid = False
+    while not valid:
+        choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
+        if choice.lower() == "y":
+            print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+            valid = True
+        elif choice.lower() == "n":
+            valid = True
+        else:
+            print("Please enter either 'y' or 'n'.")
+
     check_in = ask_date("Check-in (YYYY-MM-DD, . or / also allowed): ")
 
     while True:
