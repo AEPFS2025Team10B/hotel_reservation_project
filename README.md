@@ -75,7 +75,7 @@ Involviert: David Germann
 
 
   Erwähnenswert:
-  add_example_data.py: Reto Lutz
+  add_example_data.py: Reto Lutz, David Germann
   app.py: Reto Lutz
   Datenbank: David Germann
   Grundstruktur: Reto Lutz

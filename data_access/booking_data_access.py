@@ -22,7 +22,7 @@ class BookingDataAccess(BaseDataAccess):
         new_id, _ = self.execute(sql, (guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount))
         booking = Booking(new_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
         booking.is_cancelled = bool(is_cancelled)
-        booking.total_price = total_amount
+        booking.total_price = total_amount if total_amount is not None else 0.0
         return booking
 
     def get_booking_by_id(self, booking_id: int) -> Booking | None:
@@ -37,7 +37,7 @@ class BookingDataAccess(BaseDataAccess):
         booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
         booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
         booking.is_cancelled = bool(is_cancelled)
-        booking.total_price = total_amount
+        booking.total_price = total_amount if total_amount is not None else 0.0
         return booking
 
     def get_booking_relations(self, booking_id: int) -> tuple[int, int] | None:
@@ -110,7 +110,7 @@ class BookingDataAccess(BaseDataAccess):
         for booking_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount in rows:
             booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
             booking.is_cancelled = bool(is_cancelled)
-            booking.total_price = total_amount
+            booking.total_price = total_amount if total_amount is not None else 0.0
 
             room = find_room_by_id(room_id)
             hotel_id = find_hotel_id_by_room_id(room.room_id)
@@ -131,7 +131,7 @@ class BookingDataAccess(BaseDataAccess):
             booking_id, guest_id, room_id, check_in_date, check_out_date, is_cancelled, total_amount = row
             booking = Booking(booking_id, self._parse_date(check_in_date), self._parse_date(check_out_date))
             booking.is_cancelled = bool(is_cancelled)
-            booking.total_price = total_amount
+            booking.total_price = total_amount if total_amount is not None else 0.0
             booking.guest_id = guest_id
             booking.room_id = room_id
             bookings.append(booking)
