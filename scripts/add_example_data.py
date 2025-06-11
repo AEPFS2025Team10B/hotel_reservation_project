@@ -30,13 +30,24 @@ DELETE FROM Guest;
 DELETE FROM Hotel;
 DELETE FROM Address;
 
--- Adressen (5 Einträge)
+-- Hotel Adressen (5 Einträge)
 INSERT INTO Address(street, city, zip_code) VALUES
   ('Bahnhofstrasse 1',    'Zürich', '8001'),
   ('Langstrasse 60',      'Zürich', '8004'),
   ('Seefeldstrasse 20',   'Zürich', '8008'),
   ('Marktgasse 59',       'Bern',   '3011'),
   ('Freiestrasse 10',     'Basel',  '4051');
+
+-- Gäste Adressen (8 Einträge)
+INSERT INTO Address(street, city, zip_code) VALUES
+  ('Hauptstrasse 10',     'Zürich', '8002'),
+  ('Bahnhofplatz 5',      'Zürich', '8001'),
+  ('Limmatquai 20',       'Zürich', '8001'),
+  ('Bundesgasse 15',      'Bern',   '3011'),
+  ('Aeschenvorstadt 30',  'Basel',  '4051'),
+  ('Rämistrasse 25',      'Zürich', '8001'),
+  ('Kornhausstrasse 8',   'Bern',   '3011'),
+  ('Steinenvorstadt 12',  'Basel',  '4051');
 
 -- Hotels (5 Einträge)
 INSERT INTO Hotel(name, stars, address_id) VALUES
@@ -46,16 +57,16 @@ INSERT INTO Hotel(name, stars, address_id) VALUES
   ('Bellevue Palace',                5, 4),
   ('Les Trois Rois',                 5, 5);
 
--- Gäste (5 Einträge)
+-- Gäste (8 Einträge)
 INSERT INTO Guest(first_name, last_name, email, birthday, nationality, address_id) VALUES
-  ('Anna',    'Meier',    'anna.meier@example.com', '1990-01-15', 'Germany', 1),
-  ('Benedikt','Frey',     'benedikt.frey@example.com', '1985-06-20', 'United Kingdom', 1),
-  ('Claudia', 'Zürcher',  'claudia.zuercher@example.com', '1995-03-10', 'Germany', 2),
-  ('Daniel',  'Huber',    'daniel.huber@example.com', '1988-12-05', 'Germany', 3),
-  ('Elena',   'Schmid',   'elena.schmid@example.com', '1992-08-25', 'United Kingdom', 4),
-  ('Thomas',  'Weber',    'thomas.weber@example.com', '1978-11-30', 'Switzerland', 1),
-  ('Maria',   'Koller',   'maria.koller@example.com', '1982-04-15', 'Austria', 2),
-  ('Peter',   'Müller',   'peter.mueller@example.com', '1991-07-22', 'Germany', 3);
+  ('Anna',    'Meier',    'anna.meier@example.com', '1990-01-15', 'Germany', 6),
+  ('Benedikt','Frey',     'benedikt.frey@example.com', '1985-06-20', 'United Kingdom', 7),
+  ('Claudia', 'Zürcher',  'claudia.zuercher@example.com', '1995-03-10', 'Germany', 8),
+  ('Daniel',  'Huber',    'daniel.huber@example.com', '1988-12-05', 'Germany', 9),
+  ('Elena',   'Schmid',   'elena.schmid@example.com', '1992-08-25', 'United Kingdom', 10),
+  ('Thomas',  'Weber',    'thomas.weber@example.com', '1978-11-30', 'Switzerland', 11),
+  ('Maria',   'Koller',   'maria.koller@example.com', '1982-04-15', 'Austria', 12),
+  ('Peter',   'Müller',   'peter.mueller@example.com', '1991-07-22', 'Germany', 13);
 
 -- Zimmertypen (5 Einträge)
 INSERT INTO Room_Type(description, max_guests) VALUES
@@ -104,13 +115,7 @@ INSERT INTO Booking(guest_id, room_id, check_in_date, check_out_date) VALUES
   (4, 2, '2025-10-31','2025-11-04'),  -- Nachfolger
   (5, 3, '2025-11-01','2025-11-05'),  -- Nachfolger
   (6, 4, '2025-11-02','2025-11-06'),  -- Nachfolger
-  (7, 5, '2025-11-03','2025-11-07'),  -- Nachfolger
-  -- Zusätzliche Buchungen für den kritischen Zeitraum
-  (8, 1, '2025-10-28','2025-10-31'),  -- Hotel Baur au Lac
-  (1, 2, '2025-10-28','2025-10-31'),  -- Four Seasons
-  (2, 3, '2025-10-28','2025-10-31'),  -- Grand Hotel National
-  (3, 4, '2025-10-28','2025-10-31'),  -- Bellevue Palace
-  (4, 5, '2025-10-28','2025-10-31');  -- Les Trois Rois
+  (7, 5, '2025-11-03','2025-11-07');  -- Nachfolger
 
 -- Rechnungen (5 Einträge)
 INSERT INTO Invoice(booking_id, total_amount) VALUES
@@ -131,23 +136,16 @@ INSERT INTO Invoice(booking_id, total_amount) VALUES
   (12, 720.00), -- 4 Nächte * 180.00
   (13, 1200.00),-- 4 Nächte * 300.00
   (14, 880.00), -- 4 Nächte * 220.00
-  (15, 1000.00),-- 4 Nächte * 250.00
-  -- Rechnungen für die zusätzlichen Buchungen
-  (16, 360.00), -- 3 Nächte * 120.00
-  (17, 540.00), -- 3 Nächte * 180.00
-  (18, 900.00), -- 3 Nächte * 300.00
-  (19, 660.00), -- 3 Nächte * 220.00
-  (20, 750.00); -- 3 Nächte * 250.00
+  (15, 1000.00);-- 4 Nächte * 250.00
 
 COMMIT;
 PRAGMA foreign_keys = ON;
 """
 
-    print("Füge Beispieldaten ein...")
     cur.executescript(sql)
     conn.commit()
     conn.close()
-    print("✅ Alle Tabellen wurden mit mindestens 5 Einträgen befüllt.")
+    print("✅ The Databank got reset back to original state.")
 
 if __name__ == '__main__':
     main()
