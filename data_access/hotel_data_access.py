@@ -33,8 +33,10 @@ class HotelDataAccess(BaseDataAccess):
         addr_row = self.fetchone(
             "SELECT address_id, street, city, zip_code FROM address WHERE address_id = ?", (aid,)
         )
-        address = Address(*addr_row) if addr_row else None
-        return Hotel(hid, name, stars, Address)
+        hotel = Hotel(hid, name, stars)
+        if addr_row:
+            hotel.address = Address(*addr_row)
+        return hotel
 
     # User Story 1.1: Hotels in einer Stadt suchen
     def get_hotels_by_city(self, city: str) -> list[Hotel]:
