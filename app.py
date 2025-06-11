@@ -7,9 +7,18 @@ from logo import print_logo
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 UI_PATH = "ui"
+SCRIPTS_PATH = "scripts"
 
 def run_story(filename):
+    # Check if file exists in ui directory first
     full_path = os.path.join(UI_PATH, filename)
+    if not os.path.exists(full_path):
+        # If not in ui, try scripts directory
+        full_path = os.path.join(SCRIPTS_PATH, filename)
+        if not os.path.exists(full_path):
+            print(f"Error: File {filename} not found in {UI_PATH} or {SCRIPTS_PATH}")
+            return
+
     spec = importlib.util.spec_from_file_location("module.name", full_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -58,6 +67,9 @@ def main():
         ]),
         ("Datenvisualisierung", [
             (22, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests)."),
+        ]),
+        ("System Utilities", [
+            (100, "add_example_data.py", "Add example data to the system"),
         ]),
     ]
 
