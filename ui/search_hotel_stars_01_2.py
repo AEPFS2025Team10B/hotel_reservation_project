@@ -18,6 +18,7 @@ from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City with Minimum Stars")
+    print("for Coach: Enter Zürich or Aarau (no hotel)")
     city = input("Enter city: ").strip()
     min_stars = int(input("Enter minimum stars: "))
 
@@ -30,9 +31,11 @@ def main():
 
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
+        input("Press enter to finish")
 
     else:
         print(f"\nNo hotels found in {city} with at least {min_stars} stars.")
+        input("Press enter to finish")
     return hotels
 
 #Was könnte man besser machen: Es wäre noch gut, dass wenn man eine Stadt eingibt,

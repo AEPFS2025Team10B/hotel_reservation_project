@@ -16,7 +16,6 @@ def find_hotel_by_list_city(hotels):
                 print("\nYou selected:")
                 print(f"→ {selected.name}")
                 print(f"  {selected.stars}★, {selected.address}")
-                input("\nPress Enter to finish...")
                 return selected
             else:
                 print("Invalid selection.")

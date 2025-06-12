@@ -13,17 +13,20 @@ from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City")
+    print("for Coach: Enter Zürich or Aarau (no hotel)")
     city = input("Enter a city: ").strip()
     hotels = find_hotels_by_city(city)
 
     if hotels:
-        print(f"\nFound hotels in {city}:")
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
+        #print(f"\nFound hotels in {city}:")
+        #for index, hotel in enumerate(hotels, start=1):
+        #    print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
 
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
+        input("Press enter to finish")
 
     else:
         print(f"\nNo hotels found in {city}.")
+        input("Press enter to finish")
     return hotels

@@ -76,28 +76,37 @@ class HotelDataAccess(BaseDataAccess):
     # User Story 1.3: Hotels suchen, die Zimmer haben welche meiner Gästeanzahl entsprechen
     def get_hotels_by_guest_count(self, guest_count: int) -> list[Hotel]:
         sql = """
-      SELECT h.hotel_id, h.name, h.stars,
-             a.address_id, a.street, a.city, a.zip_code,
-             rt.type_id,rt.description, rt.max_guests
+        SELECT DISTINCT h.hotel_id, h.name, h.stars,
+               a.address_id, a.street, a.city, a.zip_code,
+               rt.type_id, rt.description, rt.max_guests
         FROM hotel AS h
         JOIN address AS a ON h.address_id = a.address_id
-        JOIN ROOM AS r ON r.hotel_id = h.hotel_id
-        JOIN Room_Type AS rt ON rt.type_id = r.type_id
+        JOIN room AS r ON r.hotel_id = h.hotel_id
+        JOIN room_type AS rt ON rt.type_id = r.type_id
         WHERE rt.max_guests >= ?
+        ORDER BY h.name, rt.max_guests
         """
         rows = self.fetchall(sql, (guest_count,))
         result: list[Hotel] = []
+        current_hotel_id = None
+        current_hotel = None
+
         for hid, name, stars, aid, street, city, zipcode, rt_id, rt_desc, rt_guests in rows:
-            hotel = Hotel(hid, name, stars)
-            hotel.address = Address(aid, street, city, zipcode)
+            if current_hotel_id != hid:
+                if current_hotel:
+                    result.append(current_hotel)
+                current_hotel = Hotel(hid, name, stars)
+                current_hotel.address = Address(aid, street, city, zipcode)
+                current_hotel.rooms = []
+                current_hotel_id = hid
 
             roomtype = RoomType(rt_id, rt_guests, rt_desc)
-            hotel.rooms = []  # optional, wenn nicht schon da
             room = Room(0, "N/A", 0.0)  # Dummy-Zimmer
             room.roomtype = roomtype
-            hotel.rooms.append(room)
+            current_hotel.rooms.append(room)
 
-            result.append(hotel)
+        if current_hotel:
+            result.append(current_hotel)
         return result
 
     # User Story 1.4: Hotels, die während des Aufenthaltes verfügbar sind
