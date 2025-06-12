@@ -22,6 +22,17 @@ def main():
         valid = False
         while not valid:
             try:
+                coach = False
+                while not coach:
+                    choice = input(
+                        "for coach: do you want to see what happens if a hotel does not have a recommendation (y/n)?")
+                    if choice.lower() == "y":
+                        print("Choose the hotel 6. Widder Hotel")
+                        coach = True
+                    elif choice.lower() == "n":
+                        coach = True
+                    else:
+                        print("Please enter either 'y' or 'n'.")
                 selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
                 if 1 <= selection <= len(hotels):
                     selected_hotel = hotels[selection - 1]
@@ -36,14 +47,17 @@ def main():
                             #das durchschnittliche rating wird ausgegeben
                         else:
                             print("No recommendation jet, for this hotel.\n")
+                            input("Press enter to finish")
                             valid = True
                         # Einzelne Reviews ausgeben
                         for rating, recommendation, first_name, last_name in reviews:
                             rec_text = '' if not recommendation or str(recommendation).lower() == 'none' else recommendation
                             print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
+                            input("Press enter to finish")
                             valid = True
                     else:
                         print("There are no recommendations for this Hotel.")
+                        input("Press enter to finish")
                         valid = True
                         #TODO: wenn es keine Bewertung gibt, soll nur diese Meldung angezeigt werden
                         #wenn es kein Rating hat, kommt diese Meldung zum Zug,
@@ -58,6 +72,7 @@ def main():
                 #es wird ein Integer verlangt, kommt keiner, wird diese Meldung angezeigt
     else:
         print("no hotels found.")
+        input("Press enter to finish")
         #kommt nur zum Zug, wenn es keine Hotels in der Datenbank gibt
 
 if __name__ == "__main__":
