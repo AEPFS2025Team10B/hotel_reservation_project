@@ -21,6 +21,7 @@ def main():
 def ask_booking_id():
     valid = False
     while not valid:
+        print("for Coach: You can use booking id: 1")
         user_input = int(input("Please enter your booking id: "))
         booking = find_booking_by_id(user_input)
         

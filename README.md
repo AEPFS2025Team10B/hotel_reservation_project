@@ -71,7 +71,7 @@ Involviert: David Germann
 
 User Stories mit Datenvisualisierung
 2. Als Admin möchte ich eine Aufschlüsselung der Gäste-Demografie sehen
-Involviert: David Germann
+Involviert: David Germann, Reto Lutz
 
 
   Erwähnenswert:
@@ -87,10 +87,10 @@ weil wir uns nicht mehr überschnitten haben.
 
 Kurze Instruktion wie die Applikation aufgebaut ist und wie sie verwendet werden muss:
 Jede User Story ist in unterschiedliche .py Dateien unterteilt(ausser wenn Code wiederverwendet werden konnte).
-Da es um die bedienung zu vereinfachen, haben wir die app.py Datei eingeführt.
+Da es um die Bedienung zu vereinfachen, haben wir die app.py Datei eingeführt.
 
 Sie können also die Datei app.py ausführen und dann die gewünschte User Story auswählen und ausführen lassen.
-wenn SIe eine User Story direkt ausführen wollen (über Current File), wird das nicht gehen.
+wenn See eine User Story direkt ausführen wollen (über Current File), wird das nicht gehen.
 Ansonsten müssen Sie keine Dateien ausführen, auch die Datenbank ist bereits fertig vorbereitet.
 Für gewisse ausnahmen, spezialfälle, können Sie sich anzeigen lassen, was eingegeben werden muss, 
 um diese hervorzurufen.

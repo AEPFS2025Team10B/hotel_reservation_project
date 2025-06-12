@@ -33,6 +33,7 @@ def main():
                         coach = True
                     else:
                         print("Please enter either 'y' or 'n'.")
+
                 selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
                 if 1 <= selection <= len(hotels):
                     selected_hotel = hotels[selection - 1]

@@ -217,11 +217,11 @@ INSERT INTO Hotel(name, stars, address_id) VALUES
   ('Grand Hotel National', 5, 3),     -- Seefeldstrasse 20
   ('Bellevue Palace', 5, 4),          -- Marktgasse 59
   ('Les Trois Rois', 5, 5),           -- Freiestrasse 10
-  ('Widder Hotel', 5, 6),             -- Rennweg 7
-  ('Baur au Lac', 5, 7),              -- Talstrasse 1
-  ('Park Hyatt Zürich', 5, 8),        -- Beethovenstrasse 21
+  ('Widder Hotel', 3, 6),             -- Rennweg 7
+  ('Hotel Messia', 2, 7),             -- Talstrasse 1
+  ('Park Hyatt Zürich', 4, 8),        -- Beethovenstrasse 21
   ('The Dolder Grand', 5, 9),         -- Kurhausstrasse 65
-  ('Atlantis by Giardino', 5, 10);    -- Döltschiweg 234
+  ('Atlantis by Giardino', 3, 10);    -- Döltschiweg 234
 
 -- Zimmertypen (5 Einträge)
 INSERT INTO Room_Type(description, max_guests) VALUES
@@ -522,7 +522,6 @@ INSERT INTO Invoice(booking_id, total_amount) VALUES
   (1, 240.00),
   (2, 360.00),
   (3, 600.00),
-  (4, 440.00),
   (5, 500.00);
 
 -- Rechnungen für Oktober-Buchungen

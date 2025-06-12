@@ -6,6 +6,17 @@ from business_logic.booking_manager import find_bookings_by_email
 
 def main():
     print("📄 View Invoice")
+    valid = False
+    while not valid:
+        choice = input("for coach: Do you want to see what happens if you want to load a Invoice of a canceled booking? (y/n)?")
+        if choice.lower() == "y":
+            print("enter as booking ID: 4")
+            valid = True
+        elif choice.lower() == "n":
+            valid = True
+        else:
+            print("Please enter either 'y' or 'n'.")
+
     booking_input = input("Enter the booking ID (or press Enter if you don't know it): ").strip()
 
     if booking_input == "":

@@ -77,6 +77,20 @@ def main ():
             selection = int(input("\nEnter the number of the hotel you want to see the available rooms for your desired stay dates: ").strip())
             if 1 <= selection <= len(hotels):
                 selected_hotel = hotels[selection - 1]
+
+                coach = False
+                while not coach:
+                    print("")
+                    choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
+                    if choice.lower() == "y":
+                        print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+                        print("")
+                        coach = True
+                    elif choice.lower() == "n":
+                        coach = True
+                    else:
+                        print("Please enter either 'y' or 'n'.")
+
                 if not check_in_date:
                     check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
                 if not check_out_date:

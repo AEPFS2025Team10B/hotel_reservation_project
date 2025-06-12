@@ -167,6 +167,8 @@ def main():
 
         print("")
         input("Press enter to finish")
+        break
+
 
 
 if __name__ == "__main__":

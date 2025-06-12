@@ -13,9 +13,9 @@ def main():
     print("=== Add a new hotel ===")
     valid = False
     while not valid:
-        choice = input("for coach: Do you want to check you add a hotel that already exists (y/n)?")
+        choice = input("for coach: Do you want to check what happens if you add a hotel that already exists (y/n)?")
         if choice.lower() == "y":
-            print("Enter as follows:")
+            print("Enter the Hotel as follows:")
             print("Name:    Les Trois Rois")
             print("Stars:   5")
             print("Street:  Freiestrasse 10")
