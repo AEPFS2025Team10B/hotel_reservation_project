@@ -78,6 +78,7 @@ Involviert: David Germann, Reto Lutz
   add_example_data.py: Reto Lutz, David Germann
   app.py: Reto Lutz
   Datenbank: David Germann
+  For Coach-Sections: David Germann
   Grundstruktur: Reto Lutz
   Visual Paradigm: Jeremy Nathan
 

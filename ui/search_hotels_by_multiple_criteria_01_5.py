@@ -24,6 +24,16 @@ def main():
             city = input("Enter a city: ").strip()
             min_stars = int(input("Enter minimum stars: "))
             guest_count = int(input("And how many people should have space in this room? "))
+            coach = False
+            while not coach:
+                choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
+                if choice.lower() == "y":
+                    print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+                    coach = True
+                elif choice.lower() == "n":
+                    coach = True
+                else:
+                    print("Please enter either 'y' or 'n'.")
             check_in_date = input("Enter your check-in Date in the Format: YYYY-MM-DD: ")
             check_out_date = input("Enter your check-out Date in the Format: YYYY-MM-DD: ")
             valid = True
@@ -37,10 +47,10 @@ def main():
         print(f"\nThese hotels are available for you:\n")
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
-        print("")
         input("\nPress Enter to finish")
     else:
         print(f"\nNo hotels available:\n")
+        input("Press Enter to finish")
 
     return hotels, check_in_date, check_out_date
 

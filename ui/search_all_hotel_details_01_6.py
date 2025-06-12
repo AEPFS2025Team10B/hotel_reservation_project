@@ -4,6 +4,7 @@ User Story 1.6: Ich möchte Name, Adresse und Anzahl der Sterne jedes Hotels seh
 
 import sys
 import os
+import subprocess
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from datetime import date
@@ -35,6 +36,28 @@ def main():
                 if available_rooms:
                     for room in available_rooms:
                         print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
+
+
+                    print()
+                    coach = False
+                    while not coach:
+                        choice = input("for Coach: Do you want to see what happens if there are currently no rooms available (y/n)?\n"
+                                     "the databank will get manipulated and you have to reload it again in the starting menu (with 100) ")
+                        if choice.lower() == "y":
+                            # manipulate_data_for_01_6.py wird ausgeführt
+                            script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scripts', 'manipulate_data_for_01_6.py')
+                            subprocess.run([sys.executable, script_path])
+
+                            #man hätte in der datenbank auch ein hotel einfach ausbuchen können, dann wäre aber das nächste frei
+                            # Zimmer erst sehr spät angezeigt worden. Oder wir hätten es direkt so hinterlegt, dass sich das datum
+                            # automatisch anpasst, dann hätten wir aber, wenn wir im Oktober sind (und auch sonst), überschneidungen
+                            # verschiedener Buchungen.
+                            coach = True
+                        elif choice.lower() == "n":
+                            coach = True
+                        else:
+                            print("Please enter either 'y' or 'n'.")
+
                 else:
                     print(" No available rooms today.")
 
@@ -42,17 +65,27 @@ def main():
                     next_date = get_next_available_date_for_hotel(selected_hotel.hotel_id)
                     if next_date:
                         print(f"\nNext available date for any room: {next_date}")
+
                     else:
                         print("No future availability found.")
+                        #sollte eigentlich nie kommen
+
             else:
                 print("Invalid selection.")
+
         except ValueError:
             print("Please enter a valid number.")
     else:
         print("No hotels found.")
 
+    print("")
+    input("Press Enter to finish")
     return hotels
 
 
 if __name__ == "__main__":
     main()
+
+#was könnte man besser machen?:
+#man könnte vielleicht bevor man ein hotel auswählt herausfiltern können,
+# welche Hotels gerade keine Freien Zimmer haben.
