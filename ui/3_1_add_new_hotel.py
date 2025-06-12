@@ -60,10 +60,13 @@ def main():
         print(f"  – address: {addr.street}, {addr.city} {addr.zip_code}")
     except ValueError as e:
         print(f"\nFehler: {e}")
+        input(f"\nPress Enter to finish")
         return
     except Exception as e:
-        print(f"Error creating entry: {e}")
+        print(f"\nError creating entry: {e}")
+        input(f"\nPress Enter to finish")
         return
 
+    input(f"\nPress Enter to finish")
 if __name__ == "__main__":
     main()

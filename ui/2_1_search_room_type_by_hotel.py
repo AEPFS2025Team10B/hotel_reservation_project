@@ -38,7 +38,7 @@ def main():
                             print(f"   Price per night: CHF {rt.price_per_night:.2f}")
                             print(f"   Facilities: {', '.join(rt.facilities) if rt.facilities else 'None'}")
                             print("\n-------------------------------")
-                            input("Press Enter to finish")
+
                             valid = True
 
                     else:
@@ -57,6 +57,7 @@ def main():
         print("No hotels found.")
         return
 
+    input("Press Enter to finish")
 
 
 

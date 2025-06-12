@@ -47,12 +47,13 @@ def main():
                             # manipulate_data_for_01_6.py wird ausgeführt
                             script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scripts', 'manipulate_data_for_01_6.py')
                             subprocess.run([sys.executable, script_path])
-
+                            coach = True
                             #man hätte in der datenbank auch ein hotel einfach ausbuchen können, dann wäre aber das nächste frei
                             # Zimmer erst sehr spät angezeigt worden. Oder wir hätten es direkt so hinterlegt, dass sich das datum
-                            # automatisch anpasst, dann hätten wir aber, wenn wir im Oktober sind (und auch sonst), überschneidungen
-                            # verschiedener Buchungen.
-                            coach = True
+                            # automatisch anpasst, dann hätten wir aber überschneidungen verschiedener Buchungen besonders, wenn
+                            # wir im Oktober sind.
+
+
                         elif choice.lower() == "n":
                             coach = True
                         else:

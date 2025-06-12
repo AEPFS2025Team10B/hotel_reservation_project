@@ -27,7 +27,7 @@ def main():
         # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
         # jetzt kann er es einfach wieder eingeben.
         try:
-            print("for Coach: do not delete hotel: Les Trois Rois, its good to check user story 3_1_add_new_hotel")
+            print(f"\n\nfor Coach: do not delete hotel: Les Trois Rois, its good to check user story 3_1_add_new_hotel")
             sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
             if not (1 <= sel <= len(hotels)):
                 print("Invalid Selection.")
@@ -46,8 +46,7 @@ def main():
         confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (j/n): ").strip().lower()
         if confirm == 'n':
             print("Cancelled.")
-            print("")
-            input("Press Enter to finish...")
+            input(f"\nPress Enter to finish")
             break
 
         elif confirm != 'j':
@@ -59,10 +58,11 @@ def main():
         try:
             remove_hotel(hotel.hotel_id)
             print(f"Hotel '{hotel.name}' was deleted succesfully.")
-            input("Press Enter to finish...")
+            input(f"\nPress Enter to finish")
             valid = True
         except Exception as e:
             print(f"Deleting didnt work: {e}")
+            input(f"\nPress Enter to finish")
             valid = True
 
 if __name__ == "__main__":
