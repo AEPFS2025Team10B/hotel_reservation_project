@@ -80,10 +80,12 @@ def get_all_bookings_with_details():
     return result
 
 def cancel_booking_by_id(booking_id: int):
-    booking_dao.cancel_booking(booking_id)
-    booking = find_booking_by_id(booking_id)
-    invoice_manager.delete_invoice_by_booking_id(booking.booking_id)
-    return booking
+    status = booking_dao.cancel_booking(booking_id)
+    if status == "Booking cancelled successfully":
+        booking = find_booking_by_id(booking_id)
+        invoice_manager.delete_invoice_by_booking_id(booking.booking_id)
+        return booking
+    return status
 
 def generate_booking_confirmation(booking: Booking) -> str:
     lines = []

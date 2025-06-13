@@ -54,8 +54,35 @@ def main ():
         user_selection = int(input("Which option would you like? Enter the according number: "))
         if user_selection == 1:
             hotels = search_all_hotel_details_01_6.main()
+            if hotels:
+                selected_hotel = hotels[0]  # Get the selected hotel directly
+                print(f"\nDetails for {selected_hotel.name}:")
+                print(f"Address: {selected_hotel.address.street}, {selected_hotel.address.zip_code}, {selected_hotel.address.city}")
+                print(f"Stars: {selected_hotel.stars}\n")
+                print("Available rooms today:")
+                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, datetime.now().strftime("%Y-%m-%d"), datetime.now().strftime("%Y-%m-%d"))
+                for room in rooms:
+                    print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
+                
+                coach = False
+                while not coach:
+                    print("")
+                    choice = input("for Coach: Do you want to see what happens if there are currently no rooms available (y/n)?")
+                    if choice.lower() == "y":
+                        print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+                        print("")
+                        coach = True
+                    elif choice.lower() == "n":
+                        coach = True
+                    else:
+                        print("Please enter either 'y' or 'n'.")
+
+                check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
+                check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
+                print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
+                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
         elif user_selection == 2:
-            hotels = search_hotels_by_city_01_1.main()
+            hotels = search_hotels_by_city_01_1.main(is_booking_process=True)
         elif user_selection == 3:
             hotels = search_hotel_stars_01_2.main()
         elif user_selection == 4:
@@ -119,7 +146,7 @@ def main ():
                 city = input("\nPlease Enter your city: ")
                 zip = input("\nPlease Enter your zip code: ")
                 email = input("\nPlease Enter your email: ")
-                birthday = input("\nPlease Enter your birthday: ")
+                birthday = input("\nPlease Enter your birthday (YYYY-MM-DD): ")
                 nationality = get_valid_nationality()
 
                 address_id = find_address_id(street, city, zip)
@@ -138,9 +165,15 @@ def main ():
                     new_guest = add_new_guest(first_name, last_name, email, street, city, zip, nationality, birthday)
                 new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
                 print(new_booking)
+                try:
+                    input("\nPress Enter to finish")
+                except (EOFError, KeyboardInterrupt):
+                    print("\nBooking completed successfully!")
+                    return
 
             if not rooms:
                 print("No available rooms, in all the hotels in this time period.")
+                input("\nPress Enter to finish")
                 live = True
 
 

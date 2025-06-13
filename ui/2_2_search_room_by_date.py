@@ -41,10 +41,10 @@ def main():
         else:
             print("Please enter either 'y' or 'n'.")
 
-    check_in = ask_date("Check-in (YYYY-MM-DD): ")
+    check_in = ask_date("Check-in (YYYY-MM-DD, . or / also allowed): ")
 
     while True:
-        check_out = ask_date("Check-out (YYYY-MM-DD): ")
+        check_out = ask_date("Check-out (YYYY-MM-DD, . or / also allowed): ")
         if check_out <= check_in:
             print("Check-out date must be after check-in date.")
         else:

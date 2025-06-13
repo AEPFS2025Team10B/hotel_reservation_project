@@ -2,10 +2,13 @@
 
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
+from data_access.address_data_access import AddressDataAccess
+from model.address import Address
 
 # DAO-Instanzen
 hotel_dao = HotelDataAccess()
 room_dao  = RoomDataAccess()
+address_dao = AddressDataAccess()
 
 # (User Story 1.1) Hotels in einer Stadt durchsuchen
 def find_hotels_by_city(city: str):
@@ -52,12 +55,20 @@ def remove_hotel(hotel_id: int):
     
 # (User Story 3.3) Admin aktualisiert ein Hotel
 def update_hotel(name: str, stars: int, street: str, city: str, zip_code: str, hotel_id: int):
-    addr = hotel_dao.update_address(hotel_id, street, city, zip_code)
     current = hotel_dao.get_hotel_by_id(hotel_id)
-    current.name  = name
-    current.stars = stars
-    hotel_dao.update_hotel(current)
-    return current
+    if current and current.address:
+        # Update the address
+        current.address.street = street
+        current.address.city = city
+        current.address.zip_code = zip_code
+        address_dao.update_address(current.address)
+        
+        # Update the hotel
+        current.name = name
+        current.stars = stars
+        hotel_dao.update_hotel(current)
+        return current
+    return None
 
 def find_hotel_by_id(hotel_id: int):
     return hotel_dao.get_hotel_by_id(hotel_id)

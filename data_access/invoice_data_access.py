@@ -1,13 +1,17 @@
 from data_access.base_data_access import BaseDataAccess
 from model import Invoice
-from datetime import datetime
+from datetime import datetime, date
 
 class InvoiceDataAccess(BaseDataAccess):
     def __init__(self, db_path: str = None):
         super().__init__(db_path)
 
-    def _parse_date(self, date_str: str) -> datetime.date:
-        return datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").date()
+    def _parse_date(self, date_str: str) -> date:
+        try:
+            return datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S").date()
+        except ValueError:
+            # If the date string doesn't include time, try parsing just the date
+            return datetime.strptime(date_str, "%Y-%m-%d").date()
 
     def create_invoice(self, booking_id: int, issue_date: str, total_amount: float) -> Invoice:
         sql = """

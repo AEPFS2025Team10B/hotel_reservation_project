@@ -18,14 +18,17 @@ def main():
     hotels = find_hotels_by_city(city)
 
     if hotels:
-        #print(f"\nFound hotels in {city}:")
-        #for index, hotel in enumerate(hotels, start=1):
-        #    print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
-
-        selected = find_hotel_by_list_city(hotels)
-        print(f"Hotel-ID for further processing: {selected.hotel_id}")
-        input("Press enter to finish")
-
+        print("\nAvailable hotels:")
+        for index, hotel in enumerate(hotels, start=1):
+            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
+        selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: ").strip())
+        if 1 <= selection <= len(hotels):
+            selected_hotel = hotels[selection - 1]
+            print("\nYou selected:")
+            print(f"→ {selected_hotel.name}")
+            print(f"  {selected_hotel.stars}★, {selected_hotel.address}")
+            print(f"Hotel-ID for further processing: {selected_hotel.hotel_id}")
+            return [selected_hotel]
     else:
         print(f"\nNo hotels found in {city}.")
         input("Press enter to finish")

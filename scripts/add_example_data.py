@@ -42,7 +42,7 @@ INSERT INTO Address(street, city, zip_code) VALUES
   ('Talstrasse 1',        'Zürich', '8001'),
   ('Beethovenstrasse 21', 'Zürich', '8002'),
   ('Kurhausstrasse 65',   'Zürich', '8032'),
-  ('Döltschiweg 234',     'Zürich', '8055');
+  ('Döltschiweg 240',     'Zürich', '8055');
 
 -- Gäste (80 Einträge)
 INSERT INTO Guest(first_name, last_name, email, birthday, nationality, address_id) VALUES
@@ -221,7 +221,7 @@ INSERT INTO Hotel(name, stars, address_id) VALUES
   ('Hotel Messia', 2, 7),             -- Talstrasse 1
   ('Park Hyatt Zürich', 4, 8),        -- Beethovenstrasse 21
   ('The Dolder Grand', 5, 9),         -- Kurhausstrasse 65
-  ('Atlantis by Giardino', 3, 10);    -- Döltschiweg 234
+  ('Atlantis by Giardino', 3, 10);    -- Döltschiweg 240
 
 -- Zimmertypen (5 Einträge)
 INSERT INTO Room_Type(description, max_guests) VALUES

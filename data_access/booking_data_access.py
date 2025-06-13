@@ -90,13 +90,28 @@ class BookingDataAccess(BaseDataAccess):
         """
         return self.fetchall(sql)
 
-    def cancel_booking(self, booking_id: int):
+    def cancel_booking(self, booking_id: int) -> str:
+        # First check if booking exists and is already cancelled
+        check_sql = """
+        SELECT is_cancelled
+        FROM booking
+        WHERE booking_id = ?
+        """
+        result = self.fetchone(check_sql, (booking_id,))
+        if result is None:
+            return "Booking not found"
+        
+        is_cancelled = bool(result[0])
+        if is_cancelled:
+            return "Booking already cancelled"
+            
         sql = """
         UPDATE booking 
         SET is_cancelled = 1
         WHERE booking_id = ?
         """
         self.execute(sql, (booking_id,))
+        return "Booking cancelled successfully"
 
     def get_bookings_by_guest_id(self, guest_id: int) -> list[Booking]:
         sql = """
