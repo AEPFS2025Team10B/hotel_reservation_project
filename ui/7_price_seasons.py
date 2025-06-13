@@ -100,7 +100,9 @@ def main ():
             else:
                 first_name = input("\nPlease Enter your first name: ")
                 last_name = input("\nPlease Enter your last name: ")
-                new_guest = add_new_guest(first_name, last_name, email, street, city, zip)
+                birthday = input("\nPlease Enter your birthday (YYYY-MM-DD): ")
+                nationality = input("\nPlease Enter your nationality: ")
+                new_guest = add_new_guest(first_name, last_name, email, street, city, zip, nationality, birthday)
             new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
             print(new_booking)
 
