@@ -141,28 +141,28 @@ def main ():
                 if 1 <= room_booking <= len(rooms):
                     selected_room = rooms[room_booking - 1]
                 live = True
+
                 print(f"\nYou have selected  {selected_room}")
-                street = input("\nPlease Enter your street address including house number: ")
-                city = input("\nPlease Enter your city: ")
-                zip = input("\nPlease Enter your zip code: ")
                 email = input("\nPlease Enter your email: ")
-                birthday = input("\nPlease Enter your birthday (YYYY-MM-DD): ")
-                nationality = get_valid_nationality()
-
-                address_id = find_address_id(street, city, zip)
-                if not address_id:
-                    new_address = add_new_address(street, city, zip)
-                    address_id = new_address.address_id
-
                 existing_guest = find_guest_by_email(email)
-
                 if existing_guest:
-                    print(f"✅ Existing guest found: {existing_guest.first_name} {existing_guest.last_name}")
+                    print(f"✅ Existing guest found: {existing_guest.first_name} {existing_guest.last_name} \n You don't have to enter all details again :) ")
                     new_guest = existing_guest
                 else:
+                    street = input("\nPlease Enter your street address including house number: ")
+                    city = input("\nPlease Enter your city: ")
+                    zip = input("\nPlease Enter your zip code: ")
+                    birthday = input("\nPlease Enter your birthday (YYYY-MM-DD): ")
+                    nationality = get_valid_nationality()
                     first_name = input("\nPlease Enter your first name: ")
                     last_name = input("\nPlease Enter your last name: ")
+
+                    address_id = find_address_id(street, city, zip)
+                    if not address_id:
+                        new_address = add_new_address(street, city, zip)
+                        address_id = new_address.address_id
                     new_guest = add_new_guest(first_name, last_name, email, street, city, zip, nationality, birthday)
+
                 new_booking = add_new_booking(email, selected_room, check_in_date, check_out_date, selected_hotel)
                 print(new_booking)
                 try:
