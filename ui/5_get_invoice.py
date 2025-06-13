@@ -50,7 +50,8 @@ def main():
     invoice = find_invoice_by_booking_id(booking_id)
 
     if not booking or not invoice:
-        print("❌ Booking or invoice not found.")
+        print(f"\n❌ Booking or invoice not found.")
+        input(f"\nPress Enter to finish")
         return
 
     # Print confirmation
@@ -63,3 +64,4 @@ def main():
     print(f"Issue Date      : {invoice.issue_date.strftime('%d.%m.%Y')}")
     print(f"Total Amount    : CHF {invoice.total_amount:.2f}")
     print("=" * 40)
+    input(f"\nPress Enter to finish")
