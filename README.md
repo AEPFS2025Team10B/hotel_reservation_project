@@ -85,6 +85,15 @@ Natürlich ist auch die Dokumentation (readme File) sowie das Projektmanagement 
 ## Übersicht
 ### Projekt Struktur
 
+Unser Code gliedert sich in mehrere klar voneinander getrennte Schichten/Layers. Jede dieser Layers übernimmt genau einen Aufgabenbereich. Der Austausch zwischen den Schichten läuft über sauber definierte Klassen und Module. Im Folgenden stellen wir die einzelnen Ebenen kurz vor:
+![Projektstruktur](images/project_structure.png)
+
+- Database Layer: Enthält die SQLite-Datei database/hotel_reservation_sample.db. Sie ist die einzige Stelle, an der Daten physisch gespeichert werden; alle anderen Schichten greifen lediglich über definierte Schnittstellen darauf zu.
+- Model Layer: Definiert die Domänen­klassen wie Hotel, Room, Booking … – jedes Objekt steht genau für einen Datenbank­eintrag und kennt nur seine Attribute. Damit bilden die Models das gemeinsame „Daten-Vokabular“ für BLL und DAL.
+- Data Access Layer: Bietet pro Entität eine DAO-Klasse (HotelDAO, BookingDAO …), die sämtliche CRUD- Operationen kapselt. Dadurch wird in keinem anderen Ort im Code direkt auf die Datenbank zugegriffen.
+- Business Logic Layer: Enthält Services wie hotel_manager oder booking_manager. Sie koordinieren Workflows, prüfen Verfügbarkeit, berechnen Preise, validieren Eingaben und rufen dabei ausschliesslich die DAO-Methoden des DAL auf.
+- UI Layer: Die UI-Layer verarbeitet User Inputs. Da wir nicht mit Jupyter Notebooks arbeiten, werden die Inputs jedoch über die app.py geregelt
+
 ### Klassendiagramm
 
 ## Methods
