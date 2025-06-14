@@ -10,6 +10,7 @@ from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_all_hotel_details, update_hotel
+from business_logic.hotel_manager import print_all_hotel_details
 
 def ask_date_int(prompt: str, min_val: int, max_val: int) -> int:
     while True:
@@ -35,8 +36,8 @@ def main():
         return
 
     # 1) Liste der Hotels anzeigen
-    for idx, h in enumerate(hotels, start=1):
-        print(f"{idx}. {h.name} ({h.stars}★), {h.address}")
+    if hotels:
+        print(print_all_hotel_details(hotels))
 
     # 2) Hotel-Auswahl
     sel = ask_date_int("\nNumber of the Hotel you want to update: ", 1, len(hotels))
@@ -45,10 +46,12 @@ def main():
     # 3) Neue Werte abfragen
     print(f"\nUpdating '{hotel.name}':")
     new_name = input(f" New name [{hotel.name}]: ").strip() or hotel.name
-    
-    stars_input = input(f" New stars (1–5) [{hotel.stars}]: ").strip()
-    new_stars = hotel.stars if not stars_input else ask_date_int(f" New stars (1–5) [{hotel.stars}]: ", 1, 5)
 
+    stars_input = input(f" New stars (1–5) [{hotel.stars}]: ").strip()
+    if stars_input:
+        new_stars = int(stars_input)
+    else:
+        new_stars = ask_date_int(f" New stars (1–5) [{hotel.stars}]: ", 1, 5)
     print("\n New address:")
     street   = input(f"  Street [{hotel.address.street}]: ").strip() or hotel.address.street
     city     = input(f"  City   [{hotel.address.city}]: ").strip() or hotel.address.city
