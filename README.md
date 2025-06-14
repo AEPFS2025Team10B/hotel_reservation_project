@@ -19,7 +19,6 @@ und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähig
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Theoretical Background](#theoretical-background)
 - [Methods](#methods)
 - [Results](#results)
 - [Discussion](#discussion)
