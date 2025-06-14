@@ -10,6 +10,7 @@ from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.room_manager import get_room_types_by_hotel
 from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 from business_logic.hotel_manager import print_all_hotel_details
+from business_logic.hotel_manager import create_detailed_hotel_list
 
 def main():
     print("All Hotels")
@@ -24,42 +25,39 @@ def main():
             try:
                 selection = int(input("\nEnter the number of the hotel you want to see the Room Types: ").strip())
                 if 1 <= selection <= len(hotels):
-                    selected_hotel = hotels[selection - 1]
-                    print(f"\nRoom Types for {selected_hotel.name}:")
-
-                    room_types = get_room_types_by_hotel(selected_hotel.hotel_id)
-
-                    if room_types:
-                        for rt in room_types:
-                            print("\n-------------------------------")
-                            print(f"→ {rt.name}")
-                            print(f"   Description: {rt.description}")
-                            print(f"   Max guests: {rt.max_guests}")
-                            print(f"   Price per night: CHF {rt.price_per_night:.2f}")
-                            print(f"   Facilities: {', '.join(rt.facilities) if rt.facilities else 'None'}")
-                            print("\n-------------------------------")
+                    selected = hotels[selection - 1]
+                    detailed_hotels = create_detailed_hotel_list(selected)
+                    if not isinstance(detailed_hotels, list):
+                        detailed_hotels = [detailed_hotels]
+                    print(f"\nRoom Types for:")
+                    output = ""
+                    for index, hotel in enumerate(detailed_hotels, start=1):
+                        output += f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}\n"
+                        if hasattr(hotel, 'rooms'):
+                            unique_roomtypes = set()
+                            for room in hotel.rooms:
+                                rt_key = room.roomtype.description
+                                if rt_key not in unique_roomtypes:
+                                    output += f"  Room Type: {room.roomtype.description}, Max Guests: {room.roomtype.max_guests}\n"
+                                    if room.facilities:
+                                        for facility in room.facilities:
+                                            output += f"    - Facility: {facility.name}\n"
+                                    unique_roomtypes.add(rt_key)
 
                             valid = True
-
-                    else:
-                        print("No room types found for this hotel.")
-                        valid = True
+                            print(output)
+                        else:
+                            print("No room types found for this hotel.")
+                            valid = True
                 else:
                     print("Invalid selection.")
-
-
             except ValueError:
                 print("Please enter a valid number.")
-
-
-
     else:
         print("No hotels found.")
         return
 
     input("Press Enter to finish")
-
-
 
 if __name__ == "__main__":
     main()
