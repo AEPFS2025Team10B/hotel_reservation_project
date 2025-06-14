@@ -55,18 +55,18 @@ def main():
             (9, "3_1_add_new_hotel.py", "As an admin, i want to be able to add new hotels"),
             (10, "3_2_remove_hotel.py", "As an admin, i want to delte a hotel"),
             (11, "3_3_update_hotel.py", "As an admin, i want to update the details of a hotel"),
-            (19, "manage_master_data_10.py", "Als Admin möchte ich Stammdaten anpassen können."),
+            (18, "manage_master_data_10.py", "Als Admin möchte ich Stammdaten anpassen können."),
         ]),
         ("Reporting & Übersicht (Admin)", [
-            (17, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels"),
-            (18, "display_all_rooms_with_facilities_9.py", "Als Admin möchte ich eine Liste der Zimmer mit ihrer Ausstattung sehen."),
+            (16, "display_all_bookings_of_all_hotels_8.py", "As an Admin, I want to see all Bookings of all Hotels"),
+            (17, "display_all_rooms_with_facilities_9.py", "Als Admin möchte ich eine Liste der Zimmer mit ihrer Ausstattung sehen."),
         ]),
         ("Empfehlungen & Bewertungen", [
-            (20, "2_3_Hotelrecommendation.py", "As a guest I want to leave a recommendation after my stay"),
-            (21, "2_4_look_up_hotelrecommendation.py", "As a guest I want to read hotel reviews before booking"),
+            (19, "2_3_Hotelrecommendation.py", "As a guest I want to leave a recommendation after my stay"),
+            (20, "2_4_look_up_hotelrecommendation.py", "As a guest I want to read hotel reviews before booking"),
         ]),
         ("Datenvisualisierung", [
-            (22, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests)."),
+            (21, "data_visualization_2.py", "As an Admin, I want to see a breakdown of guest demographics (e.g., age range, nationality, returning guests)."),
         ]),
         ("Datenbank Verwaltung", [
             (100, "add_example_data.py", "Reset data back to original"),
