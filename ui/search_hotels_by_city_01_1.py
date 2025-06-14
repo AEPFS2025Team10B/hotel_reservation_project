@@ -14,17 +14,23 @@ from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by City")
-    print("for Coach: Enter Zürich or Aarau (no hotel)")
+    print(f"\nfor Coach: Enter Zürich or Aarau (no hotel)\n")
     city = input("Enter a city: ").strip()
     hotels = find_hotels_by_city(city)
 
     if hotels:
         print("\nAvailable hotels:")
         print(print_all_hotel_details(hotels))
+        #alle verfügbaren Hotels werden ausgegeben
+
         selected = find_hotel_by_list_city(hotels)
+
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
-        input("Press enter to finish")
+        #die Hotel ID wir für den Kunden ausgegeben. So kann er eitere Informationen einfacher beschaffen.
+        input(f"\nPress enter to finish")
     else:
         print(f"\nNo hotels found in {city}.")
-        input("Press enter to finish")
+        #Der Kunde wird informiert, dass es in dieser Stadt keine erfassten Hotels gibt.
+
+        input(f"\nPress enter to finish")
     return hotels

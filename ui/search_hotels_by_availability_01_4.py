@@ -28,17 +28,20 @@ def main():
     check_out_date = input("Enter check-out date (YYYY-MM-DD): ").strip()
 
     hotels = find_hotels_by_availability(check_in_date, check_out_date)
+    #Es wird geprüft, ob wir ein Hotel erfasst haben, das zum Zeitpunkt des
+    # gewünschten Aufenthalts noch mindestens ein freies Zimmer hat.
 
     if hotels:
         print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
         print(print_all_hotel_details(hotels))
         selected = find_hotel_by_list_city(hotels)
+
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
+        # die Hotel ID wir für den Kunden ausgegeben. So kann er eitere Informationen einfacher beschaffen.
         input("Press enter to finish")
 
     else:
         print(f"\nNo hotels available in that period.")
-        print("")
-        input("Press enter to finish")
+        input(f"\nPress enter to finish")
 
     return hotels, check_in_date, check_out_date

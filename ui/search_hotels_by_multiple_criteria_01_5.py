@@ -36,6 +36,8 @@ def main():
                     coach = True
                 else:
                     print("Please enter either 'y' or 'n'.")
+                # das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
+
             check_in_date = input("Enter your check-in Date in the Format: YYYY-MM-DD: ")
             check_out_date = input("Enter your check-out Date in the Format: YYYY-MM-DD: ")
             valid = True
@@ -47,14 +49,19 @@ def main():
 
     if hotels:
         print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
+        #Dem Kunden wird nochmals die Eingabe bestätigt
+
         print(print_all_hotel_details(hotels))
         selected = find_hotel_by_list_city(hotels)
+
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
-        input("Press enter to finish")
+        # die Hotel ID wir für den Kunden ausgegeben. So kann er eitere Informationen einfacher beschaffen.
+        input(f"\nPress enter to finish")
 
     else:
         print(f"\nNo hotels available:\n")
-        input("Press Enter to finish")
+        #Dem Kunden wird mitgeteilt, das es keine verfügbaren Hotels hat.
+        input(f"\nPress Enter to finish")
 
     return hotels, check_in_date, check_out_date
 

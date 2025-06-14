@@ -23,12 +23,16 @@ def main():
         try:
             guest_count = int(input("How many people should have space in this room? "))
             if guest_count < 1:
+            #Der input vom Kunden wird geprüft, ob die Zahl kleiner als 1 ist. Wenn ja, kommt die fehlermeldung zum Zug.
                 raise ValueError
+                #der Kunde wird darauf hingewiesen, dass er eine ungültige eingabe getätigt hat.
 
             valid = True
         except ValueError:
             print("Enter a valid number and number must be above 0")
+            # der Kunde wird darauf hingewiesen, dass er eine ungültige eingabe getätigt hat.
             continue
+            #while-loop wird fortgesetzt, da wir keine gültige eingabe erhalten haben
 
     hotels = find_hotels_by_guest_count(guest_count)
 
@@ -36,11 +40,13 @@ def main():
         print(f"\nThese hotels have a room for at least {guest_count} guests:\n")
         print(print_all_hotel_details(hotels))
         selected = find_hotel_by_list_city(hotels)
+
         print(print_all_hotel_details(selected))
-        print("")
-        input("Enter to finish...")
+        #Die details für das Hotel seiner Wahl werden ausgegeben
+
+        input(f"\nEnter to finish")
     else:
         print(f"\nNo hotels found with rooms for {guest_count} guests.")
-        print("")
-        input("Enter to finish...")
+        #Der Kunde wird informiert, dass wir keine Zimmer passend zu seiner Gästezahl erfasst haben.
+        input(f"\nEnter to finish")
     return hotels

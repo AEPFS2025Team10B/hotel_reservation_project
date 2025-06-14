@@ -25,7 +25,8 @@ def main():
         print(print_all_hotel_details(hotels))
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
-        input("Press enter to finish")
+        # die Hotel ID wir für den Kunden ausgegeben. So kann er eitere Informationen einfacher beschaffen.
+        input(f"\nPress enter to finish")
 
         # Heute verfügbare Zimmer anzeigen
         available_rooms = get_available_rooms_by_hotel(selected.hotel_id, today)
