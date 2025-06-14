@@ -8,6 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_hotels_by_availability
 from business_logic.hotel_manager import print_all_hotel_details
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 
 def main():
     print(" Hotel Search by Availability")
@@ -31,7 +32,8 @@ def main():
     if hotels:
         print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
         print(print_all_hotel_details(hotels))
-        print("")
+        selected = find_hotel_by_list_city(hotels)
+        print(f"Hotel-ID for further processing: {selected.hotel_id}")
         input("Press enter to finish")
 
     else:
