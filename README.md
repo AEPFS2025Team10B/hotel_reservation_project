@@ -1,10 +1,3 @@
-Name und Vorname der Teammitglieder, die am Projekt mitgearbeitet haben
-Teammitglieder B-10:  Germann David, 
-                      Lutz Reto, 
-                      Nathan Jeremy
-
-
-
 # FS25 Anwendungsentwicklung mit Python
 
 ## General
@@ -83,15 +76,19 @@ Wir wollten also mit der Umsetzung jeweils warten bis wir das entsprechende Them
 Ein weiterer Punkt der dafür Sprach, dass wir vorerst warten sollen, war dass wir auch in den Modulen Machine Learning und Wissensrepräsentation Projekte hatten. 
 Wir haben uns also dazu entschlossen in den anderen zwei Modulen so viel wie möglich vorarbeiten, dass wir dann genug Zeit für Python haben. 
  
-Mitte April haben wir dann jedoch gemerkt, dass diese Rechnung nicht aufgehen wird. Wir haben uns also in der Blockwoche vom 14. April zusammengesetzt und unser GANTT-Digramm erstellt.  -->>> LINK GANTTT
+Mitte April haben wir dann jedoch gemerkt, dass diese Rechnung nicht aufgehen wird. Wir haben uns also in der Blockwoche vom 14. April zusammengesetzt und unser GANTT-Digramm erstellt. 
 Auch haben wir uns dazu entschieden, wie beim letzten Projekt wieder nach SCRUM- Methode zu arbeiten. Wir haben uns also alle in der Gruppe jeden Montag Abend 30 Minuten fürs Sprint Plannig,
 jeden Mittwoch nach der Schule 30 Minuten für den Sprint Standup und jeden Sonntag Abend 60 Minuten für das Sprint Review eingeplant. Natürlich haben wir uns auch fast täglich via Whatsapp oder Teams ausgetausch und uns gegenseitig bei Probleme geholfen.
 Weiter haben wir eingeplant, dass wir nach jedem "Story Stack" (siehe GANTT-Diagramm/Umsetzung) zwei Tage eingeplant haben, um die Codes zu testen und ggf. zu korrigieren. 
 
+![GANTT-Diagramm](images/GANTT-Diagram.png)
+
 Im Laufe des Projektes, haben wir uns stets versucht an die Plannung welche wir ursprünglich erstellt haben zu halten. Dies klappt anfänglich auch sehr gut. In den letzten zwei Sprints
 wurde das ganze jedoch etwas kritisch, da sich der Backlog zu häufen began. Dies lag vor allem an der Abgabe vom Projekt Wissensräpresentation, welches vom Umfang her noch grösser war als das Python Projekt.
 
---> BILD SPRINT 8
+![Letzes Sprint Meeting](images/last_sprint.png)
+
+Wie man dem Screenshot von unserem letzten Sprint Standup sehen kann, hatten wir noch zu viele offene Punkte. Uns waren Bugs bekannt und auch die DB erforderte noch Anpassungen. Zu allem Übel, stand auch noch die Angabe eines anderen Projektes bevor. 
 
 ### Tools, Frameworks und Technologien
 
