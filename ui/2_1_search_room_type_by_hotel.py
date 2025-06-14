@@ -8,15 +8,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.room_manager import get_room_types_by_hotel
-
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
+from business_logic.hotel_manager import print_all_hotel_details
 
 def main():
     print("All Hotels")
     hotels = find_all_hotel_details()
 
     if hotels:
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+        print(print_all_hotel_details(hotels))
         valid = False
         while not valid:
             # while-loop, dass der User nicht immer von vorne beginnen muss, wenn er etwas Ungültiges eingibt,
