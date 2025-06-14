@@ -7,6 +7,8 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_hotels_by_multiple_criteria
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
+from business_logic.hotel_manager import print_all_hotel_details
 
 def main():
     print("Hotel Search by your availability")
@@ -44,10 +46,12 @@ def main():
     hotels = find_hotels_by_multiple_criteria(city, min_stars, guest_count, check_in_date, check_out_date)
 
     if hotels:
-        print(f"\nThese hotels are available for you:\n")
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
-        input("\nPress Enter to finish")
+        print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
+        print(print_all_hotel_details(hotels))
+        selected = find_hotel_by_list_city(hotels)
+        print(f"Hotel-ID for further processing: {selected.hotel_id}")
+        input("Press enter to finish")
+
     else:
         print(f"\nNo hotels available:\n")
         input("Press Enter to finish")
