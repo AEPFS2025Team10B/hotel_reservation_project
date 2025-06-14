@@ -248,6 +248,8 @@ wir mit ins laufende Semester. Es war teils enorm schwer unsere vordefinierte Ti
 wenn wir aufgrund den anderen zwei Projekten bereits fast komplett ausgelastet waren. In solchen Momenten mussten wir uns 
 gegenseitig an die Wichtigkeit dieses Moduls erinnern und uns auch gegenseitig motivieren, aushelfen und gute Worte zusprechen. 
 
+Wir freuen uns darauf, Python künftig einzusetzen und unsere Kenntnisse laufend auszubauen, und danken zugleich unseren Coaches, die stets geduldig waren und uns sogar ausserhalb der Unterrichts- und Coachingzeiten unterstützt haben- kudos an euch!
+
 ## Appendix *(optional)*
 - Raw data
 - Code snippets
