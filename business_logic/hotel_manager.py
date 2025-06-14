@@ -85,3 +85,27 @@ def print_all_hotel_details(hotels):
         hotels = [hotels]
     for index, hotel in enumerate(hotels, start=1):
         print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
+
+# def print_all_hotel_details_with_room_details(hotels):
+
+def create_detailed_hotel_list(hotels):
+    if not isinstance(hotels, list):
+        hotels = [hotels]
+    for hotel in hotels:
+        rooms = room_dao.get_room_with_hotel(hotel.hotel_id)
+        hotel.rooms = rooms
+    return hotels
+
+def print_detailed_hotel_list(detailed_hotels):
+    if not isinstance(detailed_hotels, list):
+        detailed_hotels = [detailed_hotels]
+    output = ""
+    for index, hotel in enumerate(detailed_hotels, start=1):
+        output += f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}\n"
+        if hasattr(hotel, 'rooms'):
+            for room in hotel.rooms:
+                output += f"  Room {room.number}: {room.price_per_night} CHF, Type: {room.roomtype.description}, Max Guests: {room.roomtype.max_guests}\n"
+                if room.facilities:
+                    for facility in room.facilities:
+                        output += f"    - Facility: {facility.name}\n"
+    return output

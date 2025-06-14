@@ -7,6 +7,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_hotels_by_guest_count
+from business_logic.hotel_manager import print_all_hotel_details
 from model.roomtype import RoomType
 
 def main():
@@ -31,6 +32,7 @@ def main():
 
     if hotels:
         print(f"\nThese hotels have a room for at least {guest_count} guests:\n")
+        print(print_all_hotel_details(hotels))
         for index, hotel in enumerate(hotels, start=1):
             print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
             for room in hotel.rooms:

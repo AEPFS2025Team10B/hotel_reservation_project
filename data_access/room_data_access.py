@@ -168,7 +168,16 @@ class RoomDataAccess(BaseDataAccess):
         ORDER BY h.name, r.room_number
         """
         return self.fetchall(sql)
-    
+
+    # def get_hotel_room_roomType_facility(self):
+    #     sql = """
+    #     SELECT h.hotel_id, h.name, h.stars,
+    #     a.address_id, a.street, a.city, a.cipcode, r.room_id, r.room_number, r.price_per_night, rt.type_id, rt.description, rt.max_guest, fac.facility_id, fac.facility_name
+    #     FROM Hotel AS h
+    #     JOIN Address AS a ON h.address_id = a.address_id
+    #     JOIN Room AS r ON r.room_id = .room_id
+    #     JOIN Room_Type AS rt ON rt.type_id = r.type_id
+    #     JOIN L"""
     def update_room_price(self, room_id: int, new_price: float):
         sql = "UPDATE Room SET price_per_night = ? WHERE room_id = ?"
         self.execute(sql, (new_price, room_id))
@@ -198,3 +207,29 @@ class RoomDataAccess(BaseDataAccess):
         sql = "SELECT type_id, max_guests, description FROM Room_Type"
         rows = self.fetchall(sql)
         return [RoomType(type_id, max_guests, description) for type_id, max_guests, description in rows]
+
+
+    def get_room_with_hotel(self, hotel_id: int) -> list[Room]:
+        sql = """
+            SELECT r.room_id, r.room_number, r.price_per_night,
+                   rt.type_id, rt.max_guests, rt.description,
+                   fac.facility_id, fac.facility_name
+            FROM Room AS r
+            JOIN Room_Type AS rt ON rt.type_id = r.type_id
+            JOIN Room_Facilities AS rf ON rf.room_id = r.room_id
+            JOIN Facilities AS fac ON fac.facility_id = rf.facility_id
+            WHERE r.hotel_id = ?
+            ORDER BY r.room_id
+        """
+        rows = self.fetchall(sql, (hotel_id,))
+
+        rooms_by_id = {}
+        for rid, rnr, rpr, rtid, rtmg, rtd, fid, fname in rows:
+            if rid not in rooms_by_id:
+                room = Room(rid, rnr, rpr)
+                room.roomtype = RoomType(rtid, rtmg, rtd)
+                room.facilities = []
+                rooms_by_id[rid] = room
+            rooms_by_id[rid].facilities.append(Facility(fid, fname))
+
+        return list(rooms_by_id.values())

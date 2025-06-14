@@ -60,6 +60,11 @@ def get_all_rooms_with_facilities():
         })
     return result
 
+# def get_full_objects_hotel_room_type_facility():
+#     rows = room_dao.get_all_rooms_with_facilities()
+#     result = []
+#     hotel
+
 # Update the price of a room
 def update_room_price(room_id: int, new_price: float):
     room_dao.update_room_price(room_id, new_price)
