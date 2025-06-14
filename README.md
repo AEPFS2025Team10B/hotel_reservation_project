@@ -9,7 +9,7 @@
 
 ## Abstract
 Im Rahmen des Moduls FS25 Anwendungsentwicklung mit Python haben wir ein Hotel-Reservierungssystem entwickelt, das zentrale Funktionen wie Hotelsuche, 
-Zimmerverfügbarkeit, Buchung und Hotelverwaltung in einer Three-Layer-Architektur bereitstellt. Aufbauend auf einem bereits vorhandenen Datenbankschema 
+Zimmerverfügbarkeit, Buchung und Hotelverwaltung in einer Three-Layer-Architektur erstellt. Aufbauend auf einem bereits vorhandenen Datenbankschema 
 setzten wir eine Three-Layer-Architektur um, bestehend aus Benutzeroberfläche, Business-Logic- und Data-Access-Layer. Die Anwendung wird in Python 3.12 
 entwickelt, nutzt SQLite, sowie eine kleine App für Demo-Zwecke. 
 
@@ -19,11 +19,28 @@ und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähig
 
 ## Table of Contents
 - [Introduction](#introduction)
+  - [Background](#background)
+  - [Objectives](#objectives)
+    
 - [Methods](#methods)
+  - [Ansatz und Methodik](#ansatz-und-methodik)
+  - [Tools, Frameworks und Technologien](#tools-frameworks-und-technologien)
+    
 - [Results](#results)
+  - [Zentrale Erkenntnisse](#zentrale-erkenntnisse)
+  - [Beobachtungen](#beobachtungen)
+    
 - [Discussion](#discussion)
+  - [Interpretation der Ergebnisse](#interpretation-der-ergebnisse)
+  - [Herausforderungen](#herausforderungen)
+  - [Zielerreichung](#zielerreichung)
+    
 - [Conclusion](#conclusion)
-- [Final Words](#abschliessende-worte)
+  - [Zusammenfassung zentraler Erkenntnisse](#zusammenfassung-zentraler-erkenntnisse)
+  - [Was ging gut](#was-ging-gut)
+  - [Was hätte man besser machen können](#was-hätte-man-besser-machen-können)
+    
+- [Abschliessende Worte](#abschliessende-worte)
 - [References](#references)
 
 ## Introduction
@@ -170,7 +187,6 @@ Die meisten im Vorfeld gesetzten Ziele wurden erreicht:
 - KISS wurde umgesetzt (soweit es möglich war).
 - OOP stand im Fokus, haben wir eingehalten. 
 
-
 ## Conclusion
 - Summary of key findings
 - Reflection: what went well and what could be improved
@@ -226,83 +242,3 @@ gegenseitig an die Wichtigkeit dieses Moduls erinnern und uns auch gegenseitig m
 
 
 
-Alle User Stories und wer jeweils involviert war (Reihenfolge ist relevant):
-
-Minimale User Stories
-1. Als Gast möchte ich die verfügbaren Hotels durchsuchen
-  1.1 Ich möchte alle Hotels in einer Stadt durchsuchen, um ein Hotel an meinem bevorzugten Standort auszuwählen.
-  1.2 Ich möchte Hotels in einer Stadt nach der Anzahl der Sterne (z.B. mindestens 4 Sterne) durchsuchen.
-  1.3 Ich möchte Hotels finden, die Zimmer haben, die meiner Gästezahl entsprechen (nur 1 Zimmer pro Buchung).
-  1.4 Ich möchte Hotels sehen, die während meines Aufenthalts verfügbar sind (Check-in- und Check-out-Datum).
-  1.5 Ich möchte Wünsche kombinieren können (z.B. Gästezahl, Sterne, Verfügbarkeit).
-  1.6 Ich möchte die folgenden Informationen pro Hotel sehen: Name, Adresse, Anzahl der Sterne.
-Involviert: Reto Lutz, Jeremy Nathan, David Germann
-
-2. Als Gast möchte ich Details zu verschiedenen Zimmertypen sehen 
-  2.1 Ich möchte für jedes Zimmer den Typ, die maximale Gästezahl, die Beschreibung, die Ausstattung, den Preis pro Nacht und den Gesamtpreis sehen.
-  2.2 Ich möchte nur verfügbare Zimmer sehen, wenn ich meinen Aufenthalt spezifiziert habe.
-Involviert: Reto Lutz
-
-3. Als Admin möchte ich Hotelinformationen pflegen
-  3.1 Neue Hotels zum System hinzufügen.
-  3.2 Hotels aus dem System entfernen.
-  3.3 Informationen bestimmter Hotels aktualisieren (z.B. Name, Anzahl Sterne).
-Involviert: Reto Lutz, David Germann
-
-4. Als Gast möchte ich ein Zimmer in einem Hotel buchen
-	buchen
-Involviert: Jeremy Nathan, David Germann
-
-5. Als Gast möchte ich nach meinem Aufenthalt eine Rechnung erhalten
-Involviert: Jeremy Nathan
-
-6. Als Gast möchte ich meine Buchung stornieren
-Involviert: Jeremy Nathan
-
-7. Als Gast möchte ich dynamische Preise basierend auf Nachfrage sehen
-Involviert: Jeremy Nathan
-
-8. Als Admin möchte ich alle Buchungen aller Hotels sehen
-Involviert: Reto Lutz
-
-9. Als Admin möchte ich eine Liste der Zimmer mit Ausstattung sehen
-Involviert: Reto Lutz
-
-10. Als Admin möchte ich Stammdaten verwalten
-Involviert: Reto Lutz
-
-
-User Stories mit Datenbankschema-Änderung
-3. Als Gast möchte ich nach meinem Aufenthalt Hotelbewertungen abgeben
-Involviert: David Germann
-
-4. Als Gast möchte ich Hotelbewertungen vor der Buchung lesen David
-Involviert: David Germann
-
-
-User Stories mit Datenvisualisierung
-2. Als Admin möchte ich eine Aufschlüsselung der Gäste-Demografie sehen
-Involviert: David Germann, Reto Lutz
-
-
-  Erwähnenswert:
-  add_example_data.py: Reto Lutz, David Germann
-  app.py: Reto Lutz
-  Datenbank: David Germann
-  For Coach-Sections: David Germann
-  Grundstruktur: Reto Lutz
-  Visual Paradigm: Jeremy Nathan
-
-Man kann bei uns erkenne, dass wir zu Beginn der Arbeit, ein bisschen durcheinander gearbeitet haben.
-Man sieht, dass wir später, die Aufgaben besser verteilt haben. Danach konnten wir effizienter arbeiten, 
-weil wir uns nicht mehr überschnitten haben.
-
-Kurze Instruktion wie die Applikation aufgebaut ist und wie sie verwendet werden muss:
-Jede User Story ist in unterschiedliche .py Dateien unterteilt(ausser wenn Code wiederverwendet werden konnte).
-Da es um die Bedienung zu vereinfachen, haben wir die app.py Datei eingeführt.
-
-Sie können also die Datei app.py ausführen und dann die gewünschte User Story auswählen und ausführen lassen.
-wenn See eine User Story direkt ausführen wollen (über Current File), wird das nicht gehen.
-Ansonsten müssen Sie keine Dateien ausführen, auch die Datenbank ist bereits fertig vorbereitet.
-Für gewisse ausnahmen, spezialfälle, können Sie sich anzeigen lassen, was eingegeben werden muss, 
-um diese hervorzurufen.
