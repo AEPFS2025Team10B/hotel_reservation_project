@@ -12,6 +12,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.room_manager import get_available_rooms_by_hotel_and_dates
+from common_code.find_hotel_by_list_city import find_hotel_by_list_city
+from business_logic.hotel_manager import print_all_hotel_details
+from business_logic.hotel_manager import print_all_hotel_details
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -58,9 +61,13 @@ def main():
         rooms = get_available_rooms_by_hotel_and_dates(hotel.hotel_id, check_in, check_out)
         if rooms:
             any_available = True
-            print(f"\n{hotel.name} (Address: {hotel.address.street}, {hotel.address.city}, {hotel.address.zip_code}):")
-            for r in rooms:
-                print(f" - Room {r.number}, Type: {r.roomtype.description} (max {r.roomtype.max_guests} guests), CHF {r.price_per_night:.2f} per night")
+            print(f"\n{hotel.name} Address: {hotel.address.street}, {hotel.address.city}, {hotel.address.zip_code}:")
+            for room in rooms:
+                output = f"  Room {room.number}: {room.price_per_night} CHF, Type: {room.roomtype.description}, Max Guests: {room.roomtype.max_guests}\n"
+                if room.facilities:
+                    for facility in room.facilities:
+                        output += f"    - Facility: {facility.name}\n"
+                    print(output)
 
     if not any_available:
         print("No available rooms, in all the hotels in this time period.")
@@ -69,3 +76,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
