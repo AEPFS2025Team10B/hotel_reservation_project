@@ -82,7 +82,7 @@ def main ():
                 print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
                 rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
         elif user_selection == 2:
-            hotels = search_hotels_by_city_01_1.main(is_booking_process=True)
+            hotels = search_hotels_by_city_01_1.main()
         elif user_selection == 3:
             hotels = search_hotel_stars_01_2.main()
         elif user_selection == 4:

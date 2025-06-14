@@ -10,21 +10,26 @@ class RoomDataAccess(BaseDataAccess):
     # User Story 1.4: Verfügbare Zimmer eines Hotels an einem Datum
     def get_rooms_by_hotel(self, hotel_id: int, date_str: str) -> list[Room]:
         sql = """
-        SELECT room_id, room_number, price_per_night
-        FROM Room
-        WHERE hotel_id = ?
-          AND room_id NOT IN (
-              SELECT room_id
-              FROM Booking
-              WHERE check_in_date <= ?
-                AND check_out_date > ?
-          )
+        SELECT r.room_id, r.room_number, r.price_per_night,
+                   rt.type_id, rt.max_guests, rt.description,
+                   fac.facility_id, fac.facility_name
+            FROM Room AS r
+            JOIN Room_Type AS rt ON rt.type_id = r.type_id
+            JOIN Room_Facilities AS rf ON rf.room_id = r.room_id
+            JOIN Facilities AS fac ON fac.facility_id = rf.facility_id
+            WHERE r.hotel_id = ?
+            AND r.room_id NOT IN (SELECT room_id FROM Booking WHERE check_in_date <= ? AND check_out_date > ?)
         """
         rows = self.fetchall(sql, (hotel_id, date_str, date_str))
-        return [
-            Room(room_id, room_number, price_per_night)
-            for room_id, room_number, price_per_night in rows
-        ]
+        rooms = {}
+        for rid, rnr, rpr, rtid, rtmg, rtd, fid, fname in rows:
+            if rid not in rooms:
+                room = Room(rid, rnr, rpr)
+                room.roomtype = RoomType(rtid, rtmg, rtd)
+                room.facilities = []
+                rooms[rid] = room
+            rooms[rid].facilities.append(Facility(fid, fname))
+            return list(rooms.values())
 
     # User Story 2.1: Alle Raumtypen eines Hotels inklusive Ausstattung
     def get_room_types_by_hotel(self, hotel_id: int) -> list[RoomType]:
