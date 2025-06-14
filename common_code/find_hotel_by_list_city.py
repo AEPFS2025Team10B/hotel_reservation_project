@@ -13,7 +13,7 @@ def find_hotel_by_list_city(hotels):
                 selected = hotels[selection - 1]
                 detailed_hotels = create_detailed_hotel_list(selected)
                 print("\nYou selected:")
-                print(print_detailed_hotel_list(selected))
+                print(print_detailed_hotel_list(detailed_hotels))
                 return selected
             else:
                 print("Invalid selection.")
