@@ -1,7 +1,6 @@
 from data_access.base_data_access import BaseDataAccess
 from model.booking import Booking
 from business_logic.room_manager import find_room_by_id
-from business_logic.hotel_manager import find_hotel_by_id
 from business_logic.hotel_manager import find_hotel_id_by_room_id
 from business_logic.hotel_manager import find_hotel_by_id_2
 from datetime import datetime
@@ -131,6 +130,7 @@ class BookingDataAccess(BaseDataAccess):
             hotel_id = find_hotel_id_by_room_id(room.room_id)
             room.hotel = find_hotel_by_id_2(hotel_id)
             booking.room = room
+            booking.guest_id = guest_id
 
             bookings.append(booking)
         return bookings

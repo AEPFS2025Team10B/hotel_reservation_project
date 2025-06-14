@@ -105,6 +105,9 @@ def generate_booking_confirmation(booking: Booking) -> str:
 def find_bookings_by_email(email: str) -> list[Booking]:
     guest = find_guest_by_email(email)
     if not guest:
-        return f"No Guest found for {email}"
+        return []
     bookings = booking_dao.get_bookings_by_guest_id(guest.guest_id)
+    # Set guest information for each booking
+    for booking in bookings:
+        booking.guest = guest
     return bookings
