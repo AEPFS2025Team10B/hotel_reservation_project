@@ -64,8 +64,12 @@ class Room:
 
     @facilities.setter
     def facilities(self, facilities):
-        if not isinstance(facilities, Facility):
-            raise TypeError("facilities must be a Facility")
+        if not isinstance(facilities, list):
+            raise TypeError("facilities must be a list")
+        for f in facilities:
+            if not isinstance(f, Facility):
+                raise TypeError("all items in facilities must be Facility")
+        self.__facilities = facilities
 
     @property
     def hotel(self):

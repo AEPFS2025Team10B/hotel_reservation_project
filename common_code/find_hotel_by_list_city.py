@@ -2,6 +2,8 @@
 # dass sich unser code bei der user story 1.1 & 1.2 wiederholt.
 # Bei uns haben nämlich beide zu einem grossem teil dasselbe UI.
 from business_logic.hotel_manager import print_all_hotel_details
+from business_logic.hotel_manager import create_detailed_hotel_list
+from business_logic.hotel_manager import print_detailed_hotel_list
 
 def find_hotel_by_list_city(hotels):
     while True:
@@ -9,8 +11,9 @@ def find_hotel_by_list_city(hotels):
             selection = int(input("\nEnter the number of the hotel you'd like to view in more detail: "))
             if 1 <= selection <= len(hotels):
                 selected = hotels[selection - 1]
+                detailed_hotels = create_detailed_hotel_list(selected)
                 print("\nYou selected:")
-                print(print_all_hotel_details(selected))
+                print(print_detailed_hotel_list(selected))
                 return selected
             else:
                 print("Invalid selection.")
