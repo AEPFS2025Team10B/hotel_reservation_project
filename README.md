@@ -21,6 +21,10 @@ und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähig
 - [Introduction](#introduction)
   - [Background](#background)
   - [Objectives](#objectives)
+  
+- [Übersicht](#übersicht)
+  - [Projektstruktur](#projekt-struktur)
+  - [Klassendiagramm](#klassendiagramm)
     
 - [Methods](#methods)
   - [Ansatz und Methodik](#ansatz-und-methodik)
@@ -78,7 +82,10 @@ Layer man welche Anpassungen genau machen soll.
 
 Natürlich ist auch die Dokumentation (readme File) sowie das Projektmanagement (GANTT, Scrum), wie auch im letzten Jahr, wieder ein zentraler Punkt des Moduls.
 
+## Übersicht
+### Projekt Struktur
 
+### Klassendiagramm
 
 ## Methods
 - Approach and methodology
