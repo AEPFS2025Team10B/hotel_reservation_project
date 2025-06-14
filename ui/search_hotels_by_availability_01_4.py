@@ -7,6 +7,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_hotels_by_availability
+from business_logic.hotel_manager import print_all_hotel_details
 
 def main():
     print(" Hotel Search by Availability")
@@ -14,7 +15,7 @@ def main():
     while not valid:
         choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
         if choice.lower() == "y":
-            print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
+            print("enter as check-in: 2025-10-28 and check-out: 2025-10-31")
             valid = True
         elif choice.lower() == "n":
             valid = True
@@ -29,10 +30,9 @@ def main():
 
     if hotels:
         print(f"\nAvailable hotels from {check_in_date} to {check_out_date}:\n")
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
-            print("")
-            input("Press enter to finish")
+        print(print_all_hotel_details(hotels))
+        print("")
+        input("Press enter to finish")
 
     else:
         print(f"\nNo hotels available in that period.")
