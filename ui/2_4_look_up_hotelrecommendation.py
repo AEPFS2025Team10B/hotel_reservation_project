@@ -6,6 +6,7 @@
 
 import sys
 import os
+from business_logic.hotel_manager import print_all_hotel_details
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
@@ -16,8 +17,7 @@ def main():
     hotels = find_all_hotel_details()
     
     if hotels:
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★)")
+        print(print_all_hotel_details(hotels))
         #Alle Hotels werden als Auswahlmenü aufgelistet
         valid = False
         while not valid:
