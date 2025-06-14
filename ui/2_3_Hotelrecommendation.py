@@ -34,8 +34,8 @@ def ask_booking_id():
         print(f"Check-in Date: {booking.check_in_date}")
         print(f"Check-out Date: {booking.check_out_date}")
         print(f"Room: {booking.room.number}")
-        #print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
-        #print(f"Total Amount: {booking.total_amount}")
+        print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
+        print(f"Total Amount: {booking.total_price}")
 
         #TODO: wenn genug zeit, die angaben nicht printen,
         # sondern den Kunden dazu bringen Booking ID und seinen Namen einzugeben
