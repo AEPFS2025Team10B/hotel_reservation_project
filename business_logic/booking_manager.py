@@ -14,6 +14,7 @@ from model.booking import Booking
 from datetime import datetime
 from business_logic.room_manager import find_room_by_id
 from business_logic.hotel_manager import find_hotel_id_by_room_id
+from business_logic.hotel_manager import find_hotel_by_id_2
 
 # DAO-Instanzen
 booking_dao = BookingDataAccess()
@@ -47,6 +48,8 @@ def find_booking_by_id(booking_id: int):
         guest_id, room_id = relations
         booking.room = find_room_by_id(room_id)
         booking.guest = find_guest_by_id(guest_id)
+        hotel_id = find_hotel_id_by_room_id(room_id)
+        booking.room.hotel = find_hotel_by_id_2(hotel_id)
     return booking
 
 def add_new_hotelrecommendation(booking_id: int, rating: int, recommendation: str):
@@ -93,7 +96,7 @@ def generate_booking_confirmation(booking: Booking) -> str:
     lines.append("=" * 40)
     lines.append(f" Booking ID: {booking.booking_id}")
     lines.append(f"👤 Guest: {booking.guest.first_name} {booking.guest.last_name}  |  📧 {booking.guest.email}")
-    lines.append(f"🏨 Hotel: {booking.room.hotel.name}, {booking.room.hotel.address}")
+    lines.append(f"🏨 Hotel: {booking.room.hotel.name}, {booking.room.hotel.address.street}, {booking.room.hotel.address.zip_code} {booking.room.hotel.address.city}")
     lines.append(f"🛏️ Room Number: {booking.room.number}  |  Type: {booking.room.roomtype.description}")
     lines.append(f"💰 Price per Night: CHF {booking.room.price_per_night:.2f}")
     lines.append(f"📅 Stay: {booking.check_in_date.strftime('%d.%m.%Y')} to {booking.check_out_date.strftime('%d.%m.%Y')}")
