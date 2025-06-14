@@ -21,7 +21,7 @@ def main():
 def ask_booking_id():
     valid = False
     while not valid:
-        print("for Coach: You can use booking id: 1")
+        print(f"\nfor Coach: You can use booking id: 1\n")
         user_input = int(input("Please enter your booking id: "))
         booking = find_booking_by_id(user_input)
         
@@ -87,7 +87,7 @@ def ask_hotelrecommendation(booking):
             recommendation = ""
         add_new_hotelrecommendation(booking.booking_id, rating, recommendation)
         #Inputs werden an Booking Manager zurückgegeben
-        print("Thank you for your feedback!")
+        print(f"\nThank you for your feedback!\n")
         input("Press Enter to Exit")
     except ValueError as e:
         print(f"Error saving your feedback: {e}")

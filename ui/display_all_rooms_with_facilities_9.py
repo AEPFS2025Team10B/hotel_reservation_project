@@ -15,6 +15,7 @@ def main():
 
     if not rooms:
         print("Keine Zimmer gefunden.")
+        input(f"\nPress Enter to finish")
         return
 
     for room in rooms:
@@ -25,6 +26,7 @@ def main():
         print(f"Preis pro Nacht: CHF {room['price_per_night']:.2f}")
         print(f"Ausstattung: {room['facilities']}")
         print("-" * 40)
+    input(f"\nPress Enter to finish")
 
 if __name__ == "__main__":
     main()

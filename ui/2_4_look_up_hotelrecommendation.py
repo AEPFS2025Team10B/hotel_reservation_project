@@ -27,7 +27,7 @@ def main():
                     choice = input(
                         "for coach: do you want to see what happens if a hotel does not have a recommendation (y/n)?")
                     if choice.lower() == "y":
-                        print("Choose the hotel 6. Widder Hotel")
+                        print(f"\nChoose the hotel 6. Widder Hotel")
                         coach = True
                     elif choice.lower() == "n":
                         coach = True
@@ -54,11 +54,11 @@ def main():
                         for rating, recommendation, first_name, last_name in reviews:
                             rec_text = '' if not recommendation or str(recommendation).lower() == 'none' else recommendation
                             print(f"- {rating}/10 from {first_name} {last_name}: '{rec_text}'")
-                            input("Press enter to finish")
                             valid = True
+                        input(f"\nPress enter to finish")
                     else:
                         print("There are no recommendations for this Hotel.")
-                        input("Press enter to finish")
+                        input(f"\nPress enter to finish")
                         valid = True
                         #TODO: wenn es keine Bewertung gibt, soll nur diese Meldung angezeigt werden
                         #wenn es kein Rating hat, kommt diese Meldung zum Zug,
@@ -73,7 +73,7 @@ def main():
                 #es wird ein Integer verlangt, kommt keiner, wird diese Meldung angezeigt
     else:
         print("no hotels found.")
-        input("Press enter to finish")
+        input(f"\nPress enter to finish")
         #kommt nur zum Zug, wenn es keine Hotels in der Datenbank gibt
 
 if __name__ == "__main__":

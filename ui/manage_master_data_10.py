@@ -135,8 +135,7 @@ def main():
             print("invalid choice. Please try again.")
             continue
 
-        print("")
-        input("Press enter to finish")
+        input(f"\nPress enter to finish")
         valid = True
 
 

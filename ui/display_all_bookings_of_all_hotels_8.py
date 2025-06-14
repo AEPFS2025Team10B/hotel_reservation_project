@@ -17,6 +17,7 @@ def main():
 
     if not bookings:
         print("Keine Buchungen gefunden.")
+        input(f"\nPress Enter to finish")
         return
 
     for booking in bookings:
@@ -27,6 +28,7 @@ def main():
         print(f"Check-In: {booking['CheckInDatum']}")
         print(f"Check-Out: {booking['CheckOutDatum']}")
         print("-" * 30)
+    input(f"\nPress Enter to finish")
 
 if __name__ == "__main__":
     main()
