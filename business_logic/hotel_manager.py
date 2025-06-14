@@ -78,3 +78,11 @@ def find_hotel_id_by_room_id(room_id: int):
 
 def find_hotel_by_id_2(hotel_id: int):
     return hotel_dao.get_hotel_by_id_2(hotel_id)
+
+def print_all_hotel_details(hotels):
+    # Wenn ein einzelnes Hotel übergeben wurde, mache eine Liste daraus
+    if not isinstance(hotels, list):
+        hotels = [hotels]
+    print("\nAvailable hotels:")
+    for index, hotel in enumerate(hotels, start=1):
+        print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")

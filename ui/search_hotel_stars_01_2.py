@@ -7,6 +7,9 @@ User Story 1.2: Hotels nach Mindestanzahl Sterne filtern
 
 import sys
 import os
+
+from business_logic import print_all_hotel_details
+
 # Tell Python to look in the parent folder for business_logic and data_access
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -26,9 +29,7 @@ def main():
 
     if hotels:
         print(f"\nFound hotels in {city} with at least {min_stars} stars:")
-        for index, hotel in enumerate(hotels, start=1):
-            print(f"{index}. {hotel.name} ({hotel.stars}★), Address: {hotel.address.street}, {hotel.address.zip_code}, {hotel.address.city}")
-
+        print(print_all_hotel_details(hotels))
         selected = find_hotel_by_list_city(hotels)
         print(f"Hotel-ID for further processing: {selected.hotel_id}")
         input("Press enter to finish")
