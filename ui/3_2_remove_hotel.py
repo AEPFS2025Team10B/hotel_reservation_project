@@ -6,6 +6,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_all_hotel_details, remove_hotel
+from business_logic.hotel_manager import print_all_hotel_details
 
 def main():
     print("___________________")
@@ -17,8 +18,7 @@ def main():
         print("No Hotel found.")
         return
 
-    for idx, h in enumerate(hotels, start=1):
-        print(f"{idx}. {h.name} ({h.stars}★), {h.address}")
+    print(print_all_hotel_details(hotels))
 
     hotel = None
 
@@ -43,13 +43,13 @@ def main():
 
     valid = False
     while not valid:
-        confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (j/n): ").strip().lower()
+        confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (y/n): ").strip().lower()
         if confirm == 'n':
             print("Cancelled.")
             input(f"\nPress Enter to finish")
             break
 
-        elif confirm != 'j':
+        elif confirm != 'y':
             print("Cancelled.")
             print("")
             continue
