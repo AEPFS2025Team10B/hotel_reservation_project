@@ -10,11 +10,11 @@
 ## Abstract
 Im Rahmen des Moduls FS25 Anwendungsentwicklung mit Python haben wir ein Hotel-Reservierungssystem entwickelt, das zentrale Funktionen wie Hotelsuche, 
 Zimmerverfügbarkeit, Buchung und Hotelverwaltung in einer Three-Layer-Architektur erstellt. Aufbauend auf einem bereits vorhandenen Datenbankschema 
-setzten wir eine Three-Layer-Architektur um, bestehend aus Benutzeroberfläche, Business-Logic- und Data-Access-Layer. Die Anwendung wird in Python 3.12 
+setzten wir eine Three-Layer-Architektur um, bestehend aus Benutzeroberfläche, Business-Logic- und Data-Access-Layer. Die Anwendung wird in Python 3.12 
 entwickelt, nutzt SQLite, sowie eine kleine App für Demo-Zwecke. 
 
 Das Projekt zeigt, wie sich mit klarer Schichtentrennung saubere Wartbarkeit und schnelle Fehlererkennung realisieren lassen 
-und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähiges Buchungssystem aufbauen kann. Neben vertieftem Verständnis für OOP und  relationale Datenbanken (repetierung) gewannen wir wertvolle Erfahrungen in agiler Zeitplanung und Projektumsetzung. 
+und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähiges Buchungssystem aufbauen kann. Neben vertieftem Verständnis für OOP und relationale Datenbanken (Repetierung) gewannen wir wertvolle Erfahrungen in agiler Zeitplanung und Projektumsetzung. 
 
 
 ## Table of Contents
@@ -77,7 +77,7 @@ Das zentrale Ziel unserer Projektes war es, ein vollständig laufendes Hotel-Res
 Neben diesen Vorgaben, sollten wir uns auch an gängige Prinzipien wie KISS (KEEP IT SIMPLE, STUPID) und die Three-Layer-Architecture halten.
 KISS bedeutet, dass wir die Lösungen (resp. den Code) so einfach wie möglich halten und unnötig komplexe Codes so gut wie möglich Vermeiden. 
 In der Three-Layer-Architecture geht es darum, dass Präsentationsschicht (UI), Logikschicht (Business Logic) und Datenschicht (Data Access) klar 
-getrennt sind.Somit bleibt der Code übersichtlich. Auch wird es einfacher in Zukunft Anpassungen zu machen, da man relativ schnell weiss, in welcher 
+getrennt sind. Somit bleibt der Code übersichtlich. Auch wird es einfacher in Zukunft Anpassungen zu machen, da man relativ schnell weiss, in welcher 
 Layer man welche Anpassungen genau machen soll. 
 
 Natürlich ist auch die Dokumentation (readme File) sowie das Projektmanagement (GANTT, Scrum), wie auch im letzten Jahr, wieder ein zentraler Punkt des Moduls.
@@ -99,7 +99,7 @@ Unser Code gliedert sich in mehrere klar voneinander getrennte Schichten/Layers.
 ![Klassendiagramm](images/Klassendiagram.png)
 
 #### Unified Modeling Language
-Wir haben alle Klassen-beziehungen als Assoziationen modelliert. Dies war eine bewusste Entscheidung um die Komplexität zu reduzieren. Somit ist es zum Beispiel auch möglich, ein Raum zu haben ohne Hotel und umgekehrt. Mit Entsprechenden codes in der UI, Business logic layer und data access layer, kann man dies vermeiden auch wenn die Klassen als Assoziationen modelliert wurden. Uns ist bewusst das man auch hätte Aggregation oder Komposition anwenden können. So könnte man zum Beispiel für die Beziehung Hotel und Raum mittels Aggregation darstellen. Ein Hotel besteht immer aus Zimmern, aber ein Zimmer kann auch unabhängig existieren z.B für das vermieten von Konferenzräume. Die Komposition hätte man bei der beziehung Booking - Invoice anwenden können um darzustellen, dass eine Rechnung nur existieren kann, wenn es eine Buchung gibt. Allerdings ist es auch möglich das es eine Rechnung gibt, welche nicht durch eine Buchung entanden ist. Etwa durch die Beanspruchung eines Services (Massage, Brunch) ohne ein Zimmer zu Buchen.
+Wir haben alle Klassen-beziehungen als Assoziationen modelliert. Dies war eine bewusste Entscheidung um die Komplexität zu reduzieren. Somit ist es zum Beispiel auch möglich, ein Raum zu haben ohne Hotel und umgekehrt. Mit Entsprechenden codes in der UI, Business logic layer und data access layer, kann man dies vermeiden auch wenn die Klassen als Assoziationen modelliert wurden. Uns ist bewusst das man auch hätte Aggregation oder Komposition anwenden können. So könnte man zum Beispiel für die Beziehung Hotel und Raum mittels Aggregation darstellen. Ein Hotel besteht immer aus Zimmern, aber ein Zimmer kann auch unabhängig existieren z.B für das Vermieten von Konferenzräume. Die Komposition hätte man bei der Beziehung Booking - Invoice anwenden können um darzustellen, dass eine Rechnung nur existieren kann, wenn es eine Buchung gibt. Allerdings ist es auch möglich das es eine Rechnung gibt, welche nicht durch eine Buchung entstanden ist. Etwa durch die Beanspruchung eines Services (Massage, Brunch) ohne ein Zimmer zu Buchen.
 
 #### Kardinalität
 - Guest / Address
@@ -141,14 +141,14 @@ Ein weiterer Punkt der dafür Sprach, dass wir vorerst warten sollen, war dass w
 Wir haben uns also dazu entschlossen in den anderen zwei Modulen so viel wie möglich vorarbeiten, dass wir dann genug Zeit für Python haben. 
  
 Mitte April haben wir dann jedoch gemerkt, dass diese Rechnung nicht aufgehen wird. Wir haben uns also in der Blockwoche vom 14. April zusammengesetzt und unser GANTT-Digramm erstellt. 
-Auch haben wir uns dazu entschieden, wie beim letzten Projekt wieder nach SCRUM- Methode zu arbeiten. Wir haben uns also alle in der Gruppe jeden Montag Abend 30 Minuten fürs Sprint Plannig,
-jeden Mittwoch nach der Schule 30 Minuten für den Sprint Standup und jeden Sonntag Abend 60 Minuten für das Sprint Review eingeplant. Natürlich haben wir uns auch fast täglich via Whatsapp oder Teams ausgetausch und uns gegenseitig bei Problemen geholfen.
+Auch haben wir uns dazu entschieden, wie beim letzten Projekt wieder nach SCRUM- Methode zu arbeiten. Wir haben uns also alle in der Gruppe jeden Montagabend 30 Minuten fürs Sprint Plannig,
+jeden Mittwoch nach der Schule 30 Minuten für den Sprint Standup und jeden Sonntag Abend 60 Minuten für das Sprint Review eingeplant. Natürlich haben wir uns auch fast täglich via Whatsapp oder Teams ausgetauscht und uns gegenseitig bei Problemen geholfen.
 Weiter haben wir eingeplant, dass wir nach jedem "Story Stack" (siehe GANTT-Diagramm/Umsetzung) zwei Tage eingeplant haben, um die Codes zu testen und ggf. zu korrigieren. 
 
 ![GANTT-Diagramm](images/GANTT-Diagram.png)
 
-Im Laufe des Projektes, haben wir uns stets versucht an die Plannung welche wir ursprünglich erstellt haben zu halten. Dies klappt anfänglich auch sehr gut. In den letzten zwei Sprints
-wurde das ganze jedoch etwas kritisch, da sich der Backlog zu häufen began. Dies lag vor allem an der Abgabe vom Projekt Wissensräpresentation, welches vom Umfang her noch grösser war als das Python Projekt.
+Im Laufe des Projektes, haben wir uns stets versucht an die Planung welche wir ursprünglich erstellt haben zu halten. Dies klappt anfänglich auch sehr gut. In den letzten zwei Sprints
+wurde das ganze jedoch etwas kritisch, da sich der Backlog zu häufen begann. Dies lag vor allem an der Abgabe vom Projekt Wissensräpresentation, welches vom Umfang her noch grösser war als das Python Projekt.
 
 ![Letzes Sprint Meeting](images/last_sprint.png)
 
@@ -159,9 +159,9 @@ Wie man dem Screenshot von unserem letzten Sprint Standup sehen kann, hatten wir
 Für die Umsetzung des Projekts haben wir viele verschiedene Programme verwendet. Für das Programm
 selbst haben wir die Programmiersprache Python 3.12 (inkl. Libraries wie pandas) verwendet. Als Entwicklungsumgebung haben wir 
 uns auf PyCharm von Jetbrains geeinigt, wir hätten auch das jupiter Notebook Deepnote verwenden 
-können. Uns sprach jedoch das Design und die Handhabung von PyCharm viel mehr an. Auch fanden wir das Prinzip mit der GitHub anbindung und den dadurch entstandenen Möglichkeiten sehr spannend.
+können. Uns sprach jedoch das Design und die Handhabung von PyCharm viel mehr an. Auch fanden wir das Prinzip mit der GitHub Anbindung und den dadurch entstandenen Möglichkeiten sehr spannend.
 Vorallem beeindruckte uns die Nachvollziehbarkeit im GitHub. Wir konnten zu jeder Zeit sehen, wer was genau angepasst oder neu hinzugefügt hat. Für die Dokumentation, resp. die Erstellung der Projektübersicht (GANTT-Diagramm) haben wir eine Vorlage von Google Sheets verwendet und für die Dokumentation der Sprints haben wir wie im letzten Jahr ein Miro-Board verwendet.
-Natürlich war auch ChatGPT ein unterstützdenes Tool in diesem Projekt. Da wir jedoch Python wirklich verstehen wollen, und nicht einfach nur das Projekt abhacken wollten, haben wir intern abgemacht, keine Codes direkt aus ChatGPT zu kopieren. Stattdessen haben wir immer zuerst alles soweit es geht selber versucht, und ChatGPT vorallem für unverständliche Fehler in der Konsole verwendet. 
+Natürlich war auch ChatGPT ein unterstützendes Tool in diesem Projekt. Da wir jedoch Python wirklich verstehen wollen, und nicht einfach nur das Projekt abhacken wollten, haben wir intern abgemacht, keine Codes direkt aus ChatGPT zu kopieren. Stattdessen haben wir immer zuerst alles soweit es geht selber versucht, und ChatGPT vorallem für unverständliche Fehler in der Konsole verwendet. 
 Wir sind der Meinung, dass dies eine angemessene Art ist ChatGPT zu verwenden. Auch sind wir durch ChatGPT auf die Idee gekommen, Emojis im Code (resp. in den Print Ausgaben) zu verwenden. 
 
 Die Datenbank selber haben wir von unseren Dozenten zur vefügung gestellt bekommen. Diese läuft mit SQLite 3 und wurde im Verlauf des Projekts bearbeitet. Diese Aufgabe hat primär unser Datenbankspezialist David Germann übernommen. 
@@ -211,7 +211,7 @@ die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
 Die im Projekt implementierten Funktionen zeigen, dass ein einfaches, aber effektives 
 Hotelreservierungssystem mit den verwendeten Technologien erfolgreich umgesetzt werden kann. Die Hauptziele,
 wie die Suche nach Hotels, Verwaltung von Hotels und Adressdaten sowie einfache Buchungslogik, konnten in 
-funktionierender Form realisiert werden. Neben dem Three-Layer-Prinzip hat uns vorallem die und objektorientierte Umsetzung 
+funktionierender Form realisiert werden. Neben dem Three-Layer-Prinzip hat uns vor allem die und objektorientierte Umsetzung 
 positiv auf Lesbarkeit, Testbarkeit und Erweiterbarkeit ausgewirkt.
 
 ### Herausforderungen
