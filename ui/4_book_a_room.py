@@ -19,6 +19,7 @@ from datetime import datetime
 from common_code.country_list import COUNTRIES
 
 DATE_FORMAT = "%Y-%m-%d"
+#das Datumsformat wird festgelegt
 
 def ask_date(prompt: str) -> str:
     while True:
@@ -30,13 +31,13 @@ def ask_date(prompt: str) -> str:
             print("Please enter a date in the format: YYYY-MM-DD.")
 
 def get_valid_nationality():
-    """Get a valid nationality from the user."""
+    #eine gültige Nationalität vom Kunden wird abgefragt
     while True:
         code = input("\nPlease enter your nationality (country code, e.g. 'CH' for Switzerland): ").strip().upper()
         if code in COUNTRIES:
-            return COUNTRIES[code]['en']  # Return English country name instead of code
+            return COUNTRIES[code]['en']
         
-        # Only show the list if the input was invalid
+        # Falls die eingabe ungültig war, wird die gesamte Länderliste ausgegeben
         print("\nInvalid country code. Here are all available countries:")
         sorted_countries = sorted(COUNTRIES.items(), key=lambda x: x[1]['en'])
         for code, names in sorted_countries:
@@ -57,16 +58,22 @@ def main ():
         user_selection = int(input("Which option would you like? Enter the according number: "))
         if user_selection == 1:
             hotels = search_all_hotel_details_01_6.main()
+            #Code von search_all_hotel_details_01_6.py wird wiederverwendet
         elif user_selection == 2:
             hotels = search_hotels_by_city_01_1.main()
+            # Code von search_hotels_by_city_01_1.py wird wiederverwendet
         elif user_selection == 3:
             hotels = search_hotel_stars_01_2.main()
+            # Code von search_hotel_stars_01_2.py wird wiederverwendet
         elif user_selection == 4:
             hotels = search_room_by_guest_count_01_3.main()
+            # Code von search_room_by_guest_count_01_3.py wird wiederverwendet
         elif user_selection == 5:
             hotels, check_in_date, check_out_date = search_hotels_by_availability_01_4.main()
+            # Code von search_hotels_by_availability_01_4.py wird wiederverwendet
         elif user_selection == 6:
             hotels, check_in_date, check_out_date = search_hotels_by_multiple_criteria_01_5.main()
+            # Code von search_hotels_by_multiple_criteria_01_5.py wird wiederverwendet
 
         if isinstance(hotels, tuple) and len(hotels) == 3:
             # Already unpacked above, no need to unpack again
@@ -87,6 +94,8 @@ def main ():
                 selected_hotel = selected_hotel_list[0]
                 print("\nYou selected:")
                 print(print_detailed_hotel_list(selected_hotel))
+                #die Auswahl wird nochmal bestätigt
+
             coach = False
             while not coach:
                 print("")
@@ -99,11 +108,14 @@ def main ():
                     coach = True
                 else:
                     print("Please enter either 'y' or 'n'.")
+                    # das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
 
             if not check_in_date:
                 check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
             if not check_out_date:
                 check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
+                #kommt nur zum Zug, wenn noch keine eingabe getätigt wurde.
+                # Je nach dem, was bei vorhin für eine Auswahl getroffen wurde.
             print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
             rooms = get_available_rooms_by_hotel_and_dates(selected_hotel.hotel_id, check_in_date, check_out_date)
             correct = True
@@ -112,12 +124,14 @@ def main ():
         while not live:
             if rooms:
                 output = ""
+                #Der output wird festgelegt:
                 for index, r in enumerate(rooms, start=1):
                     output += f"{index} - Room {r.number}: {r.price_per_night} CHF, Type: {r.roomtype.description}, Max Guests: {r.roomtype.max_guests}\n "
                     if r.facilities:
                         for facility in r.facilities:
                             output += f"    - Facility: {facility.name}\n"
                 print(output)
+                #der Output wird festgelegt
                 room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
                 if 1 <= room_booking <= len(rooms):
                     selected_room = rooms[room_booking - 1]
@@ -130,11 +144,13 @@ def main ():
                     print(f"✅ Existing guest found: {existing_guest.first_name} {existing_guest.last_name} \n You don't have to enter all details again :) ")
                     new_guest = existing_guest
                 else:
+                    #De Kundendaten werden abgefragt
                     street = input("\nPlease Enter your street address including house number: ")
                     city = input("\nPlease Enter your city: ")
                     zip = input("\nPlease Enter your zip code: ")
                     birthday = input("\nPlease Enter your birthday (YYYY-MM-DD): ")
                     nationality = get_valid_nationality()
+                    #vorher definierte Funktion wird abgefragt
                     first_name = input("\nPlease Enter your first name: ")
                     last_name = input("\nPlease Enter your last name: ")
 
@@ -148,6 +164,7 @@ def main ():
                 print(new_booking)
                 try:
                     input("\nPress Enter to finish")
+                    #vorgang wird beendet
                     return
                 except (EOFError, KeyboardInterrupt):
                     print("\nBooking completed successfully!")

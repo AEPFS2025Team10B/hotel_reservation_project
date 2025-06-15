@@ -32,6 +32,7 @@ def main():
     if not hotels:
         print("No Hotel found.")
         input(f"\nPress Enter to finish")
+        #falls kein Hotel gefunden wird
         return
 
     # 1) Liste der Hotels anzeigen
@@ -45,16 +46,21 @@ def main():
     # 3) Neue Werte abfragen
     print(f"\nUpdating '{hotel.name}':")
     new_name = input(f" New name [{hotel.name}]: ").strip() or hotel.name
+    #der Neue Name wird erfasst (falls lehr, wird der alte übernommen)
 
     stars_input = input(f" New stars (1–5) [{hotel.stars}]: ").strip()
+    #die neue Anzahl Sterne werden abgefragt
     if stars_input:
         new_stars = int(stars_input)
+        #die Sternenzahl wird in einen Integer umgewandelt
     else:
         new_stars = ask_date_int(f" New stars (1–5) [{hotel.stars}]: ", 1, 5)
+
     print("\n New address:")
     street   = input(f"  Street [{hotel.address.street}]: ").strip() or hotel.address.street
     city     = input(f"  City   [{hotel.address.city}]: ").strip() or hotel.address.city
     zip_code = input(f"  ZIP    [{hotel.address.zip_code}]: ").strip() or hotel.address.zip_code
+    #die Neue Adresse wird als Block abgefragt (falls lehr, wird der alte übernommen)
 
     # 4) Update durchführen
     try:

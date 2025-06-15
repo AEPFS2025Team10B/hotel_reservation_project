@@ -94,6 +94,7 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
         ws3.write('A3', 'Dies ist die Anzahl der wiederkehrenden Gäste.')
 
     print(f"✅ Excel-Bericht gespeichert unter: {file_path}")
+    #Es wird dem User mitgeteilt, wo das Excel gespeichert wurde
 
 
 def main():
@@ -118,21 +119,28 @@ def main():
         demographics = compute_demographics()
         if choice == 1:
             print_age_groups(demographics)
+            # Code von def print_age_groups kommt zum Zug
         elif choice == 2:
             print_nationalities(demographics)
+            # Code von def print_nationalities kommt zum Zug
         elif choice == 3:
             print_recurring_guests(demographics)
+            # Code von def print_recurring_guests kommt zum Zug
         elif choice == 4:
             print_age_groups(demographics)
             print_nationalities(demographics)
             print_recurring_guests(demographics)
+            # alle 3 werden nacheinander ausgeführt
         elif choice == 5:
             export_demographics_to_excel()
+            # es wird ein Excelfile generiert
         elif choice == 0:
+            # das Programm wird beendet
             break
         else:
             print("invalid choice. Please try again.")
             continue
+            #Loop wird fortgesetzt
 
         input(f"\nPress enter to finish")
         valid = True

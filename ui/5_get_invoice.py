@@ -16,17 +16,23 @@ def main():
             valid = True
         else:
             print("Please enter either 'y' or 'n'.")
+            # das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
 
     booking_input = input("Enter the booking ID (or press Enter if you don't know it): ").strip()
+    #Kunde wird nach der Buchungs-ID gefragt
 
     if booking_input == "":
         email = input("Enter your email address to find your bookings: ").strip()
         bookings = find_bookings_by_email(email)
+        #wenn er die Buchungs-ID nicht kennt, kann er auch über die E-Mail fortfahren.
+        #Dieser block kommt also nur zum Zug, wenn booking_input lehr ist
 
         if not bookings:
             print("❌ No bookings found for this email.")
+            #falls wir keine Buchung/Kunden mit der angegeben E-Mail haben, kommt diese Meldung zum Zug.
             return
 
+        #Alle gefundenen Buchungen über diese E-Mail werden ausgegeben:
         print(f"\n📚 Found {len(bookings)} bookings for {email}:")
         print("-" * 50)
         for b in bookings:
@@ -51,6 +57,7 @@ def main():
 
     if not booking or not invoice:
         print(f"\n❌ Booking got cancelled, therefore no invoice")
+        #wird ausgegeben, wenn die Buchung storniert wurde
         booking = find_booking_by_id(booking_id)
         print(f"\n Details of cancelled booking: \n {generate_booking_confirmation(booking)}")
         input(f"\nPress Enter to finish")

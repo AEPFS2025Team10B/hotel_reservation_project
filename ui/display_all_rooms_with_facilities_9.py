@@ -12,13 +12,16 @@ def main():
     print("----------------------------")
 
     rooms = room_manager.get_all_rooms_with_facilities()
+    # alle Räume werden herausgesucht
 
     if not rooms:
-        print("Keine Zimmer gefunden.")
+        print("No rooms found.")
+        # dem User wird mitgeteilt, dass keine Räume gefunden werden konnten
         input(f"\nPress Enter to finish")
         return
 
     for room in rooms:
+        # Jeder Raum wir als eigener Block ausgegeben
         print(f"Hotel: {room['hotel_name']}")
         print(f"Zimmernummer: {room['room_number']}")
         print(f"Beschreibung: {room['room_type']}")
