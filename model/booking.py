@@ -1,4 +1,5 @@
 from datetime import date
+from model.invoice import Invoice
 
 class Booking:
     def __init__(self, booking_id: int, check_in_date: date, check_out_date: date):
@@ -17,7 +18,7 @@ class Booking:
 
     def __repr__(self):
         return (f"Booking(id={self.__booking_id!r}, check_in={self.__check_in_date!r}, "
-                f"check_out={self.__check_out_date!r}, guests={self.__number_of_guests!r}, "
+                f"check_out={self.__check_out_date!r},"
                 f"cancelled={self.__is_cancelled!r}, price={self.__total_price!r})")
 
     @property

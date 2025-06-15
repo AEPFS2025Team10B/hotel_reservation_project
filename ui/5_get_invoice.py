@@ -50,7 +50,9 @@ def main():
     invoice = find_invoice_by_booking_id(booking_id)
 
     if not booking or not invoice:
-        print(f"\n❌ Booking or invoice not found.")
+        print(f"\n❌ Booking got cancelled, therefore no invoice")
+        booking = find_booking_by_id(booking_id)
+        print(f"\n Details of cancelled booking: \n {generate_booking_confirmation(booking)}")
         input(f"\nPress Enter to finish")
         return
 
