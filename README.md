@@ -292,7 +292,7 @@ Wir freuen uns darauf, Python künftig einzusetzen und unsere Kenntnisse laufend
 - Extra charts or figures
 
 ## References
-- Full list of all sources (books, articles, websites)
+- BAI-AEP. (2025). System Architecture Diagram – AEP Chinook Reference Project [Diagramm]. GitHub. https://github.com/BAI-AEP/AEP_Chinook_Reference_Project
 
 
 
