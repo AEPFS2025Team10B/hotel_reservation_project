@@ -25,6 +25,7 @@ def main():
             valid = True
         else:
             print("Please enter either 'y' or 'n'.")
+        # das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
 
     # 1) Hotel-Grunddaten
     name = input("Name of the hotel: ").strip()
@@ -35,7 +36,9 @@ def main():
     try:
         stars = int(input("Number of stars (1–5): ").strip())
         if not (1 <= stars <= 5):
+            #es wird geprüft, ob die Sternenzahl wirklich zwischen 1 und 5 liegt
             raise ValueError()
+
     except ValueError:
         print("Invalid star input. Please enter a number from 1 to 5.")
         return
@@ -57,10 +60,12 @@ def main():
         print(f"  – {new_hotel.name} ({new_hotel.stars}★)")
         addr = new_hotel.address
         print(f"  – address: {addr.street}, {addr.city} {addr.zip_code}")
+
     except ValueError as e:
         print(f"\nFehler: {e}")
         input(f"\nPress Enter to finish")
         return
+
     except Exception as e:
         print(f"\nError creating entry: {e}")
         input(f"\nPress Enter to finish")

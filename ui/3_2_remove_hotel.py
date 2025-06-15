@@ -16,6 +16,7 @@ def main():
 
     if not hotels:
         print("No Hotel found.")
+        #falls keine Hotels gefunden wurden
         return
 
     print(print_all_hotel_details(hotels))
@@ -30,7 +31,9 @@ def main():
             print(f"\n\nfor Coach: do not delete hotel: Les Trois Rois, its good to check user story 3_1_add_new_hotel")
             sel = int(input("\nNumber of the Hotel you want to remove: ").strip())
             if not (1 <= sel <= len(hotels)):
+                #Es wird geprüft, ob die eingabe vom User gültig war (grösser oder 1 bis Anzahl Hotels)
                 print("Invalid Selection.")
+                #wird ausgegeben, vals der Input ungültig war
                 continue
 
         except ValueError:
@@ -46,22 +49,28 @@ def main():
         confirm = input(f"Should the hotel '{hotel.name}' really be deleted? (y/n): ").strip().lower()
         if confirm == 'n':
             print("Cancelled.")
+            #Kunde wird informiert, dass der Vorgang beendet wurde.
             input(f"\nPress Enter to finish")
             break
 
         elif confirm != 'y':
             print("Cancelled.")
-            print("")
             continue
 
 
         try:
             remove_hotel(hotel.hotel_id)
+            #Inputs wurden an den Manager weitergegeben
+
             print(f"Hotel '{hotel.name}' was deleted succesfully.")
+            #Info, dass alles funktioniert hat
+
             input(f"\nPress Enter to finish")
             valid = True
+
         except Exception as e:
             print(f"Deleting didnt work: {e}")
+            #Es wird mitgeteilt, dass der Löschvorgang fehlgeschlagen ist.
             input(f"\nPress Enter to finish")
             valid = True
 

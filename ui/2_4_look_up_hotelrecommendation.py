@@ -32,6 +32,7 @@ def main():
                         coach = True
                     else:
                         print("Please enter either 'y' or 'n'.")
+                        # das ganze loop ist dafür da um dem coach zu helfen, den Code auf funktionalität zu prüfen
 
                 selection = int(input("\nPlease enter the number of the hotel you want to see the recommendations of: ").strip())
                 if 1 <= selection <= len(hotels):
