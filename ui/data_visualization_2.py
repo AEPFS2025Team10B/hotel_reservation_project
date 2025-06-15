@@ -63,7 +63,7 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
     # Statistiken pro Gast sammeln
     stats = {}
     for b in all_bookings:
-        gid = b.guest_id
+        gid = b.guest.guest_id
         ci = b.check_in_date
         co = b.check_out_date
         nights = (co - ci).days if isinstance(co, date) and isinstance(ci, date) else 0

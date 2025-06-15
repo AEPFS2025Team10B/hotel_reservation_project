@@ -6,7 +6,6 @@ class Hotel:
         self.__stars = stars
         self.__address = None
         self.__rooms = []
-        self.__facilities = []
 
     def __repr__(self):
         return f"Hotel(id={self.__hotel_id!r}, name={self.__name!r})"
@@ -60,12 +59,3 @@ class Hotel:
             raise TypeError("Room must be a Room object")
         self.__rooms.append(room)
 
-    @property
-    def facilities(self):
-        return self.__facilities
-
-    def add_facility(self, facility):
-        from .facility import Facility
-        if not isinstance(facility, Facility):
-            raise TypeError("Facility must be a Facility object")
-        self.__facilities.append(facility)

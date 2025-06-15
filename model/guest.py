@@ -11,8 +11,7 @@ class Guest:
         self.__birthday = birthday
         self.__nationality = nationality
         self.__address = None
-        self.__booking = None
-
+        self.__booking = []
     def __repr__(self):
         return f"Guest(id={self.__guest_id!r}, last_name={self.__last_name!r}, first_name={self.__first_name!r}, email={self.__email!r}, birthday={self.__birthday!r}, nationality={self.__nationality!r})"
 
@@ -85,11 +84,14 @@ class Guest:
         self.__address = address
 
     @property
-    def booking(self):
+    def bookings(self):
         return self.__booking
 
-    @booking.setter
-    def booking(self, booking):
-        if not isinstance(booking, Booking):
-            raise TypeError("Booking must be a Booking")
-        self.__booking = booking
+    @bookings.setter
+    def bookings(self, bookings):
+        if not isinstance(bookings, list):
+            raise TypeError("Bookings must be a list of Booking objects")
+        if not all(isinstance(b, Booking) for b in bookings):
+            raise TypeError("All items in bookings must be of type Booking")
+        self.__booking = bookings
+
