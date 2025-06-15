@@ -96,6 +96,38 @@ Unser Code gliedert sich in mehrere klar voneinander getrennte Schichten/Layers.
 
 ### Klassendiagramm
 
+![Klassendiagramm](images/Klassendiagram.png)
+
+#### Unified Modeling Language
+Wir haben alle Klassen-beziehungen als Assoziationen modelliert. Dies war eine bewusste Entscheidung um die Komplexität zu reduzieren. Somit ist es zum Beispiel auch möglich, ein Raum zu haben ohne Hotel und umgekehrt. Mit Entsprechenden codes in der UI, Business logic layer und data access layer, kann man dies vermeiden auch wenn die Klassen als Assoziationen modelliert wurden. Uns ist bewusst das man auch hätte Aggregation oder Komposition anwenden können. So könnte man zum Beispiel für die Beziehung Hotel und Raum mittels Aggregation darstellen. Ein Hotel besteht immer aus Zimmern, aber ein Zimmer kann auch unabhängig existieren z.B für das vermieten von Konferenzräume. Die Komposition hätte man bei der beziehung Booking - Invoice anwenden können um darzustellen, dass eine Rechnung nur existieren kann, wenn es eine Buchung gibt. Allerdings ist es auch möglich das es eine Rechnung gibt, welche nicht durch eine Buchung entanden ist. Etwa durch die Beanspruchung eines Services (Massage, Brunch) ohne ein Zimmer zu Buchen.
+
+#### Kardinalität
+- Guest / Address
+  - Ein Kunde hat immer nur eine Adress.
+  - Eine Adresse kann mehreren zu keinem Kunden gehören (sie gehört dann zum Hotel) oder mehrere Kunden haben eine Adresse (zum Beispiel bei einer Wohngemeinschaft).
+- Address / Hotel
+  - Eine Addresse gehört entweder zu keinem Hotel (Adresse des Kunden) oder genau einem Hotel.
+  - Ein Hotel hat nur eine Adresse.
+- Guest / Booking
+  - Ein Kunde kann keine (Wenn man sich bei registriert ohne zu buchen, bei uns nicht umgesetzt aber hätte eine Option sein können) oder er kann mehrere Buchungen machen.
+  - Eine Buchung gehört immer zu einem Kunden.
+- Booking / Room
+  - Bei uns Modelliert haben wir, dass ein Kunde nur ein Zimmer buchen kann. Dementsprechend gehört eine Buchung immer zu genau einem Raum. Für die Zukunft könnte man dass anderst umsetzen.
+  - Ein Raum kann gar nicht oder mehrfach gebucht werden.
+- Room / Hotel
+  - Ein Zimmer gehört immer zu genau einem Raum.
+  - Ein Hotel hat mindestens 1 Raum, kann aber auch mehrere haben.
+- Room / Facility
+  - Ein Raum kann keine oder mehrere Ausstattungen haben.
+  - Eine Ausstattung kann zu keinem oder mehreren Zimmer gehören. Wenn es den Raum mit einer spezifischen Ausstattung nicht mehr gibt, muss diese Ausstattung nicht zwingend auch entfernt werden
+- Room / RoomType
+  - Ein Zimmer hat genau einen Zimmer-Typ: Single, Family etc.
+  - Ein Zimmer-Typ kann zu keinem oder mehreren Räumen gehören.
+- Booking / Invoice
+  - Eine Buchung generiert genau eine Rechnung
+  - Die Rechnung gehört zu genau einer Buchung
+
+
 ## Methods
 - Approach and methodology
 - Tools, frameworks, and technologies used
