@@ -19,6 +19,7 @@ und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähig
 
 ## Table of Contents
 - [Introduction](#introduction)
+  - [How To Start](how-to-start)
   - [Background](#background)
   - [Objectives](#objectives)
   
@@ -48,10 +49,13 @@ und wie ein kleines Team ohne Vorwissen in kurzer Zeit ein voll funktionsfähig
 - [References](#references)
 
 ## Introduction
-- Background / context
-- Problem statement 
-- Objectives
-- Structure of the report
+
+### How To Start
+
+1. Repository klonen
+2. Projekt öffnen
+3. Abhängigkeiten installieren (pip install -r requirements.txt)
+4. App Starten (python3 app.py)
 
 ### Background 
 Im vergangenen Semester entwickelten wir eine Datenbank für ein Hotelreservierungssystem. 
@@ -129,8 +133,6 @@ Wir haben alle Klassen-beziehungen als Assoziationen modelliert. Dies war eine b
 
 
 ## Methods
-- Approach and methodology
-- Tools, frameworks, and technologies used
 
 ### Ansatz und Methodik
 Zu Beginn des Moduls, haben wir uns darauf geeinigt, noch etwas warten, bevor wir mit dem Projekt anfangen. 
@@ -170,8 +172,6 @@ Begonnen haben wir aber mit VisualParadigm, hier konnten wir unsere Modelle korr
 
 
 ## Results
-- Key findings
-- Charts, tables, and important observations
 
 Im Laufe des Projekts konnten wir ein funktionierendes Hotelreservierungssystem programmieren, welches 
 die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
@@ -203,9 +203,6 @@ die wichtigsten Anforderungen erfüllt. Die Anwendung erfüllt unter anderem:
 
 
 ## Discussion
-- Interpretation of the results
-- Challenges encountered
-- Were objectives achieved?
 
 ### Interpretation der Ergebnisse
 Die im Projekt implementierten Funktionen zeigen, dass ein einfaches, aber effektives 
@@ -240,8 +237,6 @@ Die meisten im Vorfeld gesetzten Ziele wurden erreicht:
 - OOP stand im Fokus, haben wir eingehalten. 
 
 ## Conclusion
-- Summary of key findings
-- Reflection: what went well and what could be improved
 
 ### Zusammenfassung zentraler Erkenntnisse
 - Die Einführung einer modularen Schichtenarchitektur (UI, Business Logic, Data Access, Models) 
@@ -286,13 +281,6 @@ gegenseitig an die Wichtigkeit dieses Moduls erinnern und uns auch gegenseitig m
 
 Wir freuen uns darauf, Python künftig einzusetzen und unsere Kenntnisse laufend auszubauen, und danken zugleich unseren Coaches, die stets geduldig waren und uns sogar ausserhalb der Unterrichts- und Coachingzeiten unterstützt haben- kudos an euch!
 
-## Appendix *(optional)*
-- Raw data
-- Code snippets
-- Extra charts or figures
-
 ## References
-- BAI-AEP. (2025). System Architecture Diagram – AEP Chinook Reference Project [Diagramm]. GitHub. https://github.com/BAI-AEP/AEP_Chinook_Reference_Project
-
-
-
+- Three-Layer Architecture:
+  BAI-AEP. (2025). System Architecture Diagram – AEP Chinook Reference Project [Diagramm]. GitHub. https://github.com/BAI-AEP/AEP_Chinook_Reference_Project
