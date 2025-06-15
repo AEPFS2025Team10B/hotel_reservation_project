@@ -21,10 +21,14 @@ def ask_booking_id():
         print(f"\nfor Coach: You can use booking id: 1\n")
         user_input = int(input("Please enter your booking id: "))
         booking = find_booking_by_id(user_input)
+        #Das Loop wird noch im Manager geschlossen
         
         if booking is None:
             print("No booking found with this ID. Please try again.")
+            #Kunde wird informiert, dass er keine gültige Buchungs-Id eingegeben hat.
+
             continue
+            #loop wird fortgesetzt
             
         print("\nBooking Details:")
         print(f"Booking ID: {booking.booking_id}")
@@ -33,9 +37,11 @@ def ask_booking_id():
         print(f"Room: {booking.room.number}")
         print(f"Guest: {booking.guest.first_name} {booking.guest.last_name}")
         print(f"Total Amount: {booking.total_price}")
+        #Die details werden für den Kunden nochmals ausgegeben, dass er auch sicher ist,
+        # dass auch wirklich die Hotelbewertung richtig hinterlegt wird.
 
         #TODO: wenn genug zeit, die angaben nicht printen,
-        # sondern den Kunden dazu bringen Booking ID und seinen Namen einzugeben
+        # sondern den Kunden dazu bringen Booking ID und seinen Namen und/oder E-Mail einzugeben
 
         correct = input("Is this your booking? (Y/N): ")
         if correct.lower() == "y":
@@ -43,14 +49,14 @@ def ask_booking_id():
             return
         elif correct.lower() == "n":
             print("Alright, the process has been canceled.")
-            input("Press Enter to Exit")
-            #TODO: Quit ersetzen, mit einem auswahlmenü, möchten Sie Ihre Buchung erneut suchen
-            quit()
             # Kunde kann hier bestätigen, ob es sich um seine Buchung handelt oder nicht,
             # wenn nicht, wird das Programm beendet
+            input(f"\nPress Enter to Exit")
+            #TODO: Quit ersetzen, mit einem auswahlmenü, möchten Sie Ihre Buchung erneut suchen
+            quit()
 
 
-#Wir haben uns dazu entschieden zwei funktionen zu machen.
+# Wir haben uns dazu entschieden zwei funktionen zu machen.
 # Idee: Falls mal ein Problem auftreten sollte, ist es für uns einfach den Code wieder zu verstehen
 def ask_hotelrecommendation(booking):
     rating = None
@@ -60,11 +66,15 @@ def ask_hotelrecommendation(booking):
         try:
             rating = int(input("\nPlease enter your rating (1-10): "))
             if 1 <= rating <= 10:
+                #es wird geprüft, ob das eingegebene Rating unsren Vorgaben entspricht (muss zwischen 1 und 10 sein)
                 valid = True
             else:
                 print("Invalid input please enter 1 to 10.")
+                #Kunde wird informiert, dass er ein ungültiges Rating eingegeben hat.
+
         except ValueError:
             print("Invalid input please enter 1 to 10.")
+            # Kunde wird informiert, dass er ein ungültiges Rating eingegeben hat.
 
     valid = False
     while not valid:
@@ -76,6 +86,8 @@ def ask_hotelrecommendation(booking):
                 valid = True
             else:
                 print("The recommendation can not be longer than 500 characters")
+                #Kunde wird informiert, dass seine Bewertung zu lange war
+
         except Exception as e:
             print(f"Unexpected error: {e}")
     

@@ -71,8 +71,7 @@ def main():
     else:
         print("No hotels found.")
 
-    print("")
-    input("Press Enter to finish")
+    input(f"\nPress Enter to finish")
     return hotels
 
 

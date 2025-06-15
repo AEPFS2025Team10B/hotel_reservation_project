@@ -22,6 +22,8 @@ def main():
             # jetzt kann er es einfach wieder eingeben.
             try:
                 selection = int(input("\nEnter the number of the hotel you want to see the Room Types: ").strip())
+
+                #Eingabe vom Kunden wird überprüft, ob es grösser oder gleich 1 ist.
                 if 1 <= selection <= len(hotels):
                     selected = hotels[selection - 1]
                     detailed_hotels = create_detailed_hotel_list(selected)
@@ -49,10 +51,14 @@ def main():
                             valid = True
                 else:
                     print("Invalid selection.")
+                    # der Kunde wird darauf hingewiesen, dass er eine ungültige eingabe getätigt hat.
+
             except ValueError:
                 print("Please enter a valid number.")
+                # der Kunde wird darauf hingewiesen, dass er eine ungültige eingabe getätigt hat.
     else:
         print("No hotels found.")
+        #teilt dem Kunden mit, dass wir kein Hotel gefunden haben
         return
 
     input("Press Enter to finish")
