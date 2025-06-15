@@ -161,6 +161,8 @@ selbst haben wir die Programmiersprache Python 3.12 (inkl. Libraries wie pandas)
 uns auf PyCharm von Jetbrains geeinigt, wir hätten auch das jupiter Notebook Deepnote verwenden 
 können. Uns sprach jedoch das Design und die Handhabung von PyCharm viel mehr an. Auch fanden wir das Prinzip mit der GitHub anbindung und den dadurch entstandenen Möglichkeiten sehr spannend.
 Vorallem beeindruckte uns die Nachvollziehbarkeit im GitHub. Wir konnten zu jeder Zeit sehen, wer was genau angepasst oder neu hinzugefügt hat. Für die Dokumentation, resp. die Erstellung der Projektübersicht (GANTT-Diagramm) haben wir eine Vorlage von Google Sheets verwendet und für die Dokumentation der Sprints haben wir wie im letzten Jahr ein Miro-Board verwendet.
+Natürlich war auch ChatGPT ein unterstützdenes Tool in diesem Projekt. Da wir jedoch Python wirklich verstehen wollen, und nicht einfach nur das Projekt abhacken wollten, haben wir intern abgemacht, keine Codes direkt aus ChatGPT zu kopieren. Stattdessen haben wir immer zuerst alles soweit es geht selber versucht, und ChatGPT vorallem für unverständliche Fehler in der Konsole verwendet. 
+Wir sind der Meinung, dass dies eine angemessene Art ist ChatGPT zu verwenden. Auch sind wir durch ChatGPT auf die Idee gekommen, Emojis im Code (resp. in den Print Ausgaben) zu verwenden. 
 
 Die Datenbank selber haben wir von unseren Dozenten zur vefügung gestellt bekommen. Diese läuft mit SQLite 3 und wurde im Verlauf des Projekts bearbeitet. Diese Aufgabe hat primär unser Datenbankspezialist David Germann übernommen. 
 
@@ -219,9 +221,9 @@ Während der Entwicklung traten verschiedene Herausforderungen auf:
 - Fehlermeldungen und Debugging: Einige Fehler, z. B. bei der Übergabe von Argumenten an Konstruktoren, 
   waren schwer zu identifizieren, insbesondere bei komplexeren Methoden.
 - Klassen: Auch wenn wir uns zu beginn bereits auf die Verschiedene Klassen- und deren Attributen geeinigt haben,
-  haben sich mier manchmal Fehler eingeschlichen. Als Beispiel hatten wir zum Beispiel das Attribut "price per night"
+  haben sich hier manchmal Fehler eingeschlichen. Als Beispiel hatten wir zum Beispiel das Attribut "price per night"
   in der Klasse Room, sowie auch in der Klasse RoomType geführt- was logischerweise zu diversen Problemen geführt hat und enorm
-  mühsam zum beheben war. 
+  mühsam zum beheben war. Hierfür hätten wir uns konstant an das Klassendiagramm halten müssen. 
 - Teamkoordination: Durch unterschiedliche Verfügbarkeiten im Team war es manchmal schwierig, kontinuierlich 
   im gleichen Tempo zu arbeiten. Die wöchentlichen Scrum-Meetings haben jedoch geholfen, Aufgaben zu klären 
   und Fortschritte zu sichern.
