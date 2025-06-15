@@ -32,13 +32,13 @@ def main():
             #falls wir keine Buchung/Kunden mit der angegeben E-Mail haben, kommt diese Meldung zum Zug.
             return
 
-        #Alle gefundenen Buchungen über diese E-Mail werden ausgegeben:
-        print(f"\n📚 Found {len(bookings)} bookings for {email}:")
-        print("-" * 50)
-        for b in bookings:
-            print(f"Booking ID: {b.booking_id} | Hotel: {b.room.hotel.name} | "
-                  f"Room: {b.room.number} | Check-in: {b.check_in_date} | Check-out: {b.check_out_date}")
-        print("-" * 50)
+        else:   #Alle gefundenen Buchungen über diese E-Mail werden ausgegeben:
+            print(f"\n📚 Found {len(bookings)} bookings for {email}:")
+            print("-" * 50)
+            for b in bookings:
+                print(f"Booking ID: {b.booking_id} | Hotel: {b.room.hotel.name} | "
+                      f"Room: {b.room.number} | Check-in: {b.check_in_date} | Check-out: {b.check_out_date}")
+            print("-" * 50)
 
         try:
             booking_id = int(input("Enter the Booking ID you want to view the invoice for: ").strip())
