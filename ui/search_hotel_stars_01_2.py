@@ -5,9 +5,6 @@
 User Story 1.2: Hotels nach Mindestanzahl Sterne filtern
 """
 
-import sys
-import os
-
 from business_logic import print_all_hotel_details
 
 # Tell Python to look in the parent folder for business_logic and data_access

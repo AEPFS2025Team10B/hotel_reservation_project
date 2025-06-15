@@ -1,9 +1,6 @@
-from model.address import Address
-from model.facility import Facility
 
 class Hotel:
     def __init__(self, hotel_id: int, name: str, stars: int):
-        from model.room import Room
         self.__hotel_id = hotel_id
         self.__name = name
         self.__stars = stars

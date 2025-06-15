@@ -1,7 +1,6 @@
 from model.hotel import Hotel
 from model.roomtype import RoomType
-from model.booking import Booking
-from testing.test_class_Facility import Facility
+from model.facility import Facility
 
 
 class Room:

@@ -3,7 +3,6 @@
 from data_access.hotel_data_access import HotelDataAccess
 from data_access.room_data_access import RoomDataAccess
 from data_access.address_data_access import AddressDataAccess
-from model.address import Address
 
 # DAO-Instanzen
 hotel_dao = HotelDataAccess()
@@ -69,9 +68,6 @@ def update_hotel(name: str, stars: int, street: str, city: str, zip_code: str, h
         hotel_dao.update_hotel(current)
         return current
     return None
-
-def find_hotel_by_id(hotel_id: int):
-    return hotel_dao.get_hotel_by_id(hotel_id)
 
 def find_hotel_id_by_room_id(room_id: int):
     return hotel_dao.get_hotel_id_by_room_id(room_id)

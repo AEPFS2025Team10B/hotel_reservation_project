@@ -7,8 +7,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
-from business_logic.room_manager import get_room_types_by_hotel
-from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 from business_logic.hotel_manager import print_all_hotel_details
 from business_logic.hotel_manager import create_detailed_hotel_list
 

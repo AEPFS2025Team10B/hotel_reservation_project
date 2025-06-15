@@ -6,7 +6,6 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from business_logic.hotel_manager import add_new_hotel
 
 def main():

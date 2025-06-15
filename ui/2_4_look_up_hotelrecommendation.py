@@ -4,8 +4,7 @@
 #Zie ist es, das der Kunde von einer Liste von Hotels eines auswählen kann und
 # von diesem dann die Bewertungen siht und lesen kann.
 
-import sys
-import os
+
 from business_logic.hotel_manager import print_all_hotel_details
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

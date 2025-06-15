@@ -12,9 +12,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from business_logic.hotel_manager import find_all_hotel_details
 from business_logic.room_manager import get_available_rooms_by_hotel_and_dates
-from common_code.find_hotel_by_list_city import find_hotel_by_list_city
-from business_logic.hotel_manager import print_all_hotel_details
-from business_logic.hotel_manager import print_all_hotel_details
 
 DATE_FORMAT = "%Y-%m-%d"
 

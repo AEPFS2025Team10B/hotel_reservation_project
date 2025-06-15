@@ -5,9 +5,6 @@
 # ob sie überhaupt existiert.
 # Danach kann der User seine Bewertung abgeben und es wird gespeichert.
 
-import sys
-import os
-from datetime import datetime
 
 from business_logic.booking_manager import find_booking_by_id, add_new_hotelrecommendation
 

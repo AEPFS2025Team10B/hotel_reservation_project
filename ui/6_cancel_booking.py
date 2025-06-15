@@ -1,4 +1,3 @@
-from business_logic import invoice_manager
 from business_logic import booking_manager
 
 def main():

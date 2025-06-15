@@ -8,9 +8,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_hotels_by_guest_count
 from business_logic.hotel_manager import print_all_hotel_details
-from model.roomtype import RoomType
-from business_logic.hotel_manager import create_detailed_hotel_list
-from business_logic.hotel_manager import print_all_hotel_details
 from common_code.find_hotel_by_list_city import find_hotel_by_list_city
 def main():
     print("Hotel Search by Guest Count")

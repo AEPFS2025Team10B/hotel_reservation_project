@@ -176,45 +176,6 @@ class RoomDataAccess(BaseDataAccess):
         """
         return self.fetchall(sql)
 
-    # def get_hotel_room_roomType_facility(self):
-    #     sql = """
-    #     SELECT h.hotel_id, h.name, h.stars,
-    #     a.address_id, a.street, a.city, a.cipcode, r.room_id, r.room_number, r.price_per_night, rt.type_id, rt.description, rt.max_guest, fac.facility_id, fac.facility_name
-    #     FROM Hotel AS h
-    #     JOIN Address AS a ON h.address_id = a.address_id
-    #     JOIN Room AS r ON r.room_id = .room_id
-    #     JOIN Room_Type AS rt ON rt.type_id = r.type_id
-    #     JOIN L"""
-    def update_room_price(self, room_id: int, new_price: float):
-        sql = "UPDATE Room SET price_per_night = ? WHERE room_id = ?"
-        self.execute(sql, (new_price, room_id))
-
-    # Beschreibung und max Gäste eines Raumtyps aktualisieren
-    def update_room_type(self, type_id: int, max_guests: int, description: str):
-        sql = """
-        UPDATE Room_Type
-        SET max_guests = ?, description = ?
-        WHERE type_id = ?
-        """
-        self.execute(sql, (max_guests, description, type_id))
-
-    # Namen einer Einrichtung aktualisieren
-    def update_facility(self, facility_id: int, new_name: str):
-        sql = "UPDATE Facilities SET facility_name = ? WHERE facility_id = ?"
-        self.execute(sql, (new_name, facility_id))
-
-    # Alle Einrichtungen abrufen
-    def get_all_facilities(self) -> list[Facility]:
-        sql = "SELECT facility_id, facility_name FROM Facilities"
-        rows = self.fetchall(sql)
-        return [Facility(fid, name) for fid, name in rows]
-
-    # Alle Raumtypen abrufen
-    def get_all_room_types(self) -> list[RoomType]:
-        sql = "SELECT type_id, max_guests, description FROM Room_Type"
-        rows = self.fetchall(sql)
-        return [RoomType(type_id, max_guests, description) for type_id, max_guests, description in rows]
-
 
     def get_room_with_hotel(self, hotel_id: int) -> list[Room]:
         sql = """

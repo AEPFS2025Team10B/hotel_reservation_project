@@ -6,7 +6,6 @@ User Story 3.3: Ich möchte Hotel Infos updaten
 
 import sys
 import os
-from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from business_logic.hotel_manager import find_all_hotel_details, update_hotel

@@ -1,7 +1,6 @@
 """
 User Story 1.5: Ich möchte Wünsche kombinieren können (z.B. Gästezahl, Sterne, Verfügbarkeit).).
 """
-from model.hotel import Hotel
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))

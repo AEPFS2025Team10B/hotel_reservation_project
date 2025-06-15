@@ -3,7 +3,6 @@
 
 from data_access import GuestDataAccess, BookingDataAccess
 from model.guest import Guest
-from datetime import datetime
 from common_code.age_calculator import calculate_age
 import collections
 

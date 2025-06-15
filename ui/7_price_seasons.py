@@ -1,16 +1,13 @@
 from business_logic import add_new_booking, apply_seasonal_discount
 from business_logic.address_manager import add_new_address
-from model import hotel
 from ui import search_hotels_by_city_01_1
 from ui import search_hotel_stars_01_2
 from ui import search_room_by_guest_count_01_3
 from ui import search_hotels_by_availability_01_4
 from ui import search_hotels_by_multiple_criteria_01_5
 from ui import search_all_hotel_details_01_6
-from model import guest
 from business_logic.address_manager import find_address_id
 from business_logic.guest_manager import find_guest_by_email
-from business_logic.guest_manager import add_new_guest
 from business_logic.room_manager import get_available_rooms_by_hotel_and_dates
 from business_logic.hotel_manager import print_all_hotel_details
 from business_logic.hotel_manager import create_detailed_hotel_list
@@ -74,7 +71,9 @@ def main():
             hotels, check_in_date, check_out_date = search_hotels_by_multiple_criteria_01_5.main()
 
         if isinstance(hotels, tuple) and len(hotels) == 3:
-            hotels, check_in_date, check_out_date = hotels
+            # Already unpacked above, no need to unpack again
+            pass
+
         valid = True
 
         correct = False
