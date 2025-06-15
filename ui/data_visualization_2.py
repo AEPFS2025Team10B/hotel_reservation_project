@@ -41,10 +41,11 @@ def compute_demographics():
 
 
 def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
+    # 1) Demografie‑Daten aus der Business‑Logik holen
     # Alle Daten auswerten
     demographics = compute_demographics()
 
-    # DataFrames erstellen
+    # 2) DataFrames für Altersgruppen und Nationalitäten
     df_age = pd.DataFrame(
         list(demographics['age_groups'].items()),
         columns=['Age Group', 'Count']
@@ -54,7 +55,7 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
         columns=['Nationality', 'Count']
     )
 
-    # DataFrame für wiederkehrende Gäste mit Details
+    # 3) Wiederkehrende Gäste ermitteln und in DataFrame packen 
     guest_dao = GuestDataAccess()
     booking_dao = BookingDataAccess()
     all_guests = guest_dao.get_all_guests()
@@ -87,11 +88,13 @@ def export_demographics_to_excel(filename="guest_demographics_report.xlsx"):
             })
     df_rec = pd.DataFrame(rows)
 
-    # .outputs Ordner erstellen, falls nicht vorhanden
+    # 4) Sicherstellen, dass der Ausgabepfad existiert
+    # outputs Ordner erstellen, falls nicht vorhanden
     output_dir = 'outputs'
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, filename)
 
+    # 5) Excel-Arbeitsmappe eröffnen
     # Excel-Writer mit XlsxWriter
     with pd.ExcelWriter(file_path, engine='xlsxwriter', datetime_format='yyyy-mm-dd') as writer:
         wb = writer.book
