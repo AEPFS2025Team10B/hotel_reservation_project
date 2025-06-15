@@ -103,6 +103,7 @@ class RoomDataAccess(BaseDataAccess):
                 room.facilities = []
                 rooms_by_id[rid] = room
             rooms_by_id[rid].facilities.append(Facility(fid, fname))
+
         return list(rooms_by_id.values())
 
 

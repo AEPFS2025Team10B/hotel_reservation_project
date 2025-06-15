@@ -2,6 +2,12 @@ from business_logic import add_new_booking
 from business_logic.address_manager import add_new_address
 from business_logic.address_manager import find_address_id
 from business_logic.guest_manager import find_guest_by_email
+from business_logic.hotel_manager import print_all_hotel_details
+from business_logic.hotel_manager import create_detailed_hotel_list
+from business_logic.hotel_manager import print_detailed_hotel_list
+from business_logic.room_manager import get_available_rooms_by_hotel_and_dates
+
+
 from model import hotel
 from ui import search_hotels_by_city_01_1
 from ui import search_hotel_stars_01_2
@@ -40,6 +46,7 @@ def get_valid_nationality():
             print(f"{code} = {names['en']}")
 
 def main ():
+    global selected_hotel
     valid = False
     check_in_date = None
     check_out_date = None
@@ -54,33 +61,6 @@ def main ():
         user_selection = int(input("Which option would you like? Enter the according number: "))
         if user_selection == 1:
             hotels = search_all_hotel_details_01_6.main()
-            if hotels:
-                selected_hotel = hotels[0]  # Get the selected hotel directly
-                print(f"\nDetails for {selected_hotel.name}:")
-                print(f"Address: {selected_hotel.address.street}, {selected_hotel.address.zip_code}, {selected_hotel.address.city}")
-                print(f"Stars: {selected_hotel.stars}\n")
-                print("Available rooms today:")
-                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, datetime.now().strftime("%Y-%m-%d"), datetime.now().strftime("%Y-%m-%d"))
-                for room in rooms:
-                    print(f" - Room {room.number}, CHF {room.price_per_night:.2f} per night")
-                
-                coach = False
-                while not coach:
-                    print("")
-                    choice = input("for Coach: Do you want to see what happens if there are currently no rooms available (y/n)?")
-                    if choice.lower() == "y":
-                        print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
-                        print("")
-                        coach = True
-                    elif choice.lower() == "n":
-                        coach = True
-                    else:
-                        print("Please enter either 'y' or 'n'.")
-
-                check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
-                check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
-                print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
-                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
         elif user_selection == 2:
             hotels = search_hotels_by_city_01_1.main()
         elif user_selection == 3:
@@ -99,44 +79,47 @@ def main ():
     correct = False
     while not correct:
         if hotels:
-            for index, hotel in enumerate(hotels, start=1):
-                print(f"{index}. {hotel.name} ({hotel.stars}★), {hotel.address}")
+            print(print_all_hotel_details(hotels))
+            # Alle hotels werden ausgegeben
             selection = int(input("\nEnter the number of the hotel you want to see the available rooms for your desired stay dates: ").strip())
             if 1 <= selection <= len(hotels):
-                selected_hotel = hotels[selection - 1]
-
-                coach = False
-                while not coach:
+                selected = hotels[selection - 1]
+                #Die eingabe vom Kunden wird auf ihre Gültigkeit geprüft
+                selected_hotel_list = create_detailed_hotel_list(selected)
+                selected_hotel = selected_hotel_list[0]
+                print("\nYou selected:")
+                print(print_detailed_hotel_list(selected_hotel))
+            coach = False
+            while not coach:
+                print("")
+                choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
+                if choice.lower() == "y":
+                    print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
                     print("")
-                    choice = input("for coach: Do you want to check when no hotels are available (y/n)?")
-                    if choice.lower() == "y":
-                        print("enter as check-in: 2025-10-28 an check-out: 2025-10-31")
-                        print("")
-                        coach = True
-                    elif choice.lower() == "n":
-                        coach = True
-                    else:
-                        print("Please enter either 'y' or 'n'.")
+                    coach = True
+                elif choice.lower() == "n":
+                    coach = True
+                else:
+                    print("Please enter either 'y' or 'n'.")
 
-                if not check_in_date:
-                    check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
-                if not check_out_date:
-                    check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
-                correct = True
-                print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
-                rooms = get_available_rooms_by_hotel_and_dates_2(selected_hotel.hotel_id, check_in_date, check_out_date)
-            else:
-                print("Invalid selection. Please try again.")
-                correct = True
-        else:
-            print("No hotels available for the selected criteria. Please try different dates or criteria.")
-            return
+            if not check_in_date:
+                check_in_date = ask_date("Check-in (YYYY-MM-DD): ")
+            if not check_out_date:
+                check_out_date = ask_date("Check-out (YYYY-MM-DD): ")
+            print(f"\nVerfügbare Zimmer vom {check_in_date} bis {check_out_date} in diesem Hotel:")
+            rooms = get_available_rooms_by_hotel_and_dates(selected_hotel.hotel_id, check_in_date, check_out_date)
+            correct = True
 
         live = False
         while not live:
             if rooms:
+                output = ""
                 for index, r in enumerate(rooms, start=1):
-                    print(f"{index} - room {r.number}, Room Type {r.roomtype} CHF {r.price_per_night:.2f} per night")
+                    output += f"{index} - Room {r.number}: {r.price_per_night} CHF, Type: {r.roomtype.description}, Max Guests: {r.roomtype.max_guests}\n "
+                    if r.facilities:
+                        for facility in r.facilities:
+                            output += f"    - Facility: {facility.name}\n"
+                print(output)
                 room_booking = int(input("\nEnter the number of the room you want to book: ").strip())
                 if 1 <= room_booking <= len(rooms):
                     selected_room = rooms[room_booking - 1]
@@ -167,6 +150,7 @@ def main ():
                 print(new_booking)
                 try:
                     input("\nPress Enter to finish")
+                    return
                 except (EOFError, KeyboardInterrupt):
                     print("\nBooking completed successfully!")
                     return
@@ -175,6 +159,13 @@ def main ():
                 print("No available rooms, in all the hotels in this time period.")
                 input("\nPress Enter to finish")
                 live = True
+
+        else:
+            print("Invalid selection. Please try again.")
+            correct = True
+    else:
+        print("No hotels available for the selected criteria. Please try different dates or criteria.")
+        return
 
 
 
