@@ -46,7 +46,6 @@ def get_valid_nationality():
             print(f"{code} = {names['en']}")
 
 def main ():
-    global selected_hotel
     valid = False
     check_in_date = None
     check_out_date = None
@@ -125,7 +124,7 @@ def main ():
                     selected_room = rooms[room_booking - 1]
                 live = True
 
-                print(f"\nYou have selected  {selected_room}")
+                print(f"\nYou have selected  Room number:{selected_room.number}, Price per night: {selected_room.price_per_night}")
                 email = input("\nPlease Enter your email: ")
                 existing_guest = find_guest_by_email(email)
                 if existing_guest:

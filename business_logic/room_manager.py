@@ -33,16 +33,20 @@ def find_room_by_id(room_id: int):
 def apply_seasonal_discount(rooms: list, check_in_date_str: str) -> list:
     check_in_date = datetime.strptime(check_in_date_str, "%Y-%m-%d")
     month = check_in_date.month
-
-    if 2 <= month <= 6 or 10 <= month <= 11:
+    discount = 0.9
+    discount_percentage = round((1 - discount) * 100,1)
+    original_prices = []
+    if 3 <= month <= 5 or 9 <= month <= 11:
+        print(f"🥳 Hey look... you got a seasonal discount of {discount_percentage} %, yuhuuuu :), isn't that great ?\n and the discount is per night by the way ;)")
         for room in rooms:
             original_price = room.price_per_night
-            room.price_per_night *= 0.9
-            print(f"✅ Rabatt angewendet: {original_price:.2f} ➜ {room.price_per_night:.2f}")
+            original_prices.append(original_price)
+            room.price_per_night *= discount
     else:
-        print("🟦 Kein Rabatt für dieses Datum")
-
-    return rooms
+        print(f"🟦 Hey, just for your information: if you do a booking for: March/April/Mai/September/October/November, you get an incredible discount of {discount_percentage} % on the price PER NIGHT (OMG Woow) ")
+        for room in rooms:
+            original_prices.append(room.price_per_night)
+    return rooms, original_prices
 
 def get_all_rooms_with_facilities():
     rows = room_dao.get_all_rooms_with_facilities()
