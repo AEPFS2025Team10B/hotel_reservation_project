@@ -136,13 +136,13 @@ Wir haben alle Klassen-beziehungen als Assoziationen modelliert. Dies war eine b
 Zu Beginn des Moduls, haben wir uns darauf geeinigt, noch etwas warten, bevor wir mit dem Projekt anfangen. 
 Dies lag zum einen daran, dass wir nur zu dritt, anstatt zu viert in der Projektgruppe sind.
 Ein weiterer Punkt, der dafür sprach, dass wir noch etwas warten mit der Umsetzung war, dass wir niemanden mit Programmierkenntnissen in unserer Gruppe haben.
-Wir wollten also mit der Umsetzung jeweils warten bis wir das entsprechende Thema entweder im Unterricht behandelt haben.
+Wir wollten also mit der Umsetzung jeweils warten bis wir das entsprechende Thema im Unterricht behandelt haben.
 Ein weiterer Punkt der dafür Sprach, dass wir vorerst warten sollen, war dass wir auch in den Modulen Machine Learning und Wissensrepräsentation Projekte hatten. 
 Wir haben uns also dazu entschlossen in den anderen zwei Modulen so viel wie möglich vorarbeiten, dass wir dann genug Zeit für Python haben. 
  
 Mitte April haben wir dann jedoch gemerkt, dass diese Rechnung nicht aufgehen wird. Wir haben uns also in der Blockwoche vom 14. April zusammengesetzt und unser GANTT-Digramm erstellt. 
 Auch haben wir uns dazu entschieden, wie beim letzten Projekt wieder nach SCRUM- Methode zu arbeiten. Wir haben uns also alle in der Gruppe jeden Montag Abend 30 Minuten fürs Sprint Plannig,
-jeden Mittwoch nach der Schule 30 Minuten für den Sprint Standup und jeden Sonntag Abend 60 Minuten für das Sprint Review eingeplant. Natürlich haben wir uns auch fast täglich via Whatsapp oder Teams ausgetausch und uns gegenseitig bei Probleme geholfen.
+jeden Mittwoch nach der Schule 30 Minuten für den Sprint Standup und jeden Sonntag Abend 60 Minuten für das Sprint Review eingeplant. Natürlich haben wir uns auch fast täglich via Whatsapp oder Teams ausgetausch und uns gegenseitig bei Problemen geholfen.
 Weiter haben wir eingeplant, dass wir nach jedem "Story Stack" (siehe GANTT-Diagramm/Umsetzung) zwei Tage eingeplant haben, um die Codes zu testen und ggf. zu korrigieren. 
 
 ![GANTT-Diagramm](images/GANTT-Diagram.png)
